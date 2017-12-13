@@ -4,17 +4,22 @@
 }
 
 @using (Html.BeginForm())
-    @Html.AntiForgeryToken()
+{
 <h2>Register</h2>
 <p>Enter your email:</p>
 <div class="form-group">
-    @Html.LabelFor()
+
     <div>
-@Html.TextBoxFor("Email", new { @class = "control-label" }) 
+@Html.TextBox("Textbox1", "exempel@mail.com") 
     </div>
 </div>
 
-<p>Enter your password;</p>
+<p>Enter your password:</p>
 <div>
-@Html.TextBoxFor("Password", new { @class = "form-control" })
+@Html.TextBox("Password", "********")
     </div>
+    <div>
+        <p>Repeat password:</p>
+        @Html.TextBox("Password", "********")
+    </div>
+}
