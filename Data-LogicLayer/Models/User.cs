@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 
 
-namespace DejlienApp.Models
+namespace Data_LogicLayer.Models
 {
     public class User
     {
