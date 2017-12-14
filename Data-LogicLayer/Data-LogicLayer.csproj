@@ -87,6 +87,7 @@
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Framework\Repositories\IEntity.cs" />
     <Compile Include="Framework\Repositories\Repository.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\Description.cs" />
     <Compile Include="Models\Interest.cs" />
