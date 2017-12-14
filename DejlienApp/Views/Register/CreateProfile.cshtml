@@ -1,0 +1,46 @@
+﻿@model Data_LogicLayer.Models.Profile
+@{
+    ViewBag.Title = "CreateProfile";
+}
+
+@using (Html.BeginForm())
+{
+    <h2>CreateProfile</h2>
+    <p>Enter your Name:</p>
+    <div class="form-group">
+        <div>
+            @Html.TextBoxFor(model => model.Name)
+        </div>
+    </div>
+
+    <p>Enter your Age:</p>
+    <div>
+        @Html.TextBoxFor(model => model.Age)
+    </div>
+    <br />
+    <p>Enter your location:</p>
+    <div>
+        @Html.TextBoxFor(model => model.Location)
+    </div>
+    <br />
+    <p>Enter what gender you are looking for:</p>
+    <div>
+        @Html.TextBoxFor(model => model.SearchingFor)
+    </div>
+    <br />
+    <p>Enter your gender:</p>
+    <div>
+        @Html.TextBoxFor(model => model.Gender)
+    </div>
+    <br />
+    <p>Select a fitting image:</p>
+    <div>
+        @Html.TextBoxFor(model => model.ProfileImage)
+    </div>
+    <br />
+    <div>
+        <button type="submit" class="btn btn-default" name="provider" value="Login">
+            Login
+        </button>
+    </div>
+}
