@@ -12,6 +12,10 @@ namespace Data_LogicLayer.Repositories
 {
     public class DataContext : DbContext
     {
+        public DataContext() : base("DataContext")
+        {
+
+        }
         public DbSet<User> Users { get; set; }
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<Description> Descriptions { get; set; }
