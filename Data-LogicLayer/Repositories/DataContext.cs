@@ -10,6 +10,7 @@ using Data_LogicLayer.Models;
 
 namespace Data_LogicLayer.Repositories
 {
+
     public class DataContext : DbContext
     {
         public DataContext() : base("DataContext")

@@ -6,19 +6,22 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Data_LogicLayer.Controllers
+namespace DejlienApp.Controllers
 {
     public class RegisterController : Controller
     {
         private DataContext dataContext = new DataContext();
 
-        [HttpPost]
         public ActionResult Create(User user)
         {
             dataContext.Users.Add(user);
             dataContext.SaveChanges();
-            return View(); //Vyn för att fylla profiluppgifter.
+            return RedirectToAction("CreateProfile"); //Vyn för att fylla profiluppgifter.
+        }
 
+        public ActionResult Create()
+        {
+            return View("CreateProfile");
         }
     }
 }
