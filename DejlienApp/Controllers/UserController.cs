@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace DejlienApp.Controllers
 {
-    public class RegisterController : Controller
+    public class UserController : Controller
     {
         private DataContext dataContext = new DataContext();
 
