@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Data_LogicLayer.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Data_LogicLayer.Models
 {
-    public class Profile
+    public class Profile: IEntity
     {
-        public int ProfilId { get; set; }
+        public int Id { get; set; }
         public string Namn { get; set; }
         public int Age { get; set; }
         public string  Location { get; set; }
