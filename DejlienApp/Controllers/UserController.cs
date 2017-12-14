@@ -12,16 +12,16 @@ namespace DejlienApp.Controllers
     {
         private DataContext dataContext = new DataContext();
 
-        public ActionResult Create(User user)
-        {
-            dataContext.Users.Add(user);
-            dataContext.SaveChanges();
-            return RedirectToAction("CreateProfile"); //Vyn för att fylla profiluppgifter.
-        }
+        //public ActionResult Create(User user)
+        //{
+        //    dataContext.Users.Add(user);
+        //    dataContext.SaveChanges();
+        //    return RedirectToAction("CreateProfile"); //Vyn för att fylla profiluppgifter.
+        //}
 
         public ActionResult Create()
         {
-            return View("CreateProfile");
+            return View();
         }
     }
 }
