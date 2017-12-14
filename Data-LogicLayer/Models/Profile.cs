@@ -10,7 +10,7 @@ namespace Data_LogicLayer.Models
     public class Profile: IEntity
     {
         public int Id { get; set; }
-        public string Namn { get; set; }
+        public string Name { get; set; }
         public int Age { get; set; }
         public string  Location { get; set; }
         public string SearchingFor { get; set; }
