@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace DejlienApp.Controllers
+namespace Data_LogicLayer.Controllers
 {
     public class RegisterController : Controller
     {
@@ -16,7 +16,7 @@ namespace DejlienApp.Controllers
         public ActionResult Create(User user)
         {
             dataContext.Users.Add(user);
-
+            dataContext.SaveChanges();
             return View(); //Vyn för att fylla profiluppgifter.
 
         }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace DejlienApp.Controllers
+namespace Data_LogicLayer.Controllers
 {
     public class HomeController : Controller
     {
