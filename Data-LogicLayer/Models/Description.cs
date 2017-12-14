@@ -11,6 +11,7 @@ namespace Data_LogicLayer.Models
         public int DescriptionId { get; set; }
         public string Text { get; set; }
 
+        public int ProfileId { get; set; }//Bör den finnas på 1:1 samband?
         public virtual Profile Profile { get; set; }
     }
 }

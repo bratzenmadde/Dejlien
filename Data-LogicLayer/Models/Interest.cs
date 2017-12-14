@@ -11,6 +11,7 @@ namespace Data_LogicLayer.Models
         public int InterestId { get; set; }
         public string InterestName { get; set; }
 
+        public int ProfileId { get; set; }
         public virtual Profile Profile { get; set; }
     }
 }

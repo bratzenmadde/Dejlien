@@ -11,6 +11,7 @@ namespace Data_LogicLayer.Models
         public int ContactId { get; set; }
         public string Category { get; set; }
 
+        public int ProfileId { get; set; }
         public virtual Profile Profile { get; set; }
     }
 }
