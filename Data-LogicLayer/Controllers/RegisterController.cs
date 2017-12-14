@@ -1,5 +1,5 @@
 ﻿using Data_LogicLayer.Repositories;
-using DejlienApp.Models;
+using Data_LogicLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
