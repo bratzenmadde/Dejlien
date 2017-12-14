@@ -83,8 +83,6 @@
   <ItemGroup>
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Framework\Repositories\IEntity.cs" />
     <Compile Include="Framework\Repositories\Repository.cs" />
     <Compile Include="Models\Contact.cs" />
