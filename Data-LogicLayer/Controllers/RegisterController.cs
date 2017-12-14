@@ -11,15 +11,12 @@ namespace DejlienApp.Controllers
     public class RegisterController : Controller
     {
         private DataContext dataContext = new DataContext();
-        /*public ActionResult Register()
-        {
-            var newUser = new User();
-            return View(newUser);
-        }*/
 
+        [HttpPost]
         public ActionResult Create(User user)
         {
             dataContext.Users.Add(user);
+
             return View(); //Vyn för att fylla profiluppgifter.
 
         }
