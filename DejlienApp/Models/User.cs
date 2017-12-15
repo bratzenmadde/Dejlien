@@ -1,5 +1,5 @@
-﻿using Data_LogicLayer.Framework;
-using Data_LogicLayer.Models;
+﻿using DejlienApp.Framework;
+using DejlienApp.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Web;
 
 
-namespace Data_LogicLayer.Models
+namespace DejlienApp.Models
 {
     public class User:IEntity
     {

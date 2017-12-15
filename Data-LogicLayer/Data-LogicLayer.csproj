@@ -83,17 +83,8 @@
   <ItemGroup>
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
-    <Compile Include="Framework\Repositories\IEntity.cs" />
-    <Compile Include="Framework\Repositories\Repository.cs" />
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Contact.cs" />
-    <Compile Include="Models\Description.cs" />
-    <Compile Include="Models\Interest.cs" />
-    <Compile Include="Models\Post.cs" />
-    <Compile Include="Models\Profile.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\DataContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

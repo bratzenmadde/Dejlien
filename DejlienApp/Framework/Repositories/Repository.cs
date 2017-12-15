@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
-using Data_LogicLayer.Repositories;
+using DejlienApp;
+using DejlienApp.Repositories;
 
-namespace Data_LogicLayer.Framework
+namespace DejlienApp.Framework
 {
     public abstract class Repository<T, TKey> where T : class, IEntity<TKey>
     {

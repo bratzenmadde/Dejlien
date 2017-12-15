@@ -3,10 +3,10 @@ using System.Web.Mvc;
 
 using Unity.AspNet.Mvc;
 
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Data_LogicLayer.UnityMvcActivator), nameof(Data_LogicLayer.UnityMvcActivator.Start))]
-[assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(Data_LogicLayer.UnityMvcActivator), nameof(Data_LogicLayer.UnityMvcActivator.Shutdown))]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(DejlienApp.UnityMvcActivator), nameof(DejlienApp.UnityMvcActivator.Start))]
+[assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(DejlienApp.UnityMvcActivator), nameof(DejlienApp.UnityMvcActivator.Shutdown))]
 
-namespace Data_LogicLayer
+namespace DejlienApp
 {
     /// <summary>
     /// Provides the bootstrapping for integrating Unity with ASP.NET MVC.

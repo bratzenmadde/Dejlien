@@ -1,11 +1,11 @@
-﻿using Data_LogicLayer.Framework;
+﻿using DejlienApp.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Data_LogicLayer.Models
+namespace DejlienApp.Models
 {
     public class Interest:IEntity
     {

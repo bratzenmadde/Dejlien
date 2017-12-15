@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Data_LogicLayer.Framework
+namespace DejlienApp.Framework
 {
     public interface IEntity : IEntity<int> { }
     public interface IEntity<T>

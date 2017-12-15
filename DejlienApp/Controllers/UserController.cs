@@ -1,5 +1,5 @@
-﻿using Data_LogicLayer.Repositories;
-using Data_LogicLayer.Models;
+﻿using DejlienApp.Repositories;
+using DejlienApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ namespace DejlienApp.Controllers
 {
     public class UserController : Controller
     {
-        private DataContext dataContext = new DataContext();
+        //private DataContext dataContext = new DataContext();
 
         //public ActionResult Create(User user)
         //{

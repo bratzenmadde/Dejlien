@@ -2,7 +2,7 @@ using System;
 
 using Unity;
 
-namespace Data_LogicLayer
+namespace DejlienApp
 {
     /// <summary>
     /// Specifies the Unity configuration for the main container.

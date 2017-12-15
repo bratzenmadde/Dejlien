@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-//using DejlienApp.Framework.Logging;
-using System.Data.Entity;
-using Data_LogicLayer.Models;
-//using Microsoft.Aspnet.Identity.EntityFramework;
+﻿using System.Data.Entity;
+using DejlienApp.Models;
 
-namespace Data_LogicLayer.Repositories
+namespace DejlienApp.Repositories
 {
 
     public class DataContext : DbContext
