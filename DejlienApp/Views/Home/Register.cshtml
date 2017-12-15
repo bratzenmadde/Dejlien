@@ -1,4 +1,4 @@
-﻿@model Data_LogicLayer.Models.User
+﻿@model DejlienApp.Models.User
 @{
     ViewBag.Title = "Register";
 }
@@ -9,13 +9,13 @@
 <p>Enter your email:</p>
 <div class="form-group">
     <div>
-@Html.TextBoxFor(model=>model.Email) 
+@Html.TextBox("Example@mail.com") 
     </div>
 </div>
 
-<p>Enter your password:</p>
 <div>
-@Html.TextBoxFor(model=>model.Password)
+    <p>Enter your password:</p>
+    @Html.TextBox("Password", "********")
     </div>
     <br />
     <div>
