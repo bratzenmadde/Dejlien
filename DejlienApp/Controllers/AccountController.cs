@@ -36,8 +36,12 @@ namespace DejlienApp.Controllers
                     db.SaveChanges();
                 }
                 ModelState.Clear();
-                ViewBag.Message = account.Username + " successfully registered!";
             }
+            return RedirectToAction("ModifyProfile");
+        }
+
+        public ActionResult ModifyProfile(UserAccount account)
+        {
             return View();
         }
 

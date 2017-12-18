@@ -31,7 +31,7 @@ namespace DejlienApp.Models
 
 
 
-        //public virtual Profile Profile { get; set; }
+        public virtual Profile Profile { get; set; }
     }
 
     
