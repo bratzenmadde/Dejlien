@@ -37,21 +37,21 @@ namespace DejlienApp.Controllers
                 }
                 ModelState.Clear();
             }
-            return RedirectToAction("ModifyProfile");
+            return RedirectToAction("ModifyProfile", new { id=account.UserId});
         }
 
-        public ActionResult ModifyProfile(UserAccount account)
+        public ActionResult ModifyProfile(int id)
         {
             return View();
         }
         [HttpPost]
-        public ActionResult ModifyProfile(Profile profile)
+        public ActionResult ModifyProfile(Profile profile, int id)
         {
             if(ModelState.IsValid)
             {
                 using (DataContext db = new DataContext())
                 {
-                    db.Profiles.Add(profile);
+                    db.UserAccounts.Single(m=> m.UserId == id).Profile = profile;
                     db.SaveChanges();
                 }
                 ModelState.Clear();

@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace DejlienApp.Models
 {
+    
     public class Profile
     {
         [Key]
-        [ForeignKey("UserAccount")]
-        public int UserId { get; set; }
+        public int Id { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
