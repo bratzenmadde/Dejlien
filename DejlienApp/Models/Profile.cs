@@ -29,7 +29,7 @@ namespace DejlienApp.Models
         [Required]
         public string Description { get; set; }
 
-       // [ForeignKey("UserAccount")]
+       //[ForeignKey("UserAccount")]
         //public int UserId { get; set; }
         public virtual UserAccount UserAccount { get; set; }
 
