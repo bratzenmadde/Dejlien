@@ -3,6 +3,7 @@ using DejlienApp.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -28,8 +29,6 @@ namespace DejlienApp.Models
         [Required(ErrorMessage = "Confirm password.")]
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
-
-
 
         public virtual Profile Profile { get; set; }
     }
