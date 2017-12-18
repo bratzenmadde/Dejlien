@@ -44,6 +44,20 @@ namespace DejlienApp.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult ModifyProfile(Profile profile)
+        {
+            if(ModelState.IsValid)
+            {
+                using (DataContext db = new DataContext())
+                {
+                    db.Profiles.Add(profile);
+                    db.SaveChanges();
+                }
+                ModelState.Clear();
+            }
+            return RedirectToAction("LoggedIn");
+        }
 
         //Login
         public ActionResult Login()
