@@ -29,9 +29,7 @@ namespace DejlienApp.Models
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
 
-
-
-        public virtual Profile Profile { get; set; }
+        public Profile Profile { get; set; }
     }
 
     

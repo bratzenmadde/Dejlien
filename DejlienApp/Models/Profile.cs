@@ -12,8 +12,7 @@ namespace DejlienApp.Models
     public class Profile
     {
         [Key]
-        [ForeignKey("UserAccount")]
-        public int UserId { get; set; }
+        public int ProfileId { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
@@ -28,11 +27,7 @@ namespace DejlienApp.Models
         public string ProfileImage { get; set; }
         [Required]
         public string Description { get; set; }
-
-       //[ForeignKey("UserAccount")]
-        //public int UserId { get; set; }
-        public virtual UserAccount UserAccount { get; set; }
-
+        
         public List<Interest> Interests { get; set; }
         public List<Contact> Contacts { get; set; }
         public List<Post> Posts { get; set; }
