@@ -18,7 +18,7 @@ namespace DejlienApp.Models
         public string ProfileImage { get; set; }
 
         public int UserID { get; set; }
-        public virtual User User { get; set; }
+        public virtual UserAccount User { get; set; }
         public virtual Description Description { get; set; }
         public List<Interest> Interests { get; set; }
         public List<Contact> Contacts { get; set; }
