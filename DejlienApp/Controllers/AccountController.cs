@@ -5,6 +5,10 @@ using System.Web;
 using System.Web.Mvc;
 using DejlienApp.Models;
 using DejlienApp.Repositories;
+using Microsoft.AspNet.Identity.Owin;
+using DejlienApp.Framework.Identity;
+using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security;
 
 namespace DejlienApp.Controllers
 {
@@ -45,7 +49,7 @@ namespace DejlienApp.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult ModifyProfile(Profile profile, int id)
+        public ActionResult ModifyProfile(Profile profile, UserAccount Account, int id)
         {
             if(ModelState.IsValid)
             {
@@ -53,9 +57,11 @@ namespace DejlienApp.Controllers
                 {
                     db.UserAccounts.Single(m=> m.UserId == id).Profile = profile;
                     db.SaveChanges();
+                    
                 }
                 ModelState.Clear();
             }
+
             return RedirectToAction("LoggedIn");
         }
 
@@ -67,7 +73,26 @@ namespace DejlienApp.Controllers
         [HttpPost]
         public ActionResult Login(UserAccount user)
         {
-            using (DataContext db = new DataContext())
+            if (ModelState.IsValid)
+            {
+                var userManager = HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
+                var authManager = HttpContext.GetOwinContext().Authentication;
+
+                AppUser usr = userManager.Find(user.Username, user.Password);
+                if (usr != null)
+                {
+                    var ident = userManager.CreateIdentity(usr,
+                        DefaultAuthenticationTypes.ApplicationCookie);
+                    authManager.SignIn(
+                        new AuthenticationProperties { IsPersistent = false }, ident);
+                   // return Redirect(user.ReturnUrl ?? Url.Action("Index", "Home"));
+                }
+            }
+            ModelState.AddModelError("", "Invalid username or password");
+            return View(user);
+
+
+            /*using (DataContext db = new DataContext())
             {
                 var usr = db.UserAccounts.Where(u => u.Username == user.Username && u.Password == user.Password).FirstOrDefault();
                 if (usr != null)
@@ -81,19 +106,12 @@ namespace DejlienApp.Controllers
                     ModelState.AddModelError("", "Username or password is wrong.");
                 }
             }
-            return View();
+            return View();*/
         }
 
         public ActionResult LoggedIn()
         {
-            if(Session["UserId"] != null)
-            {
-                return View();
-            }
-            else
-            {
-                return RedirectToAction("Login");
-            }
+                    return View();
         }
     }
 }

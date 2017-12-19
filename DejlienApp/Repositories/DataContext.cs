@@ -1,10 +1,12 @@
 ﻿using System.Data.Entity;
 using DejlienApp.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
+using DejlienApp.Framework.Identity;
 
 namespace DejlienApp.Repositories
 {
 
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext<AppUser>
     {
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
