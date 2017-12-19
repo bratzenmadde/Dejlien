@@ -1,6 +1,5 @@
-﻿
-
-using DejlienApp.Framework.Identity;
+﻿using DejlienApp.Models;
+using DejlienApp.Models.Identity;
 using DejlienApp.Repositories;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -15,10 +14,12 @@ namespace DejlienApp.App_Start
         public void Configuration(IAppBuilder app)
         {
             app.CreatePerOwinContext(() => new DataContext());
-            app.CreatePerOwinContext<AppUserManager>(AppUserManager.Create);
-            app.CreatePerOwinContext<RoleManager<AppRole>>((options, context) =>
-                new RoleManager<AppRole>(
-                    new RoleStore<AppRole>(context.Get<DataContext>())));
+            app.CreatePerOwinContext<UserAccountManager>(UserAccountManager.Create);
+
+            //Johan har inte med detta i föreläsning 3
+            //app.CreatePerOwinContext<RoleManager<Role>>((options, context) =>
+            //    new RoleManager<Role>(
+            //        new RoleStore<Role>(context.Get<DataContext>())));
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {

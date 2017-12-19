@@ -1,5 +1,6 @@
 ﻿using DejlienApp.Framework;
 using DejlienApp.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,17 +11,18 @@ using System.Web;
 
 namespace DejlienApp.Models
 {
-    public class UserAccount
+    public class UserAccount:IdentityUser, IEntity<string>
     {
-        [Key]
-        public int UserId { get; set; }
+        //[Key]
+        public override string Id { get; set; }
 
-        [Required(ErrorMessage = "Email is required.")]
-        [RegularExpression(@"^([\w-\.]+)@((\[[0-9]{1,3]\.)|(([\w-]+\.)+))([a-zA-Z{2,4}|[0-9]{1,3})(\]?)$", ErrorMessage = "Please enter valid email.")]
-        public string Email { get; set; }
+        //[Required(ErrorMessage = "Email is required.")]
+        //[RegularExpression(@"^([\w-\.]+)@((\[[0-9]{1,3]\.)|(([\w-]+\.)+))([a-zA-Z{2,4}|[0-9]{1,3})(\]?)$", ErrorMessage = "Please enter valid email.")]
+        //public override string Email { get; set; }
 
-        [Required(ErrorMessage = "Username is required.")]
-        public string Username { get; set; }
+        // Är dennan ödvändig?
+        //[Required(ErrorMessage = "Username is required.")]
+        //public string Username { get; set; }
 
         [Required(ErrorMessage = "Password is required.")]
         [DataType(DataType.Password)]

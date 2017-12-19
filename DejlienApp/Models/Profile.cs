@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 namespace DejlienApp.Models
 {
     
-    public class Profile
+    public class Profile : IEntity
     {
-        [Key]
+        //[Key]
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
