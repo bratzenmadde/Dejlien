@@ -12,7 +12,7 @@ namespace DejlienApp.Models
     
     public class Profile : IEntity
     {
-        //[Key]
+        
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
@@ -30,8 +30,8 @@ namespace DejlienApp.Models
         public string Description { get; set; }
 
         public virtual UserAccount UserAccount { get; set; }
-        public List<Interest> Interests { get; set; }//gör alla List<> till ICollection<>
-        public List<Contact> Contacts { get; set; }
-        public List<Post> Posts { get; set; }
+        public ICollection<Interest> Interests { get; set; }
+        public ICollection<Contact> Contacts { get; set; }
+        public ICollection<Post> Posts { get; set; }
     }
 }

@@ -51,7 +51,7 @@ namespace DejlienApp.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Book");
+                    return RedirectToAction("ModifyProfile", "Account");
                 }
                 //AddErrors(result);
             }
@@ -76,26 +76,27 @@ namespace DejlienApp.Controllers
         ///*     return RedirectToAction("ModifyProfile", new { id = account.UserId })*/;
         // }
 
-        public ActionResult ModifyProfile(int id)
+        public ActionResult ModifyProfile()
         {
             return View();
         }
         [HttpPost]
-        //public ActionResult ModifyProfile(Profile profile, UserAccount Account, int id)
-        //{
-        //    if(ModelState.IsValid)
-        //    {
-        //        using (DataContext db = new DataContext())
-        //        {
-        //            db.UserAccounts.Single(m=> m.UserId == id).Profile = profile;
-        //            db.SaveChanges();
-                    
-        //        }
-        //        ModelState.Clear();
-        //    }
+        public ActionResult ModifyProfile(Profile profile)
+        {
+            if (ModelState.IsValid)
+            {
+                using (DataContext db = new DataContext())
+                {
+                    var user = UserManager.FindById(User.Identity.GetUserId());
+                    db.Profiles.Add(profile);
+                    db.SaveChanges();
 
-        //    return RedirectToAction("LoggedIn");
-        //}
+                }
+                ModelState.Clear();
+            }
+
+            return RedirectToAction("LoggedIn");
+        }
 
         //Login
         public ActionResult Login()

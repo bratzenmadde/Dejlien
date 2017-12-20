@@ -13,10 +13,6 @@ namespace DejlienApp.Repositories
 
             base.OnModelCreating(modelBuilder);
         }
-        //public DbSet<UserAccount> UserAccounts { get; set; }
-        // You don't need to add serAccount and Role 
-        // since automatically added by inheriting form IdentityDbContext<UserAccount>
-        // Kommentaren från guiden på stack overflow och föreläsning 3
 
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<Interest> Interests { get; set; }

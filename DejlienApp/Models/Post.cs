@@ -13,6 +13,6 @@ namespace DejlienApp.Models
         public int PostAuthor { get; set; }
         public int PostReceiver { get; set; }
 
-        public List<Profile> Profiles { get; set; }
+        public ICollection<Profile> Profiles { get; set; }
     }
 }
