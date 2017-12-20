@@ -12,7 +12,6 @@ namespace DejlienApp.Models
     
     public class Profile : IEntity
     {
-        
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
