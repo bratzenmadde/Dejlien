@@ -3,31 +3,35 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
+using Microsoft.Practices.Unity;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace DejlienApp.Models.Identity
 {
-    public class UserAccountManager:UserManager<UserAccount>
+    public class AccountUserManager : UserManager<UserAccount>
     {
-        public UserAccountManager(IUserStore<UserAccount> store)
+        public AccountUserManager(IUserStore<UserAccount> store)
         : base(store)
     {
-        }
 
-        // this method is called by Owin therefore best place to configure your User Manager
-        public static UserAccountManager Create(
-            IdentityFactoryOptions<UserAccountManager> options, IOwinContext context)
-        {
-            var manager = new UserAccountManager(
-                new UserStore<UserAccount>(context.Get<DataContext>()));
+            UserValidator = new UserValidator<UserAccount>(this)
+            {
+                AllowOnlyAlphanumericUserNames = false,
+                RequireUniqueEmail = true
+            };
 
-            // optionally configure your manager
-            // ...
+            PasswordValidator = new PasswordValidator
+            {
+                RequiredLength = 6
+                //RequireNonLetterOrDigit = true,
+                //RequireDigit = true,
+                //RequireLowercase = true,
+                //RequireUppercase = true
+            };
 
-            return manager;
+            UserLockoutEnabledByDefault = true;
+            DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
+            MaxFailedAccessAttemptsBeforeLockout = 5;
         }
     }
 }
