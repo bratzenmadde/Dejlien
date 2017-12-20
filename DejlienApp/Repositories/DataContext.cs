@@ -10,12 +10,15 @@ namespace DejlienApp.Repositories
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserAccount>().HasOptional(u => u.Profile).WithRequired(p => p.UserAccount);
+
+            base.OnModelCreating(modelBuilder);
         }
         //public DbSet<UserAccount> UserAccounts { get; set; }
         // You don't need to add serAccount and Role 
         // since automatically added by inheriting form IdentityDbContext<UserAccount>
         // Kommentaren från guiden på stack overflow och föreläsning 3
 
+        public DbSet<Profile> Profiles { get; set; }
         public DbSet<Interest> Interests { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Contact> Contacts { get; set; }

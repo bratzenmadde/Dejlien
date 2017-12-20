@@ -1,14 +1,11 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using DejlienApp.Framework;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DejlienApp.Models
 {
-    public class Role:IdentityRole
-    {
-        public Role() : base() { }
-        public Role(string name) : base(name) { }
-    }
+    //    public class Role : IdentityRole
+    //    {
+    //        public Role() : base() { }
+    //        public Role(string name) : base(name) { }
+    //    }
 }

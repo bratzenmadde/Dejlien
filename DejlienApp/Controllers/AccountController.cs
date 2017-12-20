@@ -1,27 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using DejlienApp.Models;
 using DejlienApp.Repositories;
-using Microsoft.AspNet.Identity.Owin;
-using DejlienApp.Framework.Identity;
+using System.Threading.Tasks;
+using DejlienApp.Models.Identity;
 using Microsoft.AspNet.Identity;
-using Microsoft.Owin.Security;
+using System;
+using DejlienApp.Framework.Identity;
 
 namespace DejlienApp.Controllers
 {
     public class AccountController : Controller
     {
+        private readonly ApplicationSignInManager applicationSignInManager;
+        private readonly AccountUserManager userAccountManager;
+
         // GET: Account
         public ActionResult Index()
         {
-            using (DataContext db = new DataContext())
-            {
-                return View(db.UserAccounts.ToList());
-            }
-                
+            return View();
         }
 
         public ActionResult Register()
@@ -29,67 +25,94 @@ namespace DejlienApp.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Register(UserAccount account)
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<ActionResult> Register(Register model)
         {
             if (ModelState.IsValid)
             {
-                using (DataContext db = new DataContext())
+                var user = new UserAccount { UserName = model.Email, Email = model.Email };
+                var result = await userAccountManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
                 {
-                    db.UserAccounts.Add(account);
-                    db.SaveChanges();
+                    await applicationSignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    return RedirectToAction("Index", "Book");
                 }
-                ModelState.Clear();
+                //AddErrors(result);
             }
-            return RedirectToAction("ModifyProfile", new { id=account.UserId});
+
+            return View(model);
         }
+
+
+        // [HttpPost]
+        // public ActionResult Register(UserAccount account)
+        // {
+        //     if (ModelState.IsValid)
+        //     {
+        //         using (DataContext db = new DataContext())
+        //         {
+        //             db.Users.Add(account);
+        //             db.SaveChanges();
+        //         }
+        //         ModelState.Clear();
+        //     }
+        //     return View();
+        ///*     return RedirectToAction("ModifyProfile", new { id = account.UserId })*/;
+        // }
 
         public ActionResult ModifyProfile(int id)
         {
             return View();
         }
         [HttpPost]
-        public ActionResult ModifyProfile(Profile profile, UserAccount Account, int id)
-        {
-            if(ModelState.IsValid)
-            {
-                using (DataContext db = new DataContext())
-                {
-                    db.UserAccounts.Single(m=> m.UserId == id).Profile = profile;
-                    db.SaveChanges();
+        //public ActionResult ModifyProfile(Profile profile, UserAccount Account, int id)
+        //{
+        //    if(ModelState.IsValid)
+        //    {
+        //        using (DataContext db = new DataContext())
+        //        {
+        //            db.UserAccounts.Single(m=> m.UserId == id).Profile = profile;
+        //            db.SaveChanges();
                     
-                }
-                ModelState.Clear();
-            }
+        //        }
+        //        ModelState.Clear();
+        //    }
 
-            return RedirectToAction("LoggedIn");
-        }
+        //    return RedirectToAction("LoggedIn");
+        //}
 
         //Login
         public ActionResult Login()
         {
             return View();
         }
-        [HttpPost]
-        public ActionResult Login(UserAccount user)
-        {
-            if (ModelState.IsValid)
-            {
-                var userManager = HttpContext.GetOwinContext().GetUserManager<AccountUserManager>();
-                var authManager = HttpContext.GetOwinContext().Authentication;
+        //[HttpPost]
+        //public ActionResult Login(UserAccount user)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var userManager = HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
+        //        var authManager = HttpContext.GetOwinContext().Authentication;
 
-                AppUser usr = userManager.Find(user.Username, user.Password);
-                if (usr != null)
-                {
-                    var ident = userManager.CreateIdentity(usr,
-                        DefaultAuthenticationTypes.ApplicationCookie);
-                    authManager.SignIn(
-                        new AuthenticationProperties { IsPersistent = false }, ident);
-                   // return Redirect(user.ReturnUrl ?? Url.Action("Index", "Home"));
-                }
-            }
-            ModelState.AddModelError("", "Invalid username or password");
-            return View(user);
+        //        AppUser usr = userManager.Find(user.Username, user.Password);
+        //        if (usr != null)
+        //        {
+        //            var ident = userManager.CreateIdentity(usr,
+        //                DefaultAuthenticationTypes.ApplicationCookie);
+        //            authManager.SignIn(
+        //                new AuthenticationProperties { IsPersistent = false }, ident);
+        //           // return Redirect(user.ReturnUrl ?? Url.Action("Index", "Home"));
+        //        }
+        //    }
+        //    ModelState.AddModelError("", "Invalid username or password");
+        //    return View(user);
 
 
             /*using (DataContext db = new DataContext())
@@ -107,7 +130,7 @@ namespace DejlienApp.Controllers
                 }
             }
             return View();*/
-        }
+        //}
 
         public ActionResult LoggedIn()
         {
