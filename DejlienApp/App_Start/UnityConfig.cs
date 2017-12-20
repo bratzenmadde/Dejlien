@@ -1,3 +1,6 @@
+using DejlienApp.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 
 using Unity;
@@ -41,7 +44,7 @@ namespace DejlienApp
             // container.LoadConfiguration();
 
             // TODO: Register your type's mappings here.
-            // container.RegisterType<IProductRepository, ProductRepository>();
+            container.RegisterType<IUserStore<UserAccount>, UserStore<UserAccount>>();
         }
     }
 }
