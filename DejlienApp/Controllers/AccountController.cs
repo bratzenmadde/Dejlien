@@ -79,13 +79,13 @@ namespace DejlienApp.Controllers
                 {
                     var currentUserId = User.Identity.GetUserId();
                     db.Profiles.Add(profile);
-                    db.SaveChanges();
+                    db.SaveChangesAsync();
 
                 }
                 ModelState.Clear();
             }
 
-            return RedirectToAction("LoggedIn");
+            return RedirectToAction("Index");
         }
 
         [AllowAnonymous]
@@ -114,8 +114,7 @@ namespace DejlienApp.Controllers
             {
                 case SignInStatus.Success:
                     {
-                        return View("Index");
-                        
+                        return View("ModifyProfile");   
                     }
                     
                 //return RedirectToLocal(returnUrl);
