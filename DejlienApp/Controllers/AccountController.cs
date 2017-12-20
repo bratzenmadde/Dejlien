@@ -6,14 +6,23 @@ using DejlienApp.Models.Identity;
 using Microsoft.AspNet.Identity;
 using System;
 using DejlienApp.Framework.Identity;
+using Microsoft.Owin.Security;
 
 namespace DejlienApp.Controllers
 {
     public class AccountController : Controller
     {
         private readonly ApplicationSignInManager applicationSignInManager;
-        private readonly AccountUserManager userAccountManager;
+        private readonly AccountUserManager accountUserManager;
+        private readonly IAuthenticationManager authenticationManager;
 
+        public AccountController(ApplicationSignInManager applicationSignInManager, AccountUserManager accountUserManager,
+            IAuthenticationManager authenticationManager)
+        {
+            this.authenticationManager = authenticationManager;
+            this.accountUserManager = accountUserManager;
+            this.applicationSignInManager = applicationSignInManager;
+        }
         // GET: Account
         public ActionResult Index()
         {
@@ -31,7 +40,7 @@ namespace DejlienApp.Controllers
             if (ModelState.IsValid)
             {
                 var user = new UserAccount { UserName = model.Email, Email = model.Email };
-                var result = await userAccountManager.CreateAsync(user, model.Password);
+                var result = await accountUserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await applicationSignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
