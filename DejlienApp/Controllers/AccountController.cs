@@ -59,23 +59,6 @@ namespace DejlienApp.Controllers
             return View(model);
         }
 
-
-        // [HttpPost]
-        // public ActionResult Register(UserAccount account)
-        // {
-        //     if (ModelState.IsValid)
-        //     {
-        //         using (DataContext db = new DataContext())
-        //         {
-        //             db.Users.Add(account);
-        //             db.SaveChanges();
-        //         }
-        //         ModelState.Clear();
-        //     }
-        //     return View();
-        ///*     return RedirectToAction("ModifyProfile", new { id = account.UserId })*/;
-        // }
-
         public ActionResult ModifyProfile()
         {
             return View();
@@ -87,7 +70,7 @@ namespace DejlienApp.Controllers
             {
                 using (DataContext db = new DataContext())
                 {
-                    var user = UserManager.FindById(User.Identity.GetUserId());
+                    var currentUserId = User.Identity.GetUserId();
                     db.Profiles.Add(profile);
                     db.SaveChanges();
 
@@ -147,4 +130,5 @@ namespace DejlienApp.Controllers
                     return View();
         }
     }
+
 }
