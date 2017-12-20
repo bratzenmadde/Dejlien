@@ -270,7 +270,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\LoggedIn.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\ModifyProfile.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />

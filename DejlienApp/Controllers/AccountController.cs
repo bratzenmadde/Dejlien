@@ -24,17 +24,20 @@ namespace DejlienApp.Controllers
             this.accountUserManager = accountUserManager;
             this.applicationSignInManager = applicationSignInManager;
         }
-        // GET: Account
+        
+        [Authorize]
         public ActionResult Index()
         {
             return View();
         }
 
+        [AllowAnonymous]
         public ActionResult Register()
         {
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(Register model)
         {
@@ -60,10 +63,13 @@ namespace DejlienApp.Controllers
             return View(model);
         }
 
+        [Authorize]
         public ActionResult ModifyProfile()
         {
             return View();
         }
+
+        [Authorize]
         [HttpPost]
         public ActionResult ModifyProfile(Profile profile)
         {
@@ -82,15 +88,16 @@ namespace DejlienApp.Controllers
             return RedirectToAction("LoggedIn");
         }
 
-        
-      public ActionResult Login(string returnUrl = "/")
+        [AllowAnonymous]
+        public ActionResult Login(string returnUrl = "/")
         {
             var externalLogins = authenticationManager.GetExternalAuthenticationTypes();
 
             return View(new LoginModel { /*ExternalLogins = externalLogins, ReturnUrl = returnUrl*/ });
-        
+
         }
 
+        [AllowAnonymous]
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginModel model, string returnUrl)
         {
@@ -106,8 +113,12 @@ namespace DejlienApp.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return View("Index");
-                    //return RedirectToLocal(returnUrl);
+                    {
+                        return View("Index");
+                        
+                    }
+                    
+                //return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -118,11 +129,8 @@ namespace DejlienApp.Controllers
                     return View(model);
             }
         }
-        public ActionResult LoggedIn()
-        {
-                    return View();
-        }
 
+        [Authorize]
         public ActionResult Logout()
         {
             return RedirectToAction("Index", "Home");
