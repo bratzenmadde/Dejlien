@@ -118,47 +118,6 @@ namespace DejlienApp.Controllers
                     return View(model);
             }
         }
-        #region
-
-        //[HttpPost]
-        //public ActionResult Login(UserAccount user)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var userManager = HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
-        //        var authManager = HttpContext.GetOwinContext().Authentication;
-
-        //        AppUser usr = userManager.Find(user.Username, user.Password);
-        //        if (usr != null)
-        //        {
-        //            var ident = userManager.CreateIdentity(usr,
-        //                DefaultAuthenticationTypes.ApplicationCookie);
-        //            authManager.SignIn(
-        //                new AuthenticationProperties { IsPersistent = false }, ident);
-        //           // return Redirect(user.ReturnUrl ?? Url.Action("Index", "Home"));
-        //        }
-        //    }
-        //    ModelState.AddModelError("", "Invalid username or password");
-        //    return View(user);
-
-
-        /*using (DataContext db = new DataContext())
-        {
-            var usr = db.UserAccounts.Where(u => u.Username == user.Username && u.Password == user.Password).FirstOrDefault();
-            if (usr != null)
-            {
-                Session["UserId"] = usr.UserId.ToString();
-                Session["Username"] = usr.Username.ToString();
-                return RedirectToAction("LoggedIn");
-            }
-            else
-            {
-                ModelState.AddModelError("", "Username or password is wrong.");
-            }
-        }
-        return View();*/
-        //}
-        #endregion
         public ActionResult LoggedIn()
         {
                     return View();
