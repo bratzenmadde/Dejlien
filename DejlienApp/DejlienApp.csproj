@@ -226,6 +226,7 @@
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Framework\Identity\AccountUserManager.cs" />
     <Compile Include="Models\Interest.cs" />
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Models\Profile.cs" />
     <Compile Include="Framework\Identity\Role.cs" />

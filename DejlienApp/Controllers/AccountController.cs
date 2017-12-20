@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using System;
 using DejlienApp.Framework.Identity;
 using Microsoft.Owin.Security;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace DejlienApp.Controllers
 {
@@ -81,50 +82,42 @@ namespace DejlienApp.Controllers
             return RedirectToAction("LoggedIn");
         }
 
-        //Login
-        public ActionResult Login()
+        
+      public ActionResult Login(string returnUrl = "/")
         {
-            return View();
+            var externalLogins = authenticationManager.GetExternalAuthenticationTypes();
+
+            return View(new LoginModel { /*ExternalLogins = externalLogins, ReturnUrl = returnUrl*/ });
+        
         }
-        //[HttpPost]
-        //public ActionResult Login(UserAccount user)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var userManager = HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
-        //        var authManager = HttpContext.GetOwinContext().Authentication;
 
-        //        AppUser usr = userManager.Find(user.Username, user.Password);
-        //        if (usr != null)
-        //        {
-        //            var ident = userManager.CreateIdentity(usr,
-        //                DefaultAuthenticationTypes.ApplicationCookie);
-        //            authManager.SignIn(
-        //                new AuthenticationProperties { IsPersistent = false }, ident);
-        //           // return Redirect(user.ReturnUrl ?? Url.Action("Index", "Home"));
-        //        }
-        //    }
-        //    ModelState.AddModelError("", "Invalid username or password");
-        //    return View(user);
-
-
-            /*using (DataContext db = new DataContext())
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<ActionResult> Login(LoginModel model, string returnUrl)
+        {
+            if (!ModelState.IsValid)
             {
-                var usr = db.UserAccounts.Where(u => u.Username == user.Username && u.Password == user.Password).FirstOrDefault();
-                if (usr != null)
-                {
-                    Session["UserId"] = usr.UserId.ToString();
-                    Session["Username"] = usr.Username.ToString();
-                    return RedirectToAction("LoggedIn");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Username or password is wrong.");
-                }
-            }
-            return View();*/
-        //}
+                //model.ExternalLogins = authenticationManager.GetExternalAuthenticationTypes();
 
+                return View(model);
+            }
+
+
+            var result = await applicationSignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: true);
+            switch (result)
+            {
+                case SignInStatus.Success:
+                    return View("Index");
+                    //return RedirectToLocal(returnUrl);
+                case SignInStatus.LockedOut:
+                    return View("Lockout");
+                case SignInStatus.RequiresVerification:
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, model.RememberMe });
+                case SignInStatus.Failure:
+                default:
+                    ModelState.AddModelError("", "Invalid login attempt.");
+                    return View(model);
+            }
+        }
         public ActionResult LoggedIn()
         {
                     return View();
