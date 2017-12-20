@@ -75,7 +75,7 @@ namespace DejlienApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var userManager = HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
+                var userManager = HttpContext.GetOwinContext().GetUserManager<AccountUserManager>();
                 var authManager = HttpContext.GetOwinContext().Authentication;
 
                 AppUser usr = userManager.Find(user.Username, user.Password);
