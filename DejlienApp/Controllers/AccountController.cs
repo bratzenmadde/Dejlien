@@ -114,7 +114,7 @@ namespace DejlienApp.Controllers
             {
                 case SignInStatus.Success:
                     {
-                        return View("ModifyProfile");   
+                        return RedirectToAction("ModifyProfile");   
                     }
                     
                 //return RedirectToLocal(returnUrl);
