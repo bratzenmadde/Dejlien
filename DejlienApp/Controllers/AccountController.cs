@@ -100,7 +100,7 @@ namespace DejlienApp.Controllers
         public ActionResult Login(string returnUrl = "/")
         {
             var externalLogins = authenticationManager.GetExternalAuthenticationTypes();
-
+            
             return View(new LoginModel { /*ExternalLogins = externalLogins, ReturnUrl = returnUrl*/ });
 
         }
@@ -108,15 +108,23 @@ namespace DejlienApp.Controllers
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginModel model, string returnUrl)
+        public async Task<ActionResult> Login(LoginModel model, string returnUrl, Profile profile)
         {
             if (!ModelState.IsValid)
             {
-                //model.ExternalLogins = authenticationManager.GetExternalAuthenticationTypes();
-
+                //var currentUserId = await accountUserManager.FindByIdAsync(User.Identity.GetUserId());
+                //using (var db = new DataContext())
+                //{
+                //    var p = db.Profiles.Any(x => Convert.ToChar(x.UserAccount) == Convert.ToChar(currentUserId));//string är inte en primitiv typ
+                //    if (p == true)
+                //    {
+                //        return RedirectToAction("Index");
+                //    }
+                //    else
+                //        return RedirectToAction("ModifyProfile");
+                //}
                 return View(model);
             }
-
 
             var result = await applicationSignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: true);
             switch (result)
