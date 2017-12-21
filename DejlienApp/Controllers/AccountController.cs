@@ -9,6 +9,7 @@ using DejlienApp.Framework.Identity;
 using Microsoft.Owin.Security;
 using Microsoft.AspNet.Identity.Owin;
 using System.Linq;
+using System.Net;
 
 namespace DejlienApp.Controllers
 {
@@ -83,7 +84,6 @@ namespace DejlienApp.Controllers
                 {
                     // get user from context
                     var user = db.Users.First(c => c.Id == userId);
-                    // new UserProfileInfo
                     // assign UserProfileInfo to user
                     user.Profile = profile;
                     // save changes
@@ -106,7 +106,8 @@ namespace DejlienApp.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
@@ -140,6 +141,7 @@ namespace DejlienApp.Controllers
         [Authorize]
         public ActionResult Logout()
         {
+            authenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }
     }
