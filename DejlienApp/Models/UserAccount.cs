@@ -6,6 +6,6 @@ namespace DejlienApp.Models
 {
     public class UserAccount:IdentityUser, IEntity<string>
     {
-        public Profile Profile { get; set; }
+        public virtual Profile Profile { get; set; }
     }
 }

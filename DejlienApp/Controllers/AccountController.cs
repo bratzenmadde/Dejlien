@@ -8,6 +8,7 @@ using System;
 using DejlienApp.Framework.Identity;
 using Microsoft.Owin.Security;
 using Microsoft.AspNet.Identity.Owin;
+using System.Linq;
 
 namespace DejlienApp.Controllers
 {
@@ -24,7 +25,7 @@ namespace DejlienApp.Controllers
             this.accountUserManager = accountUserManager;
             this.applicationSignInManager = applicationSignInManager;
         }
-        
+
         [Authorize]
         public ActionResult Index()
         {
@@ -75,13 +76,20 @@ namespace DejlienApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (DataContext db = new DataContext())
-                {
-                    var currentUserId = User.Identity.GetUserId(); //var currentUser = await manager.FindByIdAsync(User.Identity.GetUserId);
-                    db.Profiles.Add(profile); 
-                    db.SaveChangesAsync();
 
+                // logged in user id
+                var userId = User.Identity.GetUserId();
+                using (var db = new DataContext())
+                {
+                    // get user from context
+                    var user = db.Users.First(c => c.Id == userId);
+                    // new UserProfileInfo
+                    // assign UserProfileInfo to user
+                    user.Profile = profile;
+                    // save changes
+                    db.SaveChanges();
                 }
+
                 ModelState.Clear();
             }
 
@@ -114,9 +122,9 @@ namespace DejlienApp.Controllers
             {
                 case SignInStatus.Success:
                     {
-                        return RedirectToAction("ModifyProfile");   
+                        return RedirectToAction("ModifyProfile");
                     }
-                    
+
                 //return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
