@@ -9,6 +9,7 @@ using DejlienApp.Framework.Identity;
 using Microsoft.Owin.Security;
 using Microsoft.AspNet.Identity.Owin;
 using System.Linq;
+using System.Net;
 
 namespace DejlienApp.Controllers
 {
@@ -83,7 +84,6 @@ namespace DejlienApp.Controllers
                 {
                     // get user from context
                     var user = db.Users.First(c => c.Id == userId);
-                    // new UserProfileInfo
                     // assign UserProfileInfo to user
                     user.Profile = profile;
                     // save changes
@@ -97,21 +97,24 @@ namespace DejlienApp.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
+        public ActionResult Login(string returnUrl = "/")
         {
-            ViewBag.ReturnUrl = returnUrl;
-            return View();
+            var externalLogins = authenticationManager.GetExternalAuthenticationTypes();
+
+            return View(new LoginModel { /*ExternalLogins = externalLogins, ReturnUrl = returnUrl*/ });
+
         }
 
         [AllowAnonymous]
-        [HttpPost, ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginModel model, string returnUrl, Profile profile)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Login(LoginModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
-                /*var userId = User.Identity.GetUserId();*/
-                
-                return RedirectToAction("CheckIfProfileExists");
+                //model.ExternalLogins = authenticationManager.GetExternalAuthenticationTypes();
+
+                return View(model);
             }
 
 
@@ -120,11 +123,10 @@ namespace DejlienApp.Controllers
             {
                 case SignInStatus.Success:
                     {
-                       // if (profile.UserAccount == null)
-                            return RedirectToAction("ModifyProfile");
-                        //else
-                        //    return RedirectToAction("Index");
+                        return RedirectToAction("ModifyProfile");
                     }
+
+                //return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -136,31 +138,10 @@ namespace DejlienApp.Controllers
             }
         }
 
-        //public ActionResult CheckIfProfileExists()
-        //{
-        //    return RedirectToAction("CheckIfProfileExists");
-        //}
-        //[Authorize]
-        //[HttpPost, ValidateAntiForgeryToken]
-        //public async Task<ActionResult> CheckIfProfileExists(LoginModel model, /*string returnUrl,*/ Profile profile)
-        //{
-        //    var current = await accountUserManager.FindByIdAsync(User.Identity.GetUserId());
-        //    using (var db = new DataContext())
-        //    {
-        //        if (db.Profiles.Any(x => x.UserAccount == current))
-        //        {
-        //            return RedirectToAction("Index");
-        //        }
-        //        else
-        //        {
-        //            return RedirectToAction("ModifyProfile");
-        //        }
-        //    }
-        //}
-
         [Authorize]
         public ActionResult Logout()
         {
+            authenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }
     }
