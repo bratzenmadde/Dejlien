@@ -10,6 +10,8 @@ using Microsoft.Owin.Security;
 using Microsoft.AspNet.Identity.Owin;
 using System.Linq;
 using System.Net;
+using System.IO;
+using System.Web;
 
 namespace DejlienApp.Controllers
 {
@@ -73,10 +75,25 @@ namespace DejlienApp.Controllers
 
         [Authorize]
         [HttpPost]
-        public ActionResult ModifyProfile(Profile profile)
+        public ActionResult ModifyProfile([Bind(Exclude = "UserPhoto")]Profile profile)
         {
+
             if (ModelState.IsValid)
             {
+                // To convert the user uploaded Photo as Byte Array before save to DB
+                byte[] imageData = null;
+                if (Request.Files.Count > 0)
+                {
+                    HttpPostedFileBase poImgFile = Request.Files["UserPhoto"];
+
+                    using (var binary = new BinaryReader(poImgFile.InputStream))
+                    {
+                        imageData = binary.ReadBytes(poImgFile.ContentLength);
+                    }
+                }
+
+                //Here we pass the byte array to user context to store in db 
+                profile.UserPhoto = imageData;
 
                 // logged in user id
                 var userId = User.Identity.GetUserId();

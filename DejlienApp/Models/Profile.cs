@@ -23,8 +23,8 @@ namespace DejlienApp.Models
         public string SearchingFor { get; set; }
         [Required]
         public string Gender { get; set; }
-        [Required]
-        public string ProfileImage { get; set; }
+       
+        public byte[] UserPhoto { get; set; }
         [Required]
         public string Description { get; set; }
 
