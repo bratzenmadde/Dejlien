@@ -21,7 +21,7 @@ namespace DejlienApp.Models
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
-        public IEnumerable<AuthenticationDescription> ExternalLogins { get; set; }
+       // public IEnumerable<AuthenticationDescription> ExternalLogins { get; set; }
         public string ReturnUrl { get; set; }
 
     }
