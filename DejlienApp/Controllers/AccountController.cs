@@ -77,8 +77,8 @@ namespace DejlienApp.Controllers
             {
                 using (DataContext db = new DataContext())
                 {
-                    var currentUserId = User.Identity.GetUserId();
-                    db.Profiles.Add(profile);
+                    var currentUserId = User.Identity.GetUserId(); //var currentUser = await manager.FindByIdAsync(User.Identity.GetUserId);
+                    db.Profiles.Add(profile); 
                     db.SaveChangesAsync();
 
                 }
