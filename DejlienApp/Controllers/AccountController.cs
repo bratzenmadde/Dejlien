@@ -42,7 +42,8 @@ namespace DejlienApp.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(Register model)
         {
             if (ModelState.IsValid)
@@ -173,12 +174,12 @@ namespace DejlienApp.Controllers
             }
         }
 
-        [Authorize]
-        public ActionResult Logout()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult LogOff()
         {
             authenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }
     }
-
 }
