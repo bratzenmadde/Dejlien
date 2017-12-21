@@ -129,6 +129,7 @@ namespace DejlienApp.Controllers
         {
             if (!ModelState.IsValid)
             {
+
                 //var currentUserId = await accountUserManager.FindByIdAsync(User.Identity.GetUserId());
                 //using (var db = new DataContext())
                 //{
@@ -140,7 +141,7 @@ namespace DejlienApp.Controllers
                 //    else
                 //        return RedirectToAction("ModifyProfile");
                 //}
-                return View();
+                return View("ModifyProfile");
             }
 
             var result = await applicationSignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: true);
@@ -160,6 +161,15 @@ namespace DejlienApp.Controllers
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
+            }
+        }
+
+        public ActionResult PersonalUserSite()
+        {
+            using (var db = new DataContext())
+            {
+                var users = db.Profiles.ToList();
+                return View(users);
             }
         }
 
