@@ -168,8 +168,8 @@ namespace DejlienApp.Controllers
         {
             using (var db = new DataContext())
             {
-                var users = db.Profiles.ToList();
-                return View(users);
+                var user = db.Profiles.ToList();
+                return View(user);
             }
         }
 
