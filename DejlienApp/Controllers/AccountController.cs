@@ -78,6 +78,7 @@ namespace DejlienApp.Controllers
                 using (DataContext db = new DataContext())
                 {
                     var currentUserId = User.Identity.GetUserId(); //var currentUser = await manager.FindByIdAsync(User.Identity.GetUserId);
+                    
                     db.Profiles.Add(profile); 
                     db.SaveChangesAsync();
 
@@ -99,7 +100,7 @@ namespace DejlienApp.Controllers
 
         [AllowAnonymous]
         [HttpPost, ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginModel model, string returnUrl)
+        public async Task<ActionResult> Login(LoginModel model, string returnUrl, Profile profile)
         {
             if (!ModelState.IsValid)
             {
@@ -114,7 +115,13 @@ namespace DejlienApp.Controllers
             {
                 case SignInStatus.Success:
                     {
-                        return RedirectToAction("ModifyProfile");   
+                        if (profile.UserAccount != null)
+                        {
+                            return RedirectToAction("ModifyProfile");
+                        }
+                        else
+                            return RedirectToAction("Login");
+                          
                     }
                     
                 //return RedirectToLocal(returnUrl);
