@@ -10,7 +10,7 @@ namespace DejlienApp.Repositories
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserAccount>().HasOptional(u => u.Profile).WithRequired(p => p.UserAccount);
-
+            
             base.OnModelCreating(modelBuilder);
         }
 

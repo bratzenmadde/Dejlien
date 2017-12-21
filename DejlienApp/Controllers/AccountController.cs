@@ -118,7 +118,7 @@ namespace DejlienApp.Controllers
         public ActionResult Login(string returnUrl = "/")
         {
             var externalLogins = authenticationManager.GetExternalAuthenticationTypes();
-            
+
             return View(new LoginModel { /*ExternalLogins = externalLogins, ReturnUrl = returnUrl*/ });
 
         }
@@ -165,12 +165,15 @@ namespace DejlienApp.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult PersonalUserSite()
         {
+            var userId = User.Identity.GetUserId();
             using (var db = new DataContext())
             {
-                var users = db.Profiles.ToList();
-                return View(users);
+                var currentUser = db.Users.First(c => c.Id == userId);
+                var profileinfo = currentUser.Profile;
+                return View(profileinfo);
             }
         }
 
