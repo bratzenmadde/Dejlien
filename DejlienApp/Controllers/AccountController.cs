@@ -97,23 +97,21 @@ namespace DejlienApp.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult Login(string returnUrl = "/")
+        public ActionResult Login(string returnUrl)
         {
-            var externalLogins = authenticationManager.GetExternalAuthenticationTypes();
-
-            return View(new LoginModel { /*ExternalLogins = externalLogins, ReturnUrl = returnUrl*/ });
-
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
         }
 
         [AllowAnonymous]
         [HttpPost, ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginModel model, string returnUrl)
+        public async Task<ActionResult> Login(LoginModel model, string returnUrl, Profile profile)
         {
             if (!ModelState.IsValid)
             {
-                //model.ExternalLogins = authenticationManager.GetExternalAuthenticationTypes();
-
-                return View(model);
+                /*var userId = User.Identity.GetUserId();*/
+                
+                return RedirectToAction("CheckIfProfileExists");
             }
 
 
@@ -122,10 +120,11 @@ namespace DejlienApp.Controllers
             {
                 case SignInStatus.Success:
                     {
-                        return RedirectToAction("ModifyProfile");
+                       // if (profile.UserAccount == null)
+                            return RedirectToAction("ModifyProfile");
+                        //else
+                        //    return RedirectToAction("Index");
                     }
-
-                //return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -136,6 +135,28 @@ namespace DejlienApp.Controllers
                     return View(model);
             }
         }
+
+        //public ActionResult CheckIfProfileExists()
+        //{
+        //    return RedirectToAction("CheckIfProfileExists");
+        //}
+        //[Authorize]
+        //[HttpPost, ValidateAntiForgeryToken]
+        //public async Task<ActionResult> CheckIfProfileExists(LoginModel model, /*string returnUrl,*/ Profile profile)
+        //{
+        //    var current = await accountUserManager.FindByIdAsync(User.Identity.GetUserId());
+        //    using (var db = new DataContext())
+        //    {
+        //        if (db.Profiles.Any(x => x.UserAccount == current))
+        //        {
+        //            return RedirectToAction("Index");
+        //        }
+        //        else
+        //        {
+        //            return RedirectToAction("ModifyProfile");
+        //        }
+        //    }
+        //}
 
         [Authorize]
         public ActionResult Logout()
