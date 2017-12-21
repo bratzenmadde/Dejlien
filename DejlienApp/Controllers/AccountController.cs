@@ -130,33 +130,45 @@ namespace DejlienApp.Controllers
         {
             if (!ModelState.IsValid)
             {
-
-                //var currentUserId = await accountUserManager.FindByIdAsync(User.Identity.GetUserId());
-                //using (var db = new DataContext())
-                //{
-                //    var p = db.Profiles.Any(x => Convert.ToChar(x.UserAccount) == Convert.ToChar(currentUserId));//string är inte en primitiv typ
-                //    if (p == true)
-                //    {
-                //        return RedirectToAction("Index");
-                //    }
-                //    else
-                //        return RedirectToAction("ModifyProfile");
-                //}
-                return View("ModifyProfile");
+                if (Request.IsAuthenticated)
+                {
+                    //var currentUserId = await accountUserManager.FindByIdAsync(User.Identity.GetUserId());
+                    //using (var db = new DataContext())
+                    //{
+                        //var p = db.Profiles.Any(x => Convert.ToChar(x.UserAccount) == Convert.ToChar(currentUserId));//string är inte en primitiv typ
+                        //if (p == true)
+                        //{
+                            return View("Index");
+                    //    }
+                    //}
+                }
+                else
+                    return View("ModifyProfile");
             }
 
             var result = await applicationSignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: true);
             switch (result)
             {
                 case SignInStatus.Success:
-                    {
-                        return RedirectToAction("ModifyProfile");
-                    }
+                    //{
+                        //var currentUser = User.Identity.GetUserId();
+                        //using (var db = new DataContext())
+                        //{
+                        //    var p = db.Profiles;
+                        //    var current = currentUser.Equals(p);
+                        //    if (current is true)
+                        //    {
+                        //        return View("Index");
+                        //    }
+                            //else
+                                return View("Index");
+                        //}
+                    //}
 
                 //return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
-                case SignInStatus.RequiresVerification:
+                case SignInStatus.RequiresVerification: // är detta till external? 
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, model.RememberMe });
                 case SignInStatus.Failure:
                 default:

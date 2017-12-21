@@ -6,10 +6,9 @@
         @Html.AntiForgeryToken()
 
         <ul class="nav navbar-nav navbar-left">
-            <li>
-                @Html.ActionLink("Contacts", "Contacts", "Login")
-                </li>
-            </ul>
+            <li>@Html.ActionLink("Contacts", "Contacts", "Login")</li>
+            <li>@Html.ActionLink("Profile", "PersonalUserSite", "Account")</li>
+        </ul>
 
                 <ul class="nav navbar-nav navbar-right">
                     <li>
