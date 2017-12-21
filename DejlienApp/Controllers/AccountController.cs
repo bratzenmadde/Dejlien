@@ -140,7 +140,7 @@ namespace DejlienApp.Controllers
                 //    else
                 //        return RedirectToAction("ModifyProfile");
                 //}
-                return View(model);
+                return View();
             }
 
             var result = await applicationSignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: true);
