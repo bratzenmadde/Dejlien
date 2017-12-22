@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DejlienApp.Models;
+using DejlienApp.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +12,11 @@ namespace DejlienApp.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            using (var db = new DataContext())
+            {
+                var users = db.Profiles.ToList();
+                return View(users);
+            }     
         }
 
         public ActionResult About()
