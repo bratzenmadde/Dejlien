@@ -147,6 +147,15 @@ namespace DejlienApp.Controllers
             }
         }
 
+        public ActionResult VisitProfile(Profile profile)
+        {
+           // using (var db = new DataContext())
+            {
+                //var showProfile = db.Profiles.Where(p => p.Id == id);
+                return View("PersonalUserSite", profile);
+            }    
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()

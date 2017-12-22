@@ -21,7 +21,7 @@
                 <p>
                     @Html.DisplayFor(modelitem => item.Description)
                 </p>
-                <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+                <p><a class="btn btn-default" href='@Html.Action("VisitProfile", "Account", new { item })'>Check me out! &raquo;</a></p>
             </div>
         }
     }
