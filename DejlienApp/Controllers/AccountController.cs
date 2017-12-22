@@ -54,15 +54,9 @@ namespace DejlienApp.Controllers
                 {
                     await applicationSignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
                     return RedirectToAction("Index", "Account");
                 }
-                //AddErrors(result);
+              
             }
 
             return View(model);
@@ -115,60 +109,24 @@ namespace DejlienApp.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult Login(string returnUrl = "/")
+        public ActionResult Login()
         {
-            var externalLogins = authenticationManager.GetExternalAuthenticationTypes();
-
-            return View(new LoginModel { /*ExternalLogins = externalLogins, ReturnUrl = returnUrl*/ });
-
+            return View();
         }
 
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginModel model, string returnUrl, Profile profile)
+        public async Task<ActionResult> Login(LoginModel model, string returnUrl)
         {
-            if (!ModelState.IsValid)
-            {
-                //if(Request.IsAuthenticated)
-                //{
-                //    //var currentUserId = await accountUserManager.FindByIdAsync(User.Identity.GetUserId());
-                //    //using (var db = new DataContext())
-                //    //{
-                //        //var p = db.Profiles.Any(x => Convert.ToChar(x.UserAccount) == Convert.ToChar(currentUserId));//string är inte en primitiv typ
-                //        //if (p == true)
-                //        //{
-                //            return View("Index");
-                //    //    }
-                //    //}
-                //}
-                //else
-                    return View("ModifyProfile");
-            }
-
             var result = await applicationSignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: true);
             switch (result)
             {
                 case SignInStatus.Success:
-                    //{
-                        //var currentUser = User.Identity.GetUserId();
-                        //using (var db = new DataContext())
-                        //{
-                        //    var p = db.Profiles;
-                        //    var current = currentUser.Equals(p);
-                        //    if (current is true)
-                        //    {
-                        //        return View("Index");
-                        //    }
-                            //else
-                                return View("Index");
-                        //}
-                    //}
-
-                //return RedirectToLocal(returnUrl);
+                    return RedirectToAction("Index", "Account");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
-                case SignInStatus.RequiresVerification: // är detta till external? 
+                case SignInStatus.RequiresVerification:
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, model.RememberMe });
                 case SignInStatus.Failure:
                 default:
@@ -224,7 +182,7 @@ namespace DejlienApp.Controllers
         //            var userImage = db.Profiles.Where(x => x.UserAccount.ToString() == userId).FirstOrDefault();
         //            return new FileContentResult(userImage.UserPhoto, "image/jpeg");
         //        }
-                   
+
         //    }
         //    else
         //    {
