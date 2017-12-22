@@ -60,7 +60,7 @@ namespace DejlienApp.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Login", "Account");
+                    return RedirectToAction("Index", "Account");
                 }
                 //AddErrors(result);
             }
@@ -130,19 +130,19 @@ namespace DejlienApp.Controllers
         {
             if (!ModelState.IsValid)
             {
-                if (Request.IsAuthenticated)
-                {
-                    //var currentUserId = await accountUserManager.FindByIdAsync(User.Identity.GetUserId());
-                    //using (var db = new DataContext())
-                    //{
-                        //var p = db.Profiles.Any(x => Convert.ToChar(x.UserAccount) == Convert.ToChar(currentUserId));//string är inte en primitiv typ
-                        //if (p == true)
-                        //{
-                            return View("Index");
-                    //    }
-                    //}
-                }
-                else
+                //if(Request.IsAuthenticated)
+                //{
+                //    //var currentUserId = await accountUserManager.FindByIdAsync(User.Identity.GetUserId());
+                //    //using (var db = new DataContext())
+                //    //{
+                //        //var p = db.Profiles.Any(x => Convert.ToChar(x.UserAccount) == Convert.ToChar(currentUserId));//string är inte en primitiv typ
+                //        //if (p == true)
+                //        //{
+                //            return View("Index");
+                //    //    }
+                //    //}
+                //}
+                //else
                     return View("ModifyProfile");
             }
 
@@ -196,5 +196,49 @@ namespace DejlienApp.Controllers
             authenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }
+
+        //public FileContentResult UserPhotos()
+        //{
+        //    if (User.Identity.IsAuthenticated)
+        //    {
+        //        var userId = User.Identity.GetUserId();
+
+        //        if (userId == null)
+        //        {
+        //            string fileName = HttpContext.Server.MapPath(@"~/Images/pixel.png");
+
+        //            byte[] imageData = null;
+        //            FileInfo fileInfo = new FileInfo(fileName);
+        //            long imageFileLength = fileInfo.Length;
+        //            FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+        //            BinaryReader br = new BinaryReader(fs);
+        //            imageData = br.ReadBytes((int)imageFileLength);
+
+        //            return File(imageData, "image/png");
+
+        //        }
+        //        // to get the user details to load user Image 
+        //        // var bdProfiles = HttpContext.GetOwinContext().Get<DataContext>();
+        //        using (var db = new DataContext())
+        //        {
+        //            var userImage = db.Profiles.Where(x => x.UserAccount.ToString() == userId).FirstOrDefault();
+        //            return new FileContentResult(userImage.UserPhoto, "image/jpeg");
+        //        }
+                   
+        //    }
+        //    else
+        //    {
+        //        string fileName = HttpContext.Server.MapPath(@"~/Images/pixel.png");
+
+        //        byte[] imageData = null;
+        //        FileInfo fileInfo = new FileInfo(fileName);
+        //        long imageFileLength = fileInfo.Length;
+        //        FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+        //        BinaryReader br = new BinaryReader(fs);
+        //        imageData = br.ReadBytes((int)imageFileLength);
+        //        return File(imageData, "image/png");
+
+        //    }
+        //}
     }
 }

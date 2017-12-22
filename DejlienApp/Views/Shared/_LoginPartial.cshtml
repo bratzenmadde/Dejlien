@@ -8,9 +8,14 @@
         <ul class="nav navbar-nav navbar-left">
             <li>@Html.ActionLink("Contacts", "Contacts", "Login")</li>
             <li>@Html.ActionLink("Profile", "PersonalUserSite", "Account")</li>
+            <li>@Html.ActionLink("Account settings", "ModifyProfile", "Account")</li>
         </ul>
 
                 <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <img src="@Url.Action("UserPhotos", "Home" )" height="48" width="48" />
+
+                    </li> 
                     <li>
                         @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
                     </li>
