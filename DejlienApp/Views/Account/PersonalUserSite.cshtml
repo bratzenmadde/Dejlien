@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DejlienApp.Models.Profile>
+﻿@model DejlienApp.Models.Profile
 
 @{
     ViewBag.Title = "PersonalUserSite";
@@ -10,30 +10,30 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-@foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
+            <p>Name: @Html.DisplayFor(model => model.Name)</p>
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Age)
+            <p>Age: @Html.DisplayFor(model => model.Age)</p>
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Location)
+            <p>Location: @Html.DisplayFor(model => model.Location)</p>
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.SearchingFor)
+            <p>Searching for: @Html.DisplayFor(model => model.SearchingFor)</p>
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Gender)
+            <p>Idenifies as: @Html.DisplayFor(model => model.Gender)</p>
+            <br />
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Description)
+            <p>About @Html.DisplayFor(model => model.Name):</p>
+            @Html.DisplayFor(model => model.Description)
+            <br />
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @*@Html.ActionLink("Edit", "Edit", new { id= model.Id }) |*@
         </td>
     </tr>
-}
+
