@@ -12,6 +12,7 @@ using System.Linq;
 using System.Net;
 using System.IO;
 using System.Web;
+using System.Data.Entity;
 
 namespace DejlienApp.Controllers
 {
@@ -75,37 +76,58 @@ namespace DejlienApp.Controllers
 
             if (ModelState.IsValid)
             {
-                // To convert the user uploaded Photo as Byte Array before save to DB
-                byte[] imageData = null;
-                if (Request.Files.Count > 0)
-                {
-                    HttpPostedFileBase poImgFile = Request.Files["UserPhoto"];
-
-                    using (var binary = new BinaryReader(poImgFile.InputStream))
-                    {
-                        imageData = binary.ReadBytes(poImgFile.ContentLength);
-                    }
-                }
-
-                //Here we pass the byte array to user context to store in db 
-                profile.UserPhoto = imageData;
-
                 // logged in user id
                 var userId = User.Identity.GetUserId();
                 using (var db = new DataContext())
                 {
-                    // get user from context
-                    var user = db.Users.First(c => c.Id.ToString() == userId);
-                    // assign UserProfileInfo to user
-                    user.Profile = profile;
-                    // save changes
-                    db.SaveChanges();
+                    var currentUser = db.Users.Single(c => c.Id.ToString() == userId);
+                    var userProfile = currentUser.Profile;
+
+                    // To convert the user uploaded Photo as Byte Array before save to DB
+                    byte[] imageData = null;
+                    if (Request.Files.Count > 0)
+                    {
+                        HttpPostedFileBase poImgFile = Request.Files["UserPhoto"];
+
+                        using (var binary = new BinaryReader(poImgFile.InputStream))
+                        {
+                            imageData = binary.ReadBytes(poImgFile.ContentLength);
+                        }
+                    }
+
+                    //Here we pass the byte array to user context to store in db 
+                    profile.UserPhoto = imageData;
+
+                    if (userProfile != null)
+                    {
+                        userProfile.Name = profile.Name;
+                        userProfile.Age = profile.Age;
+                        userProfile.Location = profile.Location;
+                        userProfile.SearchingFor = profile.SearchingFor;
+                        userProfile.Gender = profile.Gender;
+                        userProfile.UserPhoto = profile.UserPhoto;
+                        userProfile.Description = profile.Description;
+
+                        db.Entry(userProfile).State = EntityState.Modified;
+
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        // get user from context
+                        var user = db.Users.First(c => c.Id.ToString() == userId);
+                        // assign UserProfileInfo to user
+                        user.Profile = profile;
+                        // save changes
+                        db.SaveChanges();
+
+                    }
                 }
 
                 ModelState.Clear();
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Account");
         }
 
         [AllowAnonymous]
