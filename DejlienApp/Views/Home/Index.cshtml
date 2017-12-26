@@ -21,7 +21,7 @@
                 <p>
                     @Html.DisplayFor(modelitem => item.Description)
                 </p>
-                <p><a class="btn btn-default" href='@Html.Action("VisitProfile", "Account"@*, new { item.Id }*@)'>Check me out! &raquo;</a></p>
+                <p><a class="btn btn-default" href='@Html.Action("VisitProfile", "Account", new { item.Id })'>Check me out! &raquo;</a></p>
             </div>
         }
     }
