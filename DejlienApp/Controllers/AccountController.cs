@@ -174,7 +174,11 @@ namespace DejlienApp.Controllers
             {
                 var userProfile = db.Profiles.Where(p => p.Id.ToString() == userId).FirstOrDefault();
 
-                if (userProfile.UserPhoto == null)
+                if (userProfile != null)
+                {
+                    return new FileContentResult(userProfile.UserPhoto, "image/jpeg");
+                }
+                else
                 {
                     string fileName = HttpContext.Server.MapPath(@"~/Images/pixel.png");
 
@@ -186,9 +190,8 @@ namespace DejlienApp.Controllers
                     imageData = br.ReadBytes((int)imageFileLength);
 
                     return File(imageData, "image/png");
-
                 }
-                return new FileContentResult(userProfile.UserPhoto, "image/jpeg");
+
             }
 
         }
