@@ -5,7 +5,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 namespace DejlienApp.Repositories
 {
 
-    public class DataContext : IdentityDbContext<UserAccount>
+    public class DataContext : IdentityDbContext<UserAccount, CustomRole, int, CustomUserLogin, CustomUserRole, CustomUserClaim>
     {
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

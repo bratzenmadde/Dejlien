@@ -13,7 +13,7 @@
 <div class="row">
     @foreach (var item in Model)
     {
-        //if (Model.Count() < 7)
+        if (Model.Count() < 7)
         {
             <div class="col-md-4">
 
@@ -21,7 +21,7 @@
                 <p>
                     @Html.DisplayFor(modelitem => item.Description)
                 </p>
-                <p><a class="btn btn-default" href='@Html.Action("VisitProfile", "Account", new { item })'>Check me out! &raquo;</a></p>
+                <p><a class="btn btn-default" href='@Html.Action("VisitProfile", "Account", new { item.Id })'>Check me out! &raquo;</a></p>
             </div>
         }
     }

@@ -8,7 +8,7 @@ using DejlienApp.Framework;
 
 namespace DejlienApp.Repositories
 {
-    public class UserRepository : Repository<UserAccount, string>
+    public class UserRepository : Repository<UserAccount, int>
     {
         public UserRepository(DataContext context) : base(context)
         {

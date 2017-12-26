@@ -13,16 +13,13 @@ using Microsoft.Practices.Unity;
 
 namespace DejlienApp.Framework.Identity
 {
-    public class ApplicationSignInManager : SignInManager<UserAccount, string>
+    public class ApplicationSignInManager : SignInManager<UserAccount, int>
     {
         public ApplicationSignInManager(AccountUserManager userAccountManager, IAuthenticationManager authenticationManager)
             : base(userAccountManager, authenticationManager)
         {
         }
 
-        public override Task<ClaimsIdentity> CreateUserIdentityAsync(UserAccount userAccount)
-        {
-            return UserManager.CreateIdentityAsync(userAccount, DefaultAuthenticationTypes.ApplicationCookie);
-        }
+        
     }
 }

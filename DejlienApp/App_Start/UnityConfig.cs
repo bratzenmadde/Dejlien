@@ -52,7 +52,7 @@ namespace DejlienApp
             // TODO: Register your type's mappings here.
             //container.RegisterType<ILogger, DebugLogger>();
             container.RegisterType<DataContext>(new PerRequestLifetimeManager());
-            container.RegisterType<IUserStore<UserAccount>, CustomUserStore>(new PerRequestLifetimeManager());
+            container.RegisterType<IUserStore<UserAccount, int>, CustomUserStore>(new PerRequestLifetimeManager());
             //container.RegisterType<IRoleStore<IdentityRole>>(new PerRequestLifetimeManager());
             container.RegisterType<AccountUserManager>(new PerRequestLifetimeManager());
             container.RegisterType<IAuthenticationManager>(new InjectionFactory(c => HttpContext.Current.GetOwinContext().Authentication));

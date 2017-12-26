@@ -217,7 +217,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Framework\Identity\ApplicationSignInManager.cs" />
-    <Compile Include="Framework\Identity\CustomUserStore.cs" />
     <Compile Include="Framework\Repositories\IEntity.cs" />
     <Compile Include="Framework\Repositories\Repository.cs" />
     <Compile Include="Global.asax.cs">

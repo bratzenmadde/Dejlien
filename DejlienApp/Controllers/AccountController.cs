@@ -95,7 +95,7 @@ namespace DejlienApp.Controllers
                 using (var db = new DataContext())
                 {
                     // get user from context
-                    var user = db.Users.First(c => c.Id == userId);
+                    var user = db.Users.First(c => c.Id.ToString() == userId);
                     // assign UserProfileInfo to user
                     user.Profile = profile;
                     // save changes
@@ -141,18 +141,19 @@ namespace DejlienApp.Controllers
             var userId = User.Identity.GetUserId();
             using (var db = new DataContext())
             {
-                var currentUser = db.Users.Single(c => c.Id == userId);
+                var currentUser = db.Users.Single(c => c.Id.ToString() == userId);
                 var profileinfo = currentUser.Profile;
                 return View(profileinfo);
             }
         }
 
-        public ActionResult VisitProfile(Profile profile)
+        public ActionResult VisitProfile(int id)
         {
-           // using (var db = new DataContext())
+            using (var db = new DataContext())
             {
-                //var showProfile = db.Profiles.Where(p => p.Id == id);
-                return View("PersonalUserSite", profile);
+                var visitUser = db.Profiles.Where(p => p.Id == id);
+
+                return View("PersonalUserSite", visitUser);
             }    
         }
 

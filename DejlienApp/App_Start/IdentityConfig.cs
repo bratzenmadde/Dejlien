@@ -10,6 +10,8 @@ using Microsoft.Owin.Security.Cookies;
 using Unity;
 using Owin;
 using System;
+using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace DejlienApp.App_Start
 {
@@ -26,9 +28,9 @@ namespace DejlienApp.App_Start
                 LoginPath = new PathString("/User/Login"),
                 Provider = new CookieAuthenticationProvider
                 {
-                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<AccountUserManager, UserAccount>(
+                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<AccountUserManager, UserAccount, int>(
                         validateInterval: TimeSpan.FromMinutes(30),
-                        regenerateIdentity: (manager, user) => manager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie))
+                        regenerateIdentityCallback: (manager, user) => user.GenerateUserIdentityAsync(manager), getUserIdCallback: (id) =>(id.GetUserId<int>()))
                 }
             });
         }
