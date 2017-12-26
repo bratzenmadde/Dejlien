@@ -56,7 +56,7 @@ namespace DejlienApp.Controllers
 
                     return RedirectToAction("Index", "Account");
                 }
-              
+
             }
 
             return View(model);
@@ -136,7 +136,7 @@ namespace DejlienApp.Controllers
         }
 
         [Authorize]
-        public ActionResult PersonalUserSite()
+        public async Task<ActionResult> PersonalUserSite()
         {
             var userId = User.Identity.GetUserId();
             using (var db = new DataContext())
@@ -154,7 +154,7 @@ namespace DejlienApp.Controllers
                 //var visitUser = db.Profiles.Where(p => p.Id == id);
 
                 return View("PersonalUserSite"/*, visitUser*/);
-            }    
+            }
         }
 
         [HttpPost]
@@ -165,48 +165,32 @@ namespace DejlienApp.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        //public FileContentResult UserPhotos()
-        //{
-        //    if (User.Identity.IsAuthenticated)
-        //    {
-        //        var userId = User.Identity.GetUserId();
+        [Authorize]
+        public FileContentResult UserPhotos()
+        {
+            var userId = User.Identity.GetUserId();
 
-        //        if (userId == null)
-        //        {
-        //            string fileName = HttpContext.Server.MapPath(@"~/Images/pixel.png");
+            using (var db = new DataContext())
+            {
+                var userProfile = db.Profiles.Where(p => p.Id.ToString() == userId).FirstOrDefault();
 
-        //            byte[] imageData = null;
-        //            FileInfo fileInfo = new FileInfo(fileName);
-        //            long imageFileLength = fileInfo.Length;
-        //            FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-        //            BinaryReader br = new BinaryReader(fs);
-        //            imageData = br.ReadBytes((int)imageFileLength);
+                if (userProfile.UserPhoto == null)
+                {
+                    string fileName = HttpContext.Server.MapPath(@"~/Images/pixel.png");
 
-        //            return File(imageData, "image/png");
+                    byte[] imageData = null;
+                    FileInfo fileInfo = new FileInfo(fileName);
+                    long imageFileLength = fileInfo.Length;
+                    FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+                    BinaryReader br = new BinaryReader(fs);
+                    imageData = br.ReadBytes((int)imageFileLength);
 
-        //        }
-        //        // to get the user details to load user Image 
-        //        // var bdProfiles = HttpContext.GetOwinContext().Get<DataContext>();
-        //        using (var db = new DataContext())
-        //        {
-        //            var userImage = db.Profiles.Where(x => x.UserAccount.ToString() == userId).FirstOrDefault();
-        //            return new FileContentResult(userImage.UserPhoto, "image/jpeg");
-        //        }
+                    return File(imageData, "image/png");
 
-        //    }
-        //    else
-        //    {
-        //        string fileName = HttpContext.Server.MapPath(@"~/Images/pixel.png");
+                }
+                return new FileContentResult(userProfile.UserPhoto, "image/jpeg");
+            }
 
-        //        byte[] imageData = null;
-        //        FileInfo fileInfo = new FileInfo(fileName);
-        //        long imageFileLength = fileInfo.Length;
-        //        FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-        //        BinaryReader br = new BinaryReader(fs);
-        //        imageData = br.ReadBytes((int)imageFileLength);
-        //        return File(imageData, "image/png");
-
-        //    }
-        //}
+        }
     }
 }
