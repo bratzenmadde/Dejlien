@@ -147,13 +147,13 @@ namespace DejlienApp.Controllers
             }
         }
 
-        public ActionResult VisitProfile(int id)
+        public ActionResult VisitProfile(/*int id*/)
         {
-            using (var db = new DataContext())
+            //using (var db = new DataContext())
             {
-                var visitUser = db.Profiles.Where(p => p.Id == id);
+                //var visitUser = db.Profiles.Where(p => p.Id == id);
 
-                return View("PersonalUserSite", visitUser);
+                return View("PersonalUserSite"/*, visitUser*/);
             }    
         }
 
