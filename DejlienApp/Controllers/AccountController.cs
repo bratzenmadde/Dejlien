@@ -157,10 +157,11 @@ namespace DejlienApp.Controllers
             }
         }
 
-        [Authorize]
+        
         public async Task<ActionResult> PersonalUserSite()
         {
             var userId = User.Identity.GetUserId();
+
             using (var db = new DataContext())
             {
                 var currentUser = db.Users.Single(c => c.Id.ToString() == userId);
@@ -169,7 +170,7 @@ namespace DejlienApp.Controllers
             }
         }
 
-        public ActionResult VisitProfile(/*int id*/)
+        public ActionResult VisitProfile()
         {
             //using (var db = new DataContext())
             {
