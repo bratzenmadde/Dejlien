@@ -30,11 +30,6 @@ namespace DejlienApp.Controllers
             this.applicationSignInManager = applicationSignInManager;
         }
 
-        [Authorize]
-        public ActionResult Index()
-        {
-            return View();
-        }
 
         [AllowAnonymous]
         public ActionResult Register()
@@ -55,7 +50,7 @@ namespace DejlienApp.Controllers
                 {
                     await applicationSignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    return RedirectToAction("Index", "Account");
+                    return RedirectToAction("Index", "Home");
                 }
 
             }
@@ -134,7 +129,7 @@ namespace DejlienApp.Controllers
                 ModelState.Clear();
             }
 
-            return RedirectToAction("Index", "Account");
+            return RedirectToAction("PersonalUserSite", "Account");
         }
 
         [AllowAnonymous]
@@ -152,7 +147,7 @@ namespace DejlienApp.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToAction("Index", "Account");
+                    return RedirectToAction("Index", "Home");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -165,7 +160,7 @@ namespace DejlienApp.Controllers
         }
 
 
-        public async Task<ActionResult> PersonalUserSite()
+        public ActionResult PersonalUserSite()
         {
             var userId = User.Identity.GetUserId();
 
@@ -173,7 +168,15 @@ namespace DejlienApp.Controllers
             {
                 var currentUser = db.Users.Single(c => c.Id.ToString() == userId);
                 var profileinfo = currentUser.Profile;
-                return View(profileinfo);
+
+                if (profileinfo != null)
+                {
+                    return View(profileinfo);
+                }
+                else
+                {
+                    return View("ModifyProfile");
+                }
             }
         }
 
@@ -208,7 +211,7 @@ namespace DejlienApp.Controllers
             {
                 var userProfile = db.Profiles.Where(p => p.Id == ProfileId).FirstOrDefault();
 
-                if (userProfile != null)
+                if (userProfile.UserPhoto != null)
                 {
                     return new FileContentResult(userProfile.UserPhoto, "image/jpeg");
                 }

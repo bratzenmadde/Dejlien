@@ -16,9 +16,6 @@
 
 <h1>@Html.DisplayFor(model => model.Name)</h1>
 
-<p>
-    @*@Html.ActionLink("Create New", "Create")*@
-</p>
     <tr>
         <td>
             <p>Name: @Html.DisplayFor(model => model.Name)</p>
@@ -40,9 +37,6 @@
             <p>About @Html.DisplayFor(model => model.Name):</p>
             @Html.DisplayFor(model => model.Description)
             <br />
-        </td>
-        <td>
-            @*@Html.ActionLink("Edit", "Edit", new { id= model.Id }) |*@
         </td>
     </tr>
 
