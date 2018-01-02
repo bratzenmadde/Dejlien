@@ -231,5 +231,14 @@ namespace DejlienApp.Controllers
             }
 
         }
+        public ActionResult ListOfContacts()
+        {
+            using (var db = new DataContext())
+            {
+                var contacts = db.Profiles.ToList();
+                return View(contacts);
+            }
+
+        }
     }
 }

@@ -276,7 +276,7 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\PersonalUserSite.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Contact\ListOfContacts.cshtml" />
+    <Content Include="Views\Account\ListOfContacts.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -286,6 +286,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Contact\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
