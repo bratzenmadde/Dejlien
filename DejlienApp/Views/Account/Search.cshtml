@@ -1,0 +1,60 @@
+﻿@model IEnumerable<DejlienApp.Models.Profile>
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Search</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Age)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Location)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SearchingFor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Age)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Location)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SearchingFor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        
+        @*Ändra denna så att man kommer till den söktas profil*@
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+        </td>
+    </tr>
+}
+
+</table>

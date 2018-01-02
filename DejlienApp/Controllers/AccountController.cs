@@ -195,6 +195,11 @@ namespace DejlienApp.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult Search()
+        {
+            return View();
+        }
+
         [Authorize]
         public FileContentResult UserPhotos(int ProfileId)
         {
