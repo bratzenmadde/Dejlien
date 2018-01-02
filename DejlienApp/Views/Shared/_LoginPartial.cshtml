@@ -11,31 +11,27 @@
             <li>@Html.ActionLink("Account settings", "ModifyProfile", "Account")</li>
         </ul>
 
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <img src="@Url.Action("UserPhotos", "Account" )" height="48" width="48" />
-
-                    </li> 
-                    <li>
-                        @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
-                    </li>
-                    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-                    <div class="nav navbar-nav navbar-right" style="margin-top:8px;">
-                        @using (Html.BeginForm("Index", "Search", FormMethod.Get))
-                        {
-                            <ul class="nav navbar-nav">
-                                <li>@Html.TextBox("id", ViewBag.CurrentFilter as string)</li>
-                                <li><input type="submit" value="Search" /></li>
-                            </ul>
-                        }
-                    </div>
-                </ul>
-                }
-                }
-                else
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink(User.Identity.GetUserName() + "!", "Index", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+            <div class="nav navbar-nav navbar-right" style="margin-top:8px;">
+                @using (Html.BeginForm("Index", "Search", FormMethod.Get))
                 {
-                <ul class="nav navbar-nav navbar-right">
-                    <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-                    <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-                </ul>
+                    <ul class="nav navbar-nav">
+                        <li>@Html.TextBox("name")</li>
+                        <li><input type="submit" value="Search" /></li>
+                    </ul>
                 }
+            </div>
+        </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

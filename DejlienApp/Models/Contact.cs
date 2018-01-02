@@ -10,7 +10,7 @@ namespace DejlienApp.Models
     public class Contact: IEntity
     {
         public int Id { get; set; }
-        public string Category { get; set; }
+        public  bool Request { get; set; }
 
         public int ProfileId { get; set; }
         public virtual Profile Profile { get; set; }

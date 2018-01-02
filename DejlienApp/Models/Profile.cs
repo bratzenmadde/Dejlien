@@ -30,7 +30,7 @@ namespace DejlienApp.Models
 
         public virtual UserAccount UserAccount { get; set; }
         public ICollection<Interest> Interests { get; set; }
-        public ICollection<Contact> Contacts { get; set; }
+        public ICollection<Profile> Contacts { get; set; }
         public ICollection<Post> Posts { get; set; }
     }
 }

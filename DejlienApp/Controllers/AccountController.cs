@@ -71,7 +71,7 @@ namespace DejlienApp.Controllers
             {
                 var currentUser = db.Users.Single(c => c.Id.ToString() == userId);
                 var userProfile = currentUser.Profile;
-                
+
                 return View(userProfile);
             }
         }
@@ -164,7 +164,7 @@ namespace DejlienApp.Controllers
             }
         }
 
-        
+
         public async Task<ActionResult> PersonalUserSite()
         {
             var userId = User.Identity.GetUserId();
@@ -177,13 +177,13 @@ namespace DejlienApp.Controllers
             }
         }
 
-        public ActionResult VisitProfile()
+        public ActionResult VisitProfile(int ProfileId)
         {
-            //using (var db = new DataContext())
+            using (var db = new DataContext())
             {
-                //var visitUser = db.Profiles.Where(p => p.Id == id);
+                var visitUser = db.Profiles.Where(p => p.Id == ProfileId).SingleOrDefault();
 
-                return View("PersonalUserSite"/*, visitUser*/);
+                return View("PersonalUserSite", visitUser);
             }
         }
 
@@ -196,13 +196,12 @@ namespace DejlienApp.Controllers
         }
 
         [Authorize]
-        public FileContentResult UserPhotos()
+        public FileContentResult UserPhotos(int ProfileId)
         {
-            var userId = User.Identity.GetUserId();
 
             using (var db = new DataContext())
             {
-                var userProfile = db.Profiles.Where(p => p.Id.ToString() == userId).FirstOrDefault();
+                var userProfile = db.Profiles.Where(p => p.Id == ProfileId).FirstOrDefault();
 
                 if (userProfile != null)
                 {

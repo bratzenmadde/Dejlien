@@ -6,7 +6,7 @@
 }
 
 <h1>
-    <img src="@Url.Action("UserPhotos", "Account" )" style="width:160px;height:160px; background: #FFFFFF;
+    <img src="@Url.Action("UserPhotos", "Account", new { ProfileId = Model.Id} )" style="width:160px;height:160px; background: #FFFFFF;
     margin: auto;
     -moz-border-radius: 60px;
     border-radius: 100px;
@@ -14,7 +14,7 @@
     box-shadow: 0px 0px 20px #888;" />
 </h1> 
 
-<h1>@User.Identity.Name</h1>
+<h1>@Html.DisplayFor(model => model.Name)</h1>
 
 <p>
     @*@Html.ActionLink("Create New", "Create")*@

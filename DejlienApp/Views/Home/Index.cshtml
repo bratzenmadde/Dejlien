@@ -21,7 +21,8 @@
                 <p>
                     @Html.DisplayFor(modelitem => item.Description)
                 </p>
-                <p><a class="btn btn-default" href='@Html.Action("VisitProfile", "Account"@*, new { item.Id }*@)'>Check me out! &raquo;</a></p>
+                <input type="button" value="Check me out!" onclick="location.href='@Url.Action("Visitprofile", "Account" , new { ProfileId = item.Id })'" />
+                @*<p><a class="btn btn-default" href='@Html.Action("VisitProfile", "Account", new { item.Id })'>Check me out! &raquo;</a></p>*@
             </div>
         }
     }
