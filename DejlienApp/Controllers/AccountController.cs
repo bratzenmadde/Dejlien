@@ -195,7 +195,8 @@ namespace DejlienApp.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult Search()
+        [HttpPost]
+        public ActionResult Search(string searchButton)
         {
             return View();
         }

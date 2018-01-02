@@ -17,13 +17,13 @@
             </li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
             <div class="nav navbar-nav navbar-right" style="margin-top:8px;">
-                @using (Html.BeginForm("Index", "Search", FormMethod.Get))
+                @using (Html.BeginForm("Index", "Search", FormMethod.Post))
                 {
                     <ul class="nav navbar-nav">
-                        <li>@Html.TextBox("name")</li>
-                        <li><input type="submit" value="Search" formaction="Search" /></li>
+                        <li>@Html.TextBox("search")</li>
+                        <li><input type="submit" name ="searchButton" value="Search" formaction="Account/Search" /></li>
                     </ul>
-                }
+                }   
             </div>
         </ul>
     }
