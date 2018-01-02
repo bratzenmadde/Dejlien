@@ -66,7 +66,14 @@ namespace DejlienApp.Controllers
         [Authorize]
         public ActionResult ModifyProfile()
         {
-            return View();
+            var userId = User.Identity.GetUserId();
+            using (var db = new DataContext())
+            {
+                var currentUser = db.Users.Single(c => c.Id.ToString() == userId);
+                var userProfile = currentUser.Profile;
+                
+                return View(userProfile);
+            }
         }
 
         [Authorize]
