@@ -198,10 +198,14 @@ namespace DejlienApp.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult Search()
+        {
+            return View();
+        }
+
         [Authorize]
         public FileContentResult UserPhotos(int ProfileId)
         {
-
             using (var db = new DataContext())
             {
                 var userProfile = db.Profiles.Where(p => p.Id == ProfileId).FirstOrDefault();
