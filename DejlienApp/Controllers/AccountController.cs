@@ -13,6 +13,7 @@ using System.Net;
 using System.IO;
 using System.Web;
 using System.Data.Entity;
+using System.Collections.Generic;
 
 namespace DejlienApp.Controllers
 {
@@ -206,9 +207,19 @@ namespace DejlienApp.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult Search(string searchButton)
+        public ActionResult Search(string searchButton, string search)
         {
-            return View();
+            using (var db = new DataContext())
+            {
+                var SearchedProfiles = db.Profiles.Where(n => n.Name.Contains(search));
+                var SearchedP = SearchedProfiles.ToList();
+
+                //if (!String.IsNullOrEmpty(search))
+                //{
+                //}
+
+                return View(SearchedP);
+            }
         }
 
         [Authorize]
