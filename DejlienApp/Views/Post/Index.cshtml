@@ -1,0 +1,30 @@
+﻿@model DejlienApp.Controllers.PostIndexViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", new { id = Model.Id })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Posts.Single().Text)
+        </th>
+    </tr>
+
+@foreach (var item in Model.Posts) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Author.Name): @Html.DisplayFor(modelItem => item.Text)
+            </td>
+        <td>
+            <img src="@Url.Action("Image", new { id = item.Id})"/> @*---Vet inte vad den gör---*@
+        </td>
+    </tr>
+}
+
+</table>
