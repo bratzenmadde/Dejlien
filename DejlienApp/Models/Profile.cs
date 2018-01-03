@@ -30,6 +30,8 @@ namespace DejlienApp.Models
         
         public string Description { get; set; }
 
+        public bool IsVisible { get; set; }
+
         public virtual UserAccount UserAccount { get; set; }
         public ICollection<Interest> Interests { get; set; }
         public ICollection<Profile> Contacts { get; set; }
