@@ -211,7 +211,8 @@ namespace DejlienApp.Controllers
         {
             using (var db = new DataContext())
             {
-                var SearchedProfiles = db.Profiles.Where(n => n.Name.Contains(search));
+                // Tar ut de användare som har det man sökte på i namnet och har synliga profiler
+                var SearchedProfiles = db.Profiles.Where(n => n.Name.Contains(search) && n.IsVisible == true);
                 var SearchedP = SearchedProfiles.ToList();
 
                 if (String.IsNullOrEmpty(search))
