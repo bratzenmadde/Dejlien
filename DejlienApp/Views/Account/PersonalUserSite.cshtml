@@ -60,8 +60,8 @@
                     <h5>Hi! I require love!</h5>
                 }
                 <div class="col-md-10">
-                    @*@Html.EditorFor(model => model.PostIndexViewModel.Posts.Single().Text, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.PostIndexViewModel.Posts.Single().Text, "", new { @class = "text-danger" })*@
+                    @Html.EditorFor(model => model.PostIndexViewModel.Posts.Single().Text, "", new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PostIndexViewModel.Posts.Single().Text, "", new { @class = "text-danger" })
                 </div>
             </div>
 
