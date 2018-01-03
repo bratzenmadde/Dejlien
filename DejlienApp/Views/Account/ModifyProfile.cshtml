@@ -1,4 +1,5 @@
 ﻿@model DejlienApp.Models.Profile
+@using DejlienApp.Models
 
 @{
     ViewBag.Title = "ModifyProfile";
@@ -72,13 +73,9 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IsVisible, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Visible, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.CheckBoxFor(model => model.IsVisible)
-                    @Html.EditorFor(model => model.IsVisible)
-                    <p>Klick here to be seen by others during a search.</p>
-                </div>
+                @Html.DropDownList("Visible", EnumHelper.GetSelectList(typeof(Visible)), new { @class = "form-control" })
             </div>
         </div>
 
