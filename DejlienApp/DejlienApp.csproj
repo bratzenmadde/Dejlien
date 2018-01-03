@@ -277,6 +277,7 @@
     <Content Include="Views\Account\PersonalUserSite.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\ListOfContacts.cshtml" />
+    <Content Include="Views\Account\Search.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
