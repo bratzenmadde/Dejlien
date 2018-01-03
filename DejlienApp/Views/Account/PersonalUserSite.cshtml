@@ -53,8 +53,8 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.PostIndexViewModel.Posts.Single().Text, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @*@Html.EditorFor(model => model.PostIndexViewModel.Posts.Single().Text, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.PostIndexViewModel.Posts.Single().Text, "", new { @class = "text-danger" })*@
+                    @Html.EditorFor(model => model.PostIndexViewModel.Posts.Single().Text, "", new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PostIndexViewModel.Posts.Single().Text, "", new { @class = "text-danger" })
                 </div>
             </div>
 
