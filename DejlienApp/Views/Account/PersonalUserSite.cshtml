@@ -67,13 +67,14 @@
     }
 
     <table class="table">
+        @if (Model.PostIndexViewModel.Posts != null)
+    {
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.PostIndexViewModel.Posts.Single().Text)
+                @Html.DisplayFor(model => model.PostIndexViewModel.Posts.Single().Text)
             </th>
         </tr>
-        @if (Model.PostIndexViewModel.Posts != null)
-        {
+       
             foreach (var item in Model.PostIndexViewModel.Posts)
             {
                 <tr>
