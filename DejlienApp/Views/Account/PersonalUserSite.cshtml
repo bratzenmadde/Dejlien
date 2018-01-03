@@ -41,65 +41,66 @@
 </tr>
 
 
-<div class="wall">
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
-            <h4>Wall of LOVE</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
+@*@using (Html.BeginForm("Create", "", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Wall of LOVE</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @if (Model.PostIndexViewModel.Posts != null)
+                {
+                <h5>How bout' you gimme some löv</h5>
+            }
+            else
+            {
+                <h5>Hi! I require love!</h5>
+            }
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PostIndexViewModel.Post.Text, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PostIndexViewModel.Post.Text, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" onclick="location.href='@Url.Action("Create", "Post", new { post = Model.PostIndexViewModel.Post, id = Model.PostIndexViewModel.Post.Receiver.Id })'" />
+            </div>
+        </div>
+
+
+            <table class="table">
                 @if (Model.PostIndexViewModel.Posts != null)
                 {
-                    <h5>How bout' you gimme some löv</h5>
+                    <tr>
+                        <p>Previous</p>
+                        <th>
+                                @Html.DisplayFor(model => model.PostIndexViewModel.Posts.Text)
+                            </th>
+                    </tr>
+
+                    foreach (var item in Model.PostIndexViewModel.Posts)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Author.Name): @Html.DisplayFor(modelItem => item.Text)
+                            </td>
+                            <td>
+                                <img src="@Url.Action("Image", new { id = item.Id })" /> 
+                            </td>
+                        </tr>
+                    }
                 }
                 else
                 {
-                    <h5>Hi! I require love!</h5>
+                    <p>There is no love at the moment... please love me!</p>
                 }
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.PostIndexViewModel.Posts.Single().Text, "", new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.PostIndexViewModel.Posts.Single().Text, "", new { @class = "text-danger" })
-                </div>
-            </div>
+            </table>*@
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
-                </div>
-            </div>
-        </div>
-    }
-
-    <table class="table">
-        @if (Model.PostIndexViewModel.Posts != null)
-    {
-        <tr>
-            <th>
-                @Html.DisplayFor(model => model.PostIndexViewModel.Posts.Single().Text)
-            </th>
-        </tr>
-       
-            foreach (var item in Model.PostIndexViewModel.Posts)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Author.Name): @Html.DisplayFor(modelItem => item.Text)
-                    </td>
-                    <td>
-                        <img src="@Url.Action("Image", new { id = item.Id })" /> @*---Vet inte vad den gör---*@
-                    </td>
-                </tr>
-            }
-        }
-        else
-        {
-            <p>There is no love at the moment... please love me!</p>
-        }
-    </table>
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

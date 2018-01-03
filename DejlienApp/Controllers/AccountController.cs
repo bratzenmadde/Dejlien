@@ -167,17 +167,17 @@ namespace DejlienApp.Controllers
 
             using (var db = new DataContext())
             {
-                var currentUser = db.Users.Single(c => c.Id.ToString() == userId); //include?? lazy loading
+                var currentUser = db.Users.Include(p => p.Profile.Posts).Single(c => c.Id.ToString() == userId);
                 var profileinfo = currentUser.Profile;
-
-                var pwm = new ProfileViewModel();
-                pwm.Profile = profileinfo;
-                pwm.PostIndexViewModel = new PostIndexViewModel();
-                pwm.PostIndexViewModel.Id = currentUser.Id;
-                pwm.PostIndexViewModel.Posts = profileinfo.Posts;
 
                 if (profileinfo != null)
                 {
+                    var pwm = new ProfileViewModel();
+                    pwm.Profile = profileinfo;
+                    pwm.PostIndexViewModel = new PostIndexViewModel();
+                    pwm.PostIndexViewModel.Id = currentUser.Id;
+                    pwm.PostIndexViewModel.Posts = profileinfo.Posts;
+
                     return View(pwm);
                 }
                 else
@@ -189,11 +189,20 @@ namespace DejlienApp.Controllers
 
         public ActionResult VisitProfile(int ProfileId)
         {
+            var userId = User.Identity.GetUserId();
+
             using (var db = new DataContext())
             {
+                var currentUser = db.Users.Include(p => p.Profile.Posts).Single(c => c.Id.ToString() == userId);
                 var visitUser = db.Profiles.Where(p => p.Id == ProfileId).SingleOrDefault();
 
-                return View("PersonalUserSite", visitUser);
+                var pwm = new ProfileViewModel();
+                pwm.Profile = visitUser;
+                pwm.PostIndexViewModel = new PostIndexViewModel();
+                pwm.PostIndexViewModel.Id = currentUser.Id;
+                pwm.PostIndexViewModel.Posts = visitUser.Posts;
+
+                return View("PersonalUserSite", pwm);
             }
         }
 

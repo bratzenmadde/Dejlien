@@ -22,12 +22,6 @@ namespace DejlienApp.Controllers
             }
         }
 
-
-        public ActionResult Create(string id)
-        {
-            return View();
-        }
-
         [HttpPost]
         public ActionResult Create(Post post, int id, HttpPostedFileBase upload)
         {
@@ -78,5 +72,6 @@ namespace DejlienApp.Controllers
     {
         public int Id { get; set; }
         public ICollection<Post> Posts { get; set; }
+        public Post Post { get; set; } = new Post();
     }
 }
