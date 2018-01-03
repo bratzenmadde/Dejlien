@@ -49,6 +49,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.Description)
         </td>
+        <td>
+            <input type="button" value="Check me out!" onclick="location.href='@Url.Action("Visitprofile", "Account" , new { ProfileId = item.Id })'" />
+        </td>
     </tr>
 }
 
