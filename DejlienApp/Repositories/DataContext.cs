@@ -18,5 +18,7 @@ namespace DejlienApp.Repositories
         public DbSet<Interest> Interests { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Contact> Contacts { get; set; }
+
+        public System.Data.Entity.DbSet<DejlienApp.Controllers.PostIndexViewModel> PostIndexViewModels { get; set; }
     }
 }
