@@ -199,6 +199,7 @@ namespace DejlienApp.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Search(string searchButton)
         {
             return View();
