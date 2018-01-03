@@ -110,7 +110,8 @@ namespace DejlienApp.Controllers
                         userProfile.Gender = profile.Gender;
                         userProfile.UserPhoto = profile.UserPhoto;
                         userProfile.Description = profile.Description;
-
+                        userProfile.Visible = profile.Visible;
+                        
                         db.Entry(userProfile).State = EntityState.Modified;
 
                         db.SaveChanges();
@@ -123,7 +124,6 @@ namespace DejlienApp.Controllers
                         user.Profile = profile;
                         // save changes
                         db.SaveChanges();
-
                     }
                 }
 
@@ -209,18 +209,28 @@ namespace DejlienApp.Controllers
         [Authorize]
         public ActionResult Search(string searchButton, string search)
         {
-            using (var db = new DataContext())
+            if (String.IsNullOrEmpty(search))
             {
-                // Tar ut de användare som har det man sökte på i namnet och har synliga profiler
-                var SearchedProfiles = db.Profiles.Where(n => n.Name.Contains(search) && n.IsVisible == true);
-                var SearchedP = SearchedProfiles.ToList();
-
-                if (String.IsNullOrEmpty(search))
+                return View();
+            }
+            else
+            {
+                using (var db = new DataContext())
                 {
-                    return View();
-                }
+                    // Tar ut de användare som har det man sökte på i namnet och har synliga profiler
+                    var SearchedProfiles = db.Profiles.Where(n => n.Name.Contains(search) && n.Visible == Visible.Yes);
+                    var SearchedP = SearchedProfiles.ToList();
 
-                return View(SearchedP);
+                    if (SearchedP == null)
+                    {
+                        return View();
+                    }
+
+                    else
+                    {
+                        return View(SearchedP);
+                    }
+                }
             }
         }
 
