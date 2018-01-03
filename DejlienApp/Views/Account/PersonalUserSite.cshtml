@@ -51,7 +51,14 @@
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
-                @Html.LabelFor(model => model.PostIndexViewModel.Posts.Single().Text, htmlAttributes: new { @class = "control-label col-md-2" })
+                @if (Model.PostIndexViewModel.Posts != null)
+                {
+                    <h5>How bout' you gimme some löv</h5>
+                }
+                else
+                {
+                    <h5>Hi! I require love!</h5>
+                }
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.PostIndexViewModel.Posts.Single().Text, "", new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.PostIndexViewModel.Posts.Single().Text, "", new { @class = "text-danger" })
@@ -89,7 +96,7 @@
         }
         else
         {
-            <p>Det finns ingen kärlek... </p>
+            <p>There is no love at the moment... please love me!</p>
         }
     </table>
 </div>
