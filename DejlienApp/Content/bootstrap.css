@@ -118,7 +118,10 @@ q {
 small {
   font-size: 80%;
 }
-
+.wall {
+    width: 100%;
+    float: right;
+}
 sub,
 sup {
   position: relative;

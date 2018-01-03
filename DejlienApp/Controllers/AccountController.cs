@@ -166,12 +166,18 @@ namespace DejlienApp.Controllers
 
             using (var db = new DataContext())
             {
-                var currentUser = db.Users.Single(c => c.Id.ToString() == userId);
+                var currentUser = db.Users.Single(c => c.Id.ToString() == userId); //include?? lazy loading
                 var profileinfo = currentUser.Profile;
+
+                var pwm = new ProfileViewModel();
+                pwm.Profile = profileinfo;
+                pwm.PostIndexViewModel = new PostIndexViewModel();
+                pwm.PostIndexViewModel.Id = currentUser.Id;
+                pwm.PostIndexViewModel.Posts = profileinfo.Posts;
 
                 if (profileinfo != null)
                 {
-                    return View(profileinfo);
+                    return View(pwm);
                 }
                 else
                 {

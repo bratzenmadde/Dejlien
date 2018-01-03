@@ -29,7 +29,7 @@ namespace DejlienApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Post post, int id/*, HttpPostedFileBase upload*/)
+        public ActionResult Create(Post post, int id, HttpPostedFileBase upload)
         {
             var userId = User.Identity.GetUserId();
 
@@ -46,16 +46,16 @@ namespace DejlienApp.Controllers
 
                 db.Posts.Add(post);
 
-                //if (upload != null && upload.ContentLength > 0)
-                //{
-                //    post.Filename = upload.FileName;
-                //    post.ContentType = upload.ContentType;
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    post.Filename = upload.FileName;
+                    post.ContentType = upload.ContentType;
 
-                //    using (var reader = new BinaryReader(upload.InputStream))
-                //    {
-                //        post.File = reader.ReadBytes(upload.ContentLength);
-                //    }
-                //}
+                    using (var reader = new BinaryReader(upload.InputStream))
+                    {
+                        post.File = reader.ReadBytes(upload.ContentLength);
+                    }
+                }
 
                 db.SaveChanges();
 

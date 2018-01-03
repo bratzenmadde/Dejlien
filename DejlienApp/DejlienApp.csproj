@@ -231,6 +231,7 @@
     <Compile Include="Models\Post.cs" />
     <Compile Include="Models\Profile.cs" />
     <Compile Include="Framework\Identity\Role.cs" />
+    <Compile Include="Models\ProfileViewModel.cs" />
     <Compile Include="Models\Register.cs" />
     <Compile Include="Models\UserAccount.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
