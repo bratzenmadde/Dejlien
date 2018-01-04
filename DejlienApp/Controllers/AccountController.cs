@@ -187,6 +187,7 @@ namespace DejlienApp.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult VisitProfile(int ProfileId)
         {
             var userId = User.Identity.GetUserId();
@@ -230,11 +231,6 @@ namespace DejlienApp.Controllers
                     // Tar ut de användare som har det man sökte på i namnet och har synliga profiler
                     var SearchedProfiles = db.Profiles.Where(n => n.Name.Contains(search) && n.Visible == Visible.Yes);
                     var SearchedP = SearchedProfiles.ToList();
-
-                    //if (String.IsNullOrEmpty(search))
-                    //{
-                    //    return View();
-                    //}
 
                     if (SearchedP == null)
                     {
