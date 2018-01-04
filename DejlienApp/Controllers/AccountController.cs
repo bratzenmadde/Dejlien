@@ -134,6 +134,7 @@ namespace DejlienApp.Controllers
         }
 
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public ActionResult Login()
         {
             return View();
@@ -215,6 +216,7 @@ namespace DejlienApp.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [Authorize]
         public ActionResult Search(string searchButton, string search)
         {
