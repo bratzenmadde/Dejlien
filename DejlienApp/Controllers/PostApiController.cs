@@ -11,7 +11,7 @@ namespace DejlienApp.Controllers
     public class PostApiController : ApiController
     {
         [HttpPost]
-        public string SavePost(Post post, int id)
+        public string SavePost(Post post, int currentUserId, int receiverId)
         {
             return "hej";
         }
