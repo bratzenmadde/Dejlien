@@ -16,16 +16,26 @@ namespace DejlienApp.Controllers
         public void SavePost(Post post, int receiverId)
         {
             var userId = User.Identity.GetUserId();
-            
+
             using (var db = new DataContext())
             {
-                var currentUser = db.Users.Single(c => c.Id.ToString() == userId);
-                post.Author = currentUser.Profile;
- 
-                post.Receiver = db.Profiles.Where(p => p.Id == receiverId).SingleOrDefault();
+                if (ModelState.IsValid && post != null)
+                {
+                    var currentUser = db.Users.Single(c => c.Id.ToString() == userId);
+                    post.Author = currentUser.Profile;
 
-                db.Posts.Add(post);
-                db.SaveChanges();
+                    post.Receiver = db.Profiles.Where(p => p.Id == receiverId).SingleOrDefault();
+                    
+                    db.Posts.Add(post);
+                    db.SaveChanges();
+
+                    
+                    //return till en annan eller samma vy fast uppdaterad
+                }
+                else
+                {
+                    //return ouppdaterad vy kanske med felmeddelande
+                }
             }
         }
     }
