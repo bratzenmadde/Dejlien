@@ -29,7 +29,9 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@if (Model != null) {
+    foreach (var item in Model)
+    {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
@@ -50,9 +52,10 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            <input type="button" value="Check me out!" onclick="location.href='@Url.Action("Visitprofile", "Account" , new { ProfileId = item.Id })'" />
+            <input type="button" value="Check me out!" onclick="location.href='@Url.Action("Visitprofile", "Account", new { ProfileId = item.Id })'" />
         </td>
     </tr>
+    }
 }
 
 </table>
