@@ -1,4 +1,6 @@
 ﻿using DejlienApp.Models;
+using DejlienApp.Repositories;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +13,30 @@ namespace DejlienApp.Controllers
     public class PostApiController : ApiController
     {
         [HttpPost]
-        public string SavePost(Post post, int id)
+        public void SavePost(Post post, int receiverId)
         {
-            return "hej";
+            var userId = User.Identity.GetUserId();
+
+            using (var db = new DataContext())
+            {
+                if (ModelState.IsValid && post != null)
+                {
+                    var currentUser = db.Users.Single(c => c.Id.ToString() == userId);
+                    post.Author = currentUser.Profile;
+
+                    post.Receiver = db.Profiles.Where(p => p.Id == receiverId).SingleOrDefault();
+                    
+                    db.Posts.Add(post);
+                    db.SaveChanges();
+
+                    
+                    //return till en annan eller samma vy fast uppdaterad
+                }
+                else
+                {
+                    //return ouppdaterad vy kanske med felmeddelande
+                }
+            }
         }
     }
 }

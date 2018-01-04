@@ -40,16 +40,16 @@ namespace DejlienApp.Controllers
 
                 db.Posts.Add(post);
 
-                if (upload != null && upload.ContentLength > 0)
-                {
-                    post.Filename = upload.FileName;
-                    post.ContentType = upload.ContentType;
+                //if (upload != null && upload.ContentLength > 0)
+                //{
+                //    post.Filename = upload.FileName;
+                //    post.ContentType = upload.ContentType;
 
-                    using (var reader = new BinaryReader(upload.InputStream))
-                    {
-                        post.File = reader.ReadBytes(upload.ContentLength);
-                    }
-                }
+                //    using (var reader = new BinaryReader(upload.InputStream))
+                //    {
+                //        post.File = reader.ReadBytes(upload.ContentLength);
+                //    }
+                //}
 
                 db.SaveChanges();
 
@@ -57,15 +57,15 @@ namespace DejlienApp.Controllers
             }
         }
 
-        public ActionResult Image(int id)
-        {
-            using (var db = new DataContext())
-            {
-                var post = db.Posts.Single(x => x.Id == id);
+        //public ActionResult Image(int id)
+        //{
+        //    using (var db = new DataContext())
+        //    {
+        //        var post = db.Posts.Single(x => x.Id == id);
 
-                return File(post.File, post.ContentType);
-            }
-        }
+        //        return File(post.File, post.ContentType);
+        //    }
+        //}
     }
 
     public class PostIndexViewModel
