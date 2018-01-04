@@ -88,9 +88,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Author.Name): @Html.DisplayFor(modelItem => item.Text)
                 </td>
-                <td>
+                @*<td>
                     <img src="@Url.Action("Image", new { id = item.Id })" />
-                </td>
+                </td>*@
             </tr>
         }
     }
@@ -103,4 +103,8 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+<script>
+
+    @*@model//prevent default, skicka formuläret till api via js, ajax web api send form*@
+    </script>
 }
