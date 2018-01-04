@@ -78,7 +78,7 @@
             <input type="text" id="Post_Text" />
         </div>
         <div>
-            <input type="submit" value="Send" />
+            <input type="submit" value="Send" onclick="location.href='@Url.Action("Index", "Post" , new { profileViewModel = Model })'"/>
         </div>
     </form>
 

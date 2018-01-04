@@ -12,13 +12,13 @@ namespace DejlienApp.Controllers
 {
     public class PostController : Controller
     {
-        // GET: Post
-        public ActionResult Index(int id)
+        public ActionResult Index(ProfileViewModel model)
         {
             using (var db = new DataContext())
             {
-                var posts = db.Posts.Where(x => x.Receiver.Id == id).ToList();
-                return View(new Profile { Id = id, Posts = posts });
+                var posts = db.Posts.Where(x => x.Receiver.Id == model.Profile.Id).ToList();
+                model.PostIndexViewModel.Posts = posts;
+                return View("ProfileUserSite", model);
             }
         }
     }
