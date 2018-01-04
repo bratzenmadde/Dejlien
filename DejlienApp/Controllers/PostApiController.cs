@@ -12,30 +12,28 @@ namespace DejlienApp.Controllers
 {
     public class PostApiController : ApiController
     {
+        public class PostModel
+        {
+            public int Reciever { get; set; }
+            public string Text { get; set; }
+        }
         [HttpPost]
-        public void SavePost(Post post, int receiverId)
+        public void SavePost(PostModel model)
         {
             var userId = User.Identity.GetUserId();
+            Post post = new Post();
 
             using (var db = new DataContext())
             {
-                if (ModelState.IsValid && post != null)
-                {
-                    var currentUser = db.Users.Single(c => c.Id.ToString() == userId);
-                    post.Author = currentUser.Profile;
+                var currentUser = db.Users.Single(c => c.Id.ToString() == userId);
 
-                    post.Receiver = db.Profiles.Where(p => p.Id == receiverId).SingleOrDefault();
-                    
-                    db.Posts.Add(post);
-                    db.SaveChanges();
+                post.Author = currentUser.Profile;
+                post.Receiver = db.Profiles.Where(p => p.Id == model.Reciever).SingleOrDefault();
 
-                    
-                    //return till en annan eller samma vy fast uppdaterad
-                }
-                else
-                {
-                    //return ouppdaterad vy kanske med felmeddelande
-                }
+                post.Text = model.Text;
+
+                db.Posts.Add(post);
+                db.SaveChanges();
             }
         }
     }

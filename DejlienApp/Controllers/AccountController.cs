@@ -134,7 +134,6 @@ namespace DejlienApp.Controllers
         }
 
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public ActionResult Login()
         {
             return View();
@@ -257,7 +256,7 @@ namespace DejlienApp.Controllers
             {
                 var userProfile = db.Profiles.Where(p => p.Id == ProfileId).FirstOrDefault();
 
-                if (userProfile.UserPhoto != null)
+                if (userProfile.UserPhoto != null && userProfile.UserPhoto.Length > 0 )
                 {
                     return new FileContentResult(userProfile.UserPhoto, "image/jpeg");
                 }
@@ -278,14 +277,6 @@ namespace DejlienApp.Controllers
             }
 
         }
-        //public ActionResult ListOfContacts()
-        //{
-        //    using (var db = new DataContext())
-        //    {
-        //        var contacts = db.Profiles.ToList();
-        //        return View(contacts);
-        //    }
 
-        //}
     }
 }
