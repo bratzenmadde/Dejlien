@@ -16,7 +16,8 @@ namespace DejlienApp
     {
         protected void Application_Start()
         {
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<DataContext>());
+            Database.SetInitializer(new DataContextInitializer());
+            //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<DataContext>());
 
             HttpConfiguration config = GlobalConfiguration.Configuration;
 
