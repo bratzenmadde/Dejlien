@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Mvc;
 
 namespace DejlienApp.Controllers
 {
@@ -17,7 +18,8 @@ namespace DejlienApp.Controllers
             public int Reciever { get; set; }
             public string Text { get; set; }
         }
-        [HttpPost]
+
+        [System.Web.Http.HttpPost]
         public void SavePost(PostModel model)
         {
             var userId = User.Identity.GetUserId();
@@ -34,6 +36,8 @@ namespace DejlienApp.Controllers
 
                 db.Posts.Add(post);
                 db.SaveChanges();
+
+                return;
             }
         }
     }
