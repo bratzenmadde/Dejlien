@@ -232,6 +232,11 @@ namespace DejlienApp.Controllers
                     var SearchedProfiles = db.Profiles.Where(n => n.Name.Contains(search) && n.Visible == Visible.Yes);
                     var SearchedP = SearchedProfiles.ToList();
 
+                    //if (String.IsNullOrEmpty(search))
+                    //{
+                    //    return View();
+                    //}
+
                     if (SearchedP == null)
                     {
                         return View();
