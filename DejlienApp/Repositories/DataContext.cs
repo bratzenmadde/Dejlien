@@ -15,7 +15,6 @@ namespace DejlienApp.Repositories
         }
 
         public DbSet<Profile> Profiles { get; set; }
-        public DbSet<Interest> Interests { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Contact> Contacts { get; set; }
 
