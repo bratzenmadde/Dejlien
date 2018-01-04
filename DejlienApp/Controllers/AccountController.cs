@@ -194,7 +194,7 @@ namespace DejlienApp.Controllers
             using (var db = new DataContext())
             {
                 var currentUser = db.Users.Include(p => p.Profile.Posts).Single(c => c.Id.ToString() == userId);
-                var visitUser = db.Profiles.Where(p => p.Id == ProfileId).SingleOrDefault();
+                var visitUser = db.Profiles.Include(e => e.UserAccount).Where(p => p.Id == ProfileId).SingleOrDefault();
 
                 var pwm = new ProfileViewModel();
                 pwm.Profile = visitUser;
