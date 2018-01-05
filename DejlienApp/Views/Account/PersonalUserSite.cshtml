@@ -60,12 +60,12 @@
             <input type="text" id="Post_Text" />
         </div>
         <div>
-            <input type="submit" value="Send" onclick="location.href='@Url.Action("Index", "Post" , new { profileViewModel = Model })'" />
+            <input type="submit" value="Send" onclick="location.href='@Url.Action("VisitProfile", "Account" , new { profileId = Model.Profile.Id })'" />
         </div>
     </form>
 
 
-    @if (Model.PostIndexViewModel.Posts != null)
+    @if (Model.Profile.Posts != null)
     {
         <h4>Wall of LOVE</h4>
         <table class="table">
@@ -76,7 +76,7 @@
                 </th>
             </tr>
 
-            @foreach (var item in Model.PostIndexViewModel.Posts)
+            @foreach (var item in Model.Profile.Posts)
             {
                 <tr>
                     <td>
@@ -99,9 +99,9 @@
     <script type="text/javascript">
 
 
-    $("#form1").submit(function (event) {
-        event.preventDefault();
-        var text = $.ajax({ url: '/api/PostApi/SavePost/', data: { text: $('#Post_Text').val(), reciever: @Model.Profile.Id }, type: "post" })
+        $("#form1").submit(function (event) {
+            event.preventDefault();
+            var text = $.ajax({ url: '/api/PostApi/SavePost/', data: { text: $('#Post_Text').val(), reciever: @Model.Profile.Id }, type: "post" })
         alert("Message successfully sent!");
         $("#form1")[0].reset();
         });

@@ -10,18 +10,6 @@ using System.Web.Mvc;
 
 namespace DejlienApp.Controllers
 {
-    public class PostController : Controller
-    {
-        public ActionResult Index(ProfileViewModel model)
-        {
-            using (var db = new DataContext())
-            {
-                var posts = db.Posts.Where(x => x.Receiver.Id == model.Profile.Id).ToList();
-                model.PostIndexViewModel.Posts = posts;
-                return View("ProfileUserSite", model);
-            }
-        }
-    }
 
     public class PostIndexViewModel
     {
