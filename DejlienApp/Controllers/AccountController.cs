@@ -79,14 +79,12 @@ namespace DejlienApp.Controllers
 
             if (ModelState.IsValid)
             {
-                // logged in user id
                 var userId = User.Identity.GetUserId();
                 using (var db = new DataContext())
                 {
                     var currentUser = db.Users.Single(c => c.Id.ToString() == userId);
                     var userProfile = currentUser.Profile;
-
-                    // To convert the user uploaded Photo as Byte Array before save to DB
+                    
                     byte[] imageData = null;
                     if (Request.Files.Count > 0)
                     {
@@ -97,8 +95,7 @@ namespace DejlienApp.Controllers
                             imageData = binary.ReadBytes(poImgFile.ContentLength);
                         }
                     }
-
-                    //Here we pass the byte array to user context to store in db 
+                    
                     profile.UserPhoto = imageData;
 
                     if (userProfile != null)
@@ -118,11 +115,8 @@ namespace DejlienApp.Controllers
                     }
                     else
                     {
-                        // get user from context
                         var user = db.Users.First(c => c.Id.ToString() == userId);
-                        // assign UserProfileInfo to user
                         user.Profile = profile;
-                        // save changes
                         db.SaveChanges();
                     }
                 }
@@ -179,7 +173,6 @@ namespace DejlienApp.Controllers
                     pwm.PostIndexViewModel = new PostIndexViewModel();
                     pwm.PostIndexViewModel.Id = currentUser.Id;
 
-
                     return View(pwm);
                 }
                 else
@@ -230,7 +223,6 @@ namespace DejlienApp.Controllers
             {
                 using (var db = new DataContext())
                 {
-                    // Tar ut de användare som har det man sökte på i namnet och har synliga profiler
                     var SearchedProfiles = db.Profiles.Where(n => n.Name.Contains(search) && n.Visible == Visible.Yes);
                     var SearchedP = SearchedProfiles.ToList();
 

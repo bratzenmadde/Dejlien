@@ -141,4 +141,51 @@
   <data name="Slogan_Home" xml:space="preserve">
     <value>We belive in long-distance love!</value>
   </data>
+  <data name="Adress1_Contact" xml:space="preserve">
+    <value>Alexander Island, Antarctic 
+
+</value>
+  </data>
+  <data name="Adress2_Contact" xml:space="preserve">
+    <value>Tellus, Milky Way</value>
+  </data>
+  <data name="CMOButton_Search" xml:space="preserve">
+    <value>Check me out!</value>
+  </data>
+  <data name="h3_About" xml:space="preserve">
+    <value>Welcome to Dejlien! The only existing dejting website where you can find your intergalactic soulmate.</value>
+  </data>
+  <data name="LogOff_LoginPartial" xml:space="preserve">
+    <value>Log off</value>
+  </data>
+  <data name="Marketing_Contact" xml:space="preserve">
+    <value>Marketing:</value>
+  </data>
+  <data name="p_About" xml:space="preserve">
+    <value>To be a part of this community, the only thing you need to do is to create an account. Then you will have full access to meet any other registered species! All the way from Milky Way to Tadpole Galaxy.</value>
+  </data>
+  <data name="p_Contact" xml:space="preserve">
+    <value>If you have any questions or thoughts, please contact us on the support e-mail.</value>
+  </data>
+  <data name="p_Search" xml:space="preserve">
+    <value>Unable to find love, have you written anything in the searchbox?</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Search_LoginPartial" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Title_About" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="Title_Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="Title_ModifyProfile" xml:space="preserve">
+    <value>Edit your profile information</value>
+  </data>
+  <data name="Title_Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
 </root>

@@ -1,10 +1,7 @@
 ﻿@model IEnumerable<DejlienApp.Models.Profile>
 
-@{
-    ViewBag.Title = "Search";
-}
+<h2>@Resources.Lang.Title_Search</h2>
 
-<h2>Search</h2>
 
 <table class="table">
     <tr>
@@ -28,11 +25,34 @@
         </th>
         <th></th>
     </tr>
-
 @if (Model != null)
 {
     foreach (var item in Model)
     {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SearchingFor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                <input type="button" value="Check me out!" onclick="location.href='@Url.Action("Visitprofile", "Account", new { ProfileId = item.Id })'" />
+            </td>
+        </tr>
+
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
@@ -53,14 +73,16 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            <input type="button" value="Check me out!" onclick="location.href='@Url.Action("Visitprofile", "Account", new { ProfileId = item.Id })'" />
+            <input type="button" value="@Resources.Lang.CMOButton_Search" onclick="location.href='@Url.Action("Visitprofile", "Account", new { ProfileId = item.Id })'" />
         </td>
     </tr>
+
     }
 }
 else
 {
-    <p>Unable to find love, have you written anything in the searchbox?</p>
+    <p>@Resources.Lang.p_Search</p>
 }
+
 
 </table>
