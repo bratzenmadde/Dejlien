@@ -20,8 +20,10 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink(Resources.Lang.About_Menu, "About", "Home")</li>
+                    <li>@Html.ActionLink(Resources.Lang.Contact_Menu, "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Svenska", "ChangeLang", "Home", new { lang = "sv-SE"}, null)</li>
+                    <li>@Html.ActionLink("English", "ChangeLang", "Home", new { lang = "en"}, null)</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -31,7 +33,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Dejlien spreading love!</p>
+            <p>&copy; @DateTime.Now.Year - @Resources.Lang.Footer_Home</p>
         </footer>
     </div>
 
