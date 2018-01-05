@@ -29,9 +29,11 @@
 
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
+        @foreach (var item in Model)
+        {
+            if (Model != null)
+        {
+        <tr>
         @*<td>
             @Html.DisplayFor(modelItem => item.UserPhoto)
         </td>*@
@@ -51,6 +53,6 @@
             @Html.DisplayFor(modelItem => item.Gender)
         </td>
     </tr>
-}
-
+        }
+        }
 </table>

@@ -201,7 +201,6 @@ namespace DejlienApp.Controllers
                 pwm.Profile = visitUser;
                 pwm.PostIndexViewModel = new PostIndexViewModel();
                 pwm.PostIndexViewModel.Id = currentUser.Id;
-                pwm.PostIndexViewModel.Posts = visitUser.Posts;
 
                 return View("PersonalUserSite", pwm);
             }
