@@ -4,7 +4,9 @@
     ViewBag.Title = "PersonalUserSite";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<head><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"></head>
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
 
 <div id="left">
 
@@ -23,51 +25,33 @@
     }
 
     <h1>@Html.DisplayFor(model => model.Profile.Name)</h1>
-
-    <tr>
-        <td>
-            <p>Name: @Html.DisplayFor(model => model.Profile.Name)</p>
-        </td>
-        <td>
-            <p>Age: @Html.DisplayFor(model => model.Profile.Age)</p>
-        </td>
-        <td>
-            <p>Location: @Html.DisplayFor(model => model.Profile.Location)</p>
-        </td>
-        <td>
-            <p>Searching for: @Html.DisplayFor(model => model.Profile.SearchingFor)</p>
-        </td>
-        <td>
-            <p>Idenifies as: @Html.DisplayFor(model => model.Profile.Gender)</p>
-            <br />
-        </td>
-        <td>
-            <p>About @Html.DisplayFor(model => model.Profile.Name):</p>
-            @Html.DisplayFor(model => model.Profile.Description)
-            <br />
-        </td>
-    </tr>
+    <table>
+        <tr>
+            <td>
+                <p>Name: @Html.DisplayFor(model => model.Profile.Name)</p>
+            </td>
+            <td>
+                <p>Age: @Html.DisplayFor(model => model.Profile.Age)</p>
+            </td>
+            <td>
+                <p>Location: @Html.DisplayFor(model => model.Profile.Location)</p>
+            </td>
+            <td>
+                <p>Searching for: @Html.DisplayFor(model => model.Profile.SearchingFor)</p>
+            </td>
+            <td>
+                <p>Idenifies as: @Html.DisplayFor(model => model.Profile.Gender)</p>
+                <br />
+            </td>
+            <td>
+                <p>About @Html.DisplayFor(model => model.Profile.Name):</p>
+                @Html.DisplayFor(model => model.Profile.Description)
+                <br />
+            </td>
+        </tr>
+    </table>
 </div>
-@*@using (Html.BeginForm("Create", "Post", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>Create Message:</h4>
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PostIndexViewModel.Post.Text, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PostIndexViewModel.Post.Text, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>*@
-@*}*@
 <div id="right">
     <form id="form1" method="post" action="api/PostApi/SavePost"
           enctype="application/x-www-form-urlencoded">
@@ -78,50 +62,49 @@
             <input type="text" id="Post_Text" />
         </div>
         <div>
-            <input type="submit" value="Send" />
+            <input type="submit" value="Send" onclick="location.href='@Url.Action("Index", "Post" , new { profileViewModel = Model })'" />
         </div>
     </form>
 
-    <table class="table">
-        @if (Model.PostIndexViewModel.Posts != null)
-        {
-            <h4>Wall of LOVE</h4>
+
+    @if (Model.PostIndexViewModel.Posts != null)
+    {
+        <h4>Wall of LOVE</h4>
+        <table class="table">
+
             <tr>
                 <th>
                     @Html.DisplayFor(model => model.PostIndexViewModel.Post.Text)
                 </th>
             </tr>
 
-            foreach (var item in Model.PostIndexViewModel.Posts)
+            @foreach (var item in Model.PostIndexViewModel.Posts)
             {
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.Author.Name): @Html.DisplayFor(modelItem => item.Text)
                     </td>
-                    @*<td>
-                            <img src="@Url.Action("Image", new { id = item.Id })" />
-                        </td>*@
                 </tr>
             }
-        }
-        else
-        {
-            <p>There is no love at the moment... please love me!</p>
-        }
-    </table>
+        </table>
+    }
+    else
+    {
+        <p>There is no love at the moment... please love me!</p>
+    }
+
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    @*@model//prevent default, skicka formuläret till api via js, ajax web api send form*@
 
-<script type="text/javascript">
+    <script type="text/javascript">
 
 
     $("#form1").submit(function (event) {
         event.preventDefault();
         var text = $.ajax({ url: '/api/PostApi/SavePost/', data: { text: $('#Post_Text').val(), reciever: @Model.Profile.Id }, type: "post"})
         });
-</script>
-  
+    </script>
+
 }
