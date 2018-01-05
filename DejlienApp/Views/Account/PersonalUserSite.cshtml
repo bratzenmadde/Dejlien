@@ -21,8 +21,9 @@
     <br />
     @if (Model.Profile.UserAccount.Email != User.Identity.Name)
     {
-        <button style="font-size:24px">Add to contacts <i class="material-icons">person_add</i></button>
+        <input type="button" name="requestButton" value="Add friend" onclick="location.href='@Url.Action("FriendRequest", "Contact" , new { ProfileId = Model.Profile.Id })'" />
     }
+    <br />
 
     <h1>@Html.DisplayFor(model => model.Profile.Name)</h1>
     <table>
