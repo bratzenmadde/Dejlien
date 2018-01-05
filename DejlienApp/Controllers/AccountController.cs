@@ -111,7 +111,7 @@ namespace DejlienApp.Controllers
                         userProfile.UserPhoto = profile.UserPhoto;
                         userProfile.Description = profile.Description;
                         userProfile.Visible = profile.Visible;
-                        
+
                         db.Entry(userProfile).State = EntityState.Modified;
 
                         db.SaveChanges();
@@ -169,10 +169,11 @@ namespace DejlienApp.Controllers
             {
                 var currentUser = db.Users.Include(p => p.Profile.Posts).Single(c => c.Id.ToString() == userId);
                 var profileinfo = currentUser.Profile;
-                profileinfo.Posts = db.Posts.Where(p => p.Receiver.Id == profileinfo.Id).ToList();
+
 
                 if (profileinfo != null)
                 {
+                    profileinfo.Posts = db.Posts.Where(p => p.Receiver.Id == profileinfo.Id).ToList();
                     var pwm = new ProfileViewModel();
                     pwm.Profile = profileinfo;
                     pwm.PostIndexViewModel = new PostIndexViewModel();
@@ -253,7 +254,7 @@ namespace DejlienApp.Controllers
             {
                 var userProfile = db.Profiles.Where(p => p.Id == ProfileId).FirstOrDefault();
 
-                if (userProfile.UserPhoto != null && userProfile.UserPhoto.Length > 0 )
+                if (userProfile.UserPhoto != null && userProfile.UserPhoto.Length > 0)
                 {
                     return new FileContentResult(userProfile.UserPhoto, "image/jpeg");
                 }
