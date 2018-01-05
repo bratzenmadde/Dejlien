@@ -97,7 +97,9 @@
 
     $("#form1").submit(function (event) {
         event.preventDefault();
-        var text = $.ajax({ url: '/api/PostApi/SavePost/', data: { text: $('#Post_Text').val(), reciever: @Model.Profile.Id }, type: "post"})
+        var text = $.ajax({ url: '/api/PostApi/SavePost/', data: { text: $('#Post_Text').val(), reciever: @Model.Profile.Id }, type: "post" })
+        alert("Message successfully sent!");
+        $("#form1")[0].reset();
         });
 </script>
   
