@@ -33,7 +33,7 @@ namespace DejlienApp.Models
         public Visible Visible { get; set; }
 
         public virtual UserAccount UserAccount { get; set; }
-        public ICollection<Profile> Contacts { get; set; }
+        public ICollection<Contact> Contacts { get; set; }
         public ICollection<Post> Posts { get; set; }
     }
 
