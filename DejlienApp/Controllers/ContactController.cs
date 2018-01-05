@@ -21,12 +21,10 @@ namespace DejlienApp.Controllers
             {
                 // gets the current user profile
                 var currentUser = db.Users.Include(p => p.Profile).Include(c => c.Profile.Contacts).Single(c => c.Id.ToString() == currentUserId);
-                var contacts = currentUser.Profile.Contacts.Where(c => c.User.Id == currentUser.Profile.Id);
-                //var contacts1 = db.Profiles.Include(c => c.Contacts).Where(p => p.Id == currentUser.Profile.Id);
+                var contacts = db.Contacts.Include(f => f.Friend).Where(c => c.User.Id.ToString() == currentUserId);
+                var con = contacts.ToList();
 
-                //var friends = contacts.Where(f => f.User.Id == currentUser.Profile.Id);
-
-                return View();
+                return View(con);
             }
         }
 
@@ -58,7 +56,7 @@ namespace DejlienApp.Controllers
 
                 Contact contact = new Contact
                 {
-                    User = profile,
+                    User = currentUser.Profile,
                     Request = true,
                     Accept = false,
                     Friend = profile
@@ -78,7 +76,7 @@ namespace DejlienApp.Controllers
                 //pwm.PostIndexViewModel.Posts = visitedUserProfiel.Posts;
 
                 //return View("PersonalUserSite", pwm);
-                return RedirectToAction("VisitProfile", "Account");
+                return RedirectToAction("VisitProfile");
             }   
         }
     }
