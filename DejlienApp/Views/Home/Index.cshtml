@@ -6,14 +6,14 @@
 
 <div class="jumbotron">
     <h1>Dejlien</h1>
-    <p class="lead">We belive in long-distance love!</p>
-    <p><a href='@Url.Action("About", "Home")' class="btn btn-primary btn-lg">Read more &raquo;</a></p>
+    <p class="lead">@Resources.Lang.Slogan_Home</p>
+    <p><a href='@Url.Action("About", "Home")' class="btn btn-primary btn-lg">@Resources.Lang.RMButton_Home &raquo;</a></p>
 </div>
 
 <div class="row">
     @foreach (var item in Model)
     {
-        if (Model.Count() < 7)//fungerar inte med fler än 6 användare!
+        if (Model.Count() < 7)
         {
             <div class="col-md-4">
 
@@ -28,7 +28,7 @@
                 }
                 else
                 {
-                    <input type="button" value="Log in to check me out!" onclick="location.href='@Url.Action("Login", "Account")'" />
+                    <input type="button" value="@Resources.Lang.CMButton_Home" onclick="location.href='@Url.Action("Login", "Account")'" />
                 }
 
             </div>
