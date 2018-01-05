@@ -22,7 +22,7 @@ namespace DejlienApp.Controllers
                 // gets the current user profile
                 var currentUser = db.Users.Include(p => p.Profile).Include(c => c.Profile.Contacts).Single(c => c.Id.ToString() == currentUserId);
                 var contacts = currentUser.Profile.Contacts;
-                    //.Where(c => currentUser.Profile.Id.ToString() == currentUserId);
+                //var contacts = db.Profiles.Include(c => c.Contacts).Where(p => p.Id == currentUser.Profile.Id);
 
                 return View(contacts);
             }
@@ -37,18 +37,39 @@ namespace DejlienApp.Controllers
             using (var db = new DataContext())
             {
                 var currentUser = db.Users.Single(c => c.Id.ToString() == userId);
-                var userProfile = currentUser.Profile;
 
+                //var visitUserProfile = db.Profiles.Include(e => e.UserAccount).Include(c => c.Contacts).Where(p => p.Id == ProfileId);
                 var visitUserProfile = db.Profiles.Include(e => e.UserAccount).Where(p => p.Id == ProfileId).SingleOrDefault();
 
-                Contact contact = new Contact();
-                //contact.User = userProfile;
-                contact.Request = true;
-                contact.Accept = false;
-                contact.Friend = visitUserProfile;
+
+                Profile profile = new Profile
+                {
+                    Id = visitUserProfile.Id,
+                    Name = visitUserProfile.Name,
+                    Age = visitUserProfile.Age,
+                    Location = visitUserProfile.Location,
+                    Gender = visitUserProfile.Gender,
+                    SearchingFor = visitUserProfile.SearchingFor,
+                    UserPhoto = visitUserProfile.UserPhoto,
+                    Description = visitUserProfile.Description,
+                    Visible = visitUserProfile.Visible,
+                    UserAccount = visitUserProfile.UserAccount
+                };
+
+                Contact contact = new Contact
+                {
+                    User = profile,
+                    Request = true,
+                    Accept = false,
+                    Friend = profile
+                };
+
+                //currentUser.Profile.Contacts.Add(contact);
 
                 db.Contacts.Add(contact);
                 db.SaveChanges();
+
+
 
                 //var pwm = new ProfileViewModel();
                 //pwm.Profile = visitedProfile;
