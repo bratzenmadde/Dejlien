@@ -141,4 +141,50 @@
   <data name="Slogan_Home" xml:space="preserve">
     <value>Kärlek på lång distans!</value>
   </data>
+  <data name="Adress1_Contact" xml:space="preserve">
+    <value>Alexander Island, Antarktis 
+</value>
+  </data>
+  <data name="Adress2_Contact" xml:space="preserve">
+    <value>Tellus, Vintergatan</value>
+  </data>
+  <data name="CMOButton_Search" xml:space="preserve">
+    <value>Spana in mig!</value>
+  </data>
+  <data name="h3_About" xml:space="preserve">
+    <value>Välkommen till Dejlien! Den enda existerande dejting-hemsidan där du kan finna din intergalaktiga själsfrände.</value>
+  </data>
+  <data name="LogOff_LoginPartial" xml:space="preserve">
+    <value>Logga ut</value>
+  </data>
+  <data name="Marketing_Contact" xml:space="preserve">
+    <value>Marknadsföring:</value>
+  </data>
+  <data name="p_About" xml:space="preserve">
+    <value>För att bli en del av Dejlien, behöver du endast registrera dig. Sen kommer du ha full tillgång till att möta andra användare! Hela vägen från Vintergatan och hela vägen till Grodyngel-Galaxen! </value>
+  </data>
+  <data name="p_Contact" xml:space="preserve">
+    <value>Om du har några frågor eller andra tankar, vänligen kontakta oss på </value>
+  </data>
+  <data name="p_Search" xml:space="preserve">
+    <value>Kan inte finna kärleken. Har du skrivit något i sökrutan?</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Spara</value>
+  </data>
+  <data name="Search_LoginPartial" xml:space="preserve">
+    <value>Sök</value>
+  </data>
+  <data name="Title_About" xml:space="preserve">
+    <value>Om</value>
+  </data>
+  <data name="Title_Contact" xml:space="preserve">
+    <value>Kontakta oss</value>
+  </data>
+  <data name="Title_ModifyProfile" xml:space="preserve">
+    <value>Redigera din profil</value>
+  </data>
+  <data name="Title_Search" xml:space="preserve">
+    <value>Sökresultat</value>
+  </data>
 </root>

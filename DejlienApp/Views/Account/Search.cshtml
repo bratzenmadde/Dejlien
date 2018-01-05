@@ -1,10 +1,6 @@
 ﻿@model IEnumerable<DejlienApp.Models.Profile>
 
-@{
-    ViewBag.Title = "Search";
-}
-
-<h2>Search</h2>
+<h2>@Resources.Lang.Title_Search</h2>
 
 <table class="table">
     <tr>
@@ -53,14 +49,14 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            <input type="button" value="Check me out!" onclick="location.href='@Url.Action("Visitprofile", "Account", new { ProfileId = item.Id })'" />
+            <input type="button" value="@Resources.Lang.CMOButton_Search" onclick="location.href='@Url.Action("Visitprofile", "Account", new { ProfileId = item.Id })'" />
         </td>
     </tr>
     }
 }
 else
 {
-    <p>Unable to find love, have you written anything in the searchbox?</p>
+    <p>@Resources.Lang.p_Search</p>
 }
 
 </table>

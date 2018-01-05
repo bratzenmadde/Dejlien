@@ -1,18 +1,15 @@
-﻿@{
-    ViewBag.Title = "Contact";
-}
-<h2>@ViewBag.Title.</h2>
-<p>If you have any questions or thoughts, please contact us on the support e-mail. </p>
+﻿
+<h2>@Resources.Lang.Title_Contact</h2>
+<p>@Resources.Lang.p_Contact<a href="mailto:Support@example.com">Support@example.com</a></p>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-    Tellus, Milky Way
+</br>
+
+<address>  
+    <strong>@Resources.Lang.Marketing_Contact</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
 </address>
 
 <address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+    @Resources.Lang.Adress1_Contact </br>
+    70°56'21.7"S 64°37'55.0"W </br>
+    @Resources.Lang.Adress2_Contact
 </address>
