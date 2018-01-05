@@ -169,6 +169,7 @@ namespace DejlienApp.Controllers
             {
                 var currentUser = db.Users.Include(p => p.Profile.Posts).Single(c => c.Id.ToString() == userId);
                 var profileinfo = currentUser.Profile;
+                profileinfo.Posts = db.Posts.Where(p => p.Receiver.Id == profileinfo.Id).ToList();
 
                 if (profileinfo != null)
                 {
@@ -176,7 +177,7 @@ namespace DejlienApp.Controllers
                     pwm.Profile = profileinfo;
                     pwm.PostIndexViewModel = new PostIndexViewModel();
                     pwm.PostIndexViewModel.Id = currentUser.Id;
-                    pwm.PostIndexViewModel.Posts = profileinfo.Posts;
+
 
                     return View(pwm);
                 }
@@ -196,6 +197,7 @@ namespace DejlienApp.Controllers
             {
                 var currentUser = db.Users.Include(p => p.Profile.Posts).Single(c => c.Id.ToString() == userId);
                 var visitUser = db.Profiles.Include(e => e.UserAccount).Where(p => p.Id == ProfileId).SingleOrDefault();
+                visitUser.Posts = db.Posts.Where(p => p.Receiver.Id == ProfileId).ToList();
 
                 var pwm = new ProfileViewModel();
                 pwm.Profile = visitUser;
