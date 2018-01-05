@@ -20,10 +20,9 @@ namespace DejlienApp.Controllers
             using (var db = new DataContext())
             {
                 // gets the current user profile
-                var currentUserProfile = db.Profiles.Single(p => p.UserAccount.ToString() == currentUserId);
-                // gets the current users contacts
-                var contacts = db.Contacts.Where(c => c.Id == currentUserProfile.Id);
-                contacts.ToList();
+                var currentUser = db.Users.Include(p => p.Profile).Include(c => c.Profile.Contacts).Single(c => c.Id.ToString() == currentUserId);
+                var contacts = currentUser.Profile.Contacts;
+                    //.Where(c => currentUser.Profile.Id.ToString() == currentUserId);
 
                 return View(contacts);
             }
@@ -43,7 +42,7 @@ namespace DejlienApp.Controllers
                 var visitUserProfile = db.Profiles.Include(e => e.UserAccount).Where(p => p.Id == ProfileId).SingleOrDefault();
 
                 Contact contact = new Contact();
-                contact.User = userProfile;
+                //contact.User = userProfile;
                 contact.Request = true;
                 contact.Accept = false;
                 contact.Friend = visitUserProfile;

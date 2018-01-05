@@ -13,7 +13,7 @@ namespace DejlienApp.Models
         public  bool Request { get; set; }
         public bool Accept { get; set; }
 
-        public virtual Profile User { get; set; }
+        //public virtual Profile User { get; set; }
         public virtual Profile Friend { get; set; }
     }
 }
