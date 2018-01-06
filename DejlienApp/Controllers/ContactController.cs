@@ -46,7 +46,7 @@ namespace DejlienApp.Controllers
                     Accept = false,
                     Friend = profile
                 };
-
+                if()
                 db.Contacts.Add(contact);
                 db.SaveChanges();
 
