@@ -19,10 +19,9 @@ namespace DejlienApp.Controllers
             using (var db = new DataContext())
             {
                 var currentUser = db.Users.Include(p => p.Profile).Include(c => c.Profile.Contacts).Single(c => c.Id.ToString() == currentUserId);
-                var contacts = db.Contacts.Include(f => f.Friend).Where(c => c.User.Id.ToString() == currentUserId);
-                var con = contacts.ToList();
+                var contacts = db.Contacts.Include(f => f.Friend).Where(c => c.User.Id.ToString() == currentUserId).ToList();
 
-                return View(con);
+                return View(contacts);
             }
         }
 
@@ -73,8 +72,7 @@ namespace DejlienApp.Controllers
                 var currentUser = db.Users.Include(p => p.Profile).Single(c => c.Id.ToString() == userId);
                 var visitUserProfile = db.Profiles.Include(e => e.UserAccount).Where(p => p.Id == ProfileId).SingleOrDefault();
   
-                var visitCon = db.Contacts.Where(c => c.User.Id == ProfileId).ToList();
-                var visitCt = visitCon.Where(x => x.User.Id == ProfileId).SingleOrDefault(q => q.Friend.Id == currentUser.Id);
+                var visitCt = db.Contacts.Where(x => x.User.Id == ProfileId).SingleOrDefault(q => q.Friend.Id == currentUser.Id);
 
                 visitCt.Request = false;
                 visitCt.Accept = true;
@@ -104,8 +102,6 @@ namespace DejlienApp.Controllers
                 //Tar ut den användare vi hälsar på
                 var visitUserProfile = db.Profiles.Include(e => e.UserAccount).Where(p => p.Id == ProfileId).SingleOrDefault();
 
-                //Tar ut kontakter hos den vi hälsar på
-                var visitCon = db.Contacts.Where(c => c.User.Id == ProfileId).ToList();
                 //Tar ut just den som är inloggad och kontakt med den som vi hälsar på
                 var visitCt = db.Contacts.Where(x => x.User.Id == ProfileId).SingleOrDefault(q => q.Friend.Id == currentUser.Id);
 
@@ -116,7 +112,7 @@ namespace DejlienApp.Controllers
                 //Tar ut kontakter för den inloggade
                 var userCon = db.Contacts.Where(a => a.User.Id == currentUser.Profile.Id).ToList();
                 //Tar ut den som vi hälsar på i den inloggades kontaktlista
-                var userCt = db.Contacts.Where(t => t.User.Id == currentUser.Profile.Id).SingleOrDefault(w => w.Friend.Id == ProfileId);
+                var userCt = userCon.Where(t => t.User.Id == currentUser.Profile.Id).SingleOrDefault(w => w.Friend.Id == ProfileId);
 
                 userCt.Request = false;
                 userCt.Accept = false;
