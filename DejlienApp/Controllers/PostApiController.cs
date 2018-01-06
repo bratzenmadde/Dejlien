@@ -16,9 +16,7 @@ namespace DejlienApp.Controllers
     {
         public class PostModel
         {
-            [Required]
             public int Reciever { get; set; }
-            [Required]
             public string Text { get; set; }
         }
 
