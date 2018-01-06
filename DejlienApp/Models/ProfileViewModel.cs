@@ -10,5 +10,6 @@ namespace DejlienApp.Models
     {
         public Profile Profile { get; set; }
         public PostIndexViewModel  PostIndexViewModel { get; set; }
+        public ContactViewModel ContactViewModel { get; set; }
     }
 }

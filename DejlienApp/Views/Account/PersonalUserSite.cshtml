@@ -21,7 +21,21 @@
     <br />
     @if (Model.Profile.UserAccount.Email != User.Identity.Name)
     {
-        <input type="button" name="requestButton" value="Add friend" onclick="location.href='@Url.Action("FriendRequest", "Contact", new { ProfileId = Model.Profile.Id} )'" />
+        if (Model.ContactViewModel != null)
+        {
+            if (Model.ContactViewModel.Contact.Request == false && Model.ContactViewModel.Contact.Accept == false)
+            {
+            <input type="button" name="requestButton" value="Add friend" onclick="location.href='@Url.Action("FriendRequest", "Contact", new { ProfileId = Model.Profile.Id })'" />
+            }
+            if (Model.ContactViewModel.Contact.Request == true || Model.ContactViewModel.Contact.Accept == true)
+            {
+            <input type="button" name="requestButton" value="Add friend" onclick="this.disabled = true"/>
+            }
+        }
+        else
+        {
+            <input type="button" name="requestButton" value="Add friend" onclick="location.href='@Url.Action("FriendRequest", "Contact", new { ProfileId = Model.Profile.Id })'" />
+        }
     }
     <br />
 
