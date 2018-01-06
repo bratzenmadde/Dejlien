@@ -21,38 +21,38 @@
     <br />
     @if (Model.Profile.UserAccount.Email != User.Identity.Name)
     {
-        <input type="button" name="requestButton" value="Add friend" onclick="location.href='@Url.Action("FriendRequest", "Account", new { ProfileId = Model.Profile.Id} )'" />
+        <input type="button" name="requestButton" value="Add friend" onclick="location.href='@Url.Action("FriendRequest", "Contact", new { ProfileId = Model.Profile.Id} )'" />
     }
     <br />
 
     <h1>@Html.DisplayFor(model => model.Profile.Name)</h1>
-        <tr>
-            <td>
-                <p>Name: @Html.DisplayFor(model => model.Profile.Name)</p>
-            </td>
-            <td>
-                <p>Age: @Html.DisplayFor(model => model.Profile.Age)</p>
-            </td>
-            <td>
-                <p>Location: @Html.DisplayFor(model => model.Profile.Location)</p>
-            </td>
-            <td>
-                <p>Searching for: @Html.DisplayFor(model => model.Profile.SearchingFor)</p>
-            </td>
-            <td>
-                <p>Idenifies as: @Html.DisplayFor(model => model.Profile.Gender)</p>
-                <br />
-            </td>
-            <td>
-                <p>About @Html.DisplayFor(model => model.Profile.Name):</p>
-                @Html.DisplayFor(model => model.Profile.Description)
-                <br />
-            </td>
-        </tr>
+    <tr>
+        <td>
+            <p>Name: @Html.DisplayFor(model => model.Profile.Name)</p>
+        </td>
+        <td>
+            <p>Age: @Html.DisplayFor(model => model.Profile.Age)</p>
+        </td>
+        <td>
+            <p>Location: @Html.DisplayFor(model => model.Profile.Location)</p>
+        </td>
+        <td>
+            <p>Searching for: @Html.DisplayFor(model => model.Profile.SearchingFor)</p>
+        </td>
+        <td>
+            <p>Idenifies as: @Html.DisplayFor(model => model.Profile.Gender)</p>
+            <br />
+        </td>
+        <td>
+            <p>About @Html.DisplayFor(model => model.Profile.Name):</p>
+            @Html.DisplayFor(model => model.Profile.Description)
+            <br />
+        </td>
+    </tr>
 </div>
 <br />
 <div id="right">
-    <form id="form1" method="post" action="api/PostApi/SavePost"
+    <form id="form1" method="post" action=""
           enctype="application/x-www-form-urlencoded">
         <div>
             <label for="text">Create Message:</label>
@@ -99,14 +99,20 @@
     @Scripts.Render("~/bundles/jqueryval")
 
     <script type="text/javascript">
-
-
         $("#form1").submit(function (event) {
-            event.preventDefault();
-            var text = $.ajax({ url: '/api/PostApi/SavePost/', data: { text: $('#Post_Text').val(), reciever: @Model.Profile.Id }, type: "post" })
-        alert("Message successfully sent!");
-        $("#form1")[0].reset();
-        });
+            var txtLength = $('#Post_Text').val().length;
+            if (txtLength > 0) {
+                event.preventDefault();
+                var text = $.ajax({ url: '/api/PostApi/SavePost/', data: { text: $('#Post_Text').val(), reciever: @Model.Profile.Id }, type: "post" })
+                alert("Message successfully sent!");
+                $("#form1")[0].reset();
+            }
+            else {
+                alert("Message cannot be empty.");
+            }
+            });
+        
+
     </script>
 
 }
