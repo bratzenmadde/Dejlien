@@ -50,7 +50,7 @@
             </td>
         </tr>
 </div>
-
+<br />
 <div id="right">
     <form id="form1" method="post" action="api/PostApi/SavePost"
           enctype="application/x-www-form-urlencoded">
@@ -69,8 +69,8 @@
     @if (Model.Profile.Posts != null)
     {
         <h4>Wall of LOVE</h4>
-        <table class="table">
 
+        <table>
             <tr>
                 <th>
                     @Html.DisplayFor(model => model.PostIndexViewModel.Post.Text)
@@ -81,6 +81,7 @@
             {
                 <tr>
                     <td>
+                        <hr />
                         @Html.DisplayFor(modelItem => item.Author.Name): @Html.DisplayFor(modelItem => item.Text)
                     </td>
                 </tr>

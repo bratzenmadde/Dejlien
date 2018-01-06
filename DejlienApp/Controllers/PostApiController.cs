@@ -3,6 +3,7 @@ using DejlienApp.Repositories;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -15,7 +16,9 @@ namespace DejlienApp.Controllers
     {
         public class PostModel
         {
+            [Required]
             public int Reciever { get; set; }
+            [Required]
             public string Text { get; set; }
         }
 

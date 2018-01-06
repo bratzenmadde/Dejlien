@@ -14,20 +14,23 @@ namespace DejlienApp.Models
     {
         public int Id { get; set; }
         
-        [Required]
+        [Required(ErrorMessage = "Please enter your name.")]
         public string Name { get; set; }
         
         [Required]
         public int Age { get; set; }
-        
+
+        [Required]
         public string  Location { get; set; }
         
+        [Required]
         public string SearchingFor { get; set; }
         
         public string Gender { get; set; }
        
         public byte[] UserPhoto { get; set; }
         
+        [Required]
         public string Description { get; set; }
 
         public Visible Visible { get; set; }
