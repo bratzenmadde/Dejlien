@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<DejlienApp.Models.Contact>
 
 @{
-    ViewBag.Title = "ListOfContacts";
+    ViewBag.Title = "List Of Contacts";
 }
 
-<h2>ListOfContacts</h2>
+<h2>Contacts</h2>
 
 
 <table class="table">
@@ -26,24 +26,85 @@
         </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Friend.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Friend.Age)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Friend.Location)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Friend.SearchingFor)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Friend.Gender)
-        </td>
-    </tr>
-}
+    <h4>Your friend requests</h4>
+    @foreach (var item in Model)
+    {
+        if (item.Request == true)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Friend.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Friend.Age)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Friend.Location)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Friend.SearchingFor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Friend.Gender)
+                </td>
+                @if (item.IAskedTheQuestion == false)
+                {
+                <td>
+                    <input type="button" value="Accept" onclick="location.href='@Url.Action("Accept", "Contact", new { ProfileId = item.Friend.Id })'" />
+                </td>
+                }
+                <td>
+                    <input type="button" value="Reject" onclick="location.href='@Url.Action("Reject", "Contact", new { ProfileId = item.Friend.Id })'" />
+                </td>
+            </tr>
+        }
+    }
+    </table>
+    <h4>Your friends</h4>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Friend.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Friend.Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Friend.Location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Friend.SearchingFor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Friend.Gender)
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            if (item.Accept == true)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Friend.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Friend.Age)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Friend.Location)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Friend.SearchingFor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Friend.Gender)
+                    </td>
+                    <td>
+                        <input type="button" value="@Resources.Lang.CMOButton_Search" onclick="location.href='@Url.Action("Visitprofile", "Account", new { ProfileId = item.Friend.Id })'" />
+                    </td>
+                </tr>
+            }
 
-</table>
+        }
+
+    </table>

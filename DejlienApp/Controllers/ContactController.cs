@@ -44,7 +44,8 @@ namespace DejlienApp.Controllers
                     User = currentUser.Profile,
                     Request = true,
                     Accept = false,
-                    Friend = profile
+                    Friend = profile,
+                    IAskedTheQuestion = true
                 };
 
                 Contact contact2 = new Contact
@@ -52,7 +53,8 @@ namespace DejlienApp.Controllers
                     User = profile,
                     Request = true,
                     Accept = false,
-                    Friend = currentUser.Profile
+                    Friend = currentUser.Profile,
+                    IAskedTheQuestion = false
                 };
 
                 db.Contacts.Add(contact);
@@ -61,6 +63,69 @@ namespace DejlienApp.Controllers
 
                 return RedirectToAction("VisitProfile", "Account", new { profileid = ProfileId });
             }   
+        }
+        
+        public ActionResult Accept(int ProfileId)
+        {
+            var userId = User.Identity.GetUserId();
+            using (var db = new DataContext())
+            {
+                var currentUser = db.Users.Include(p => p.Profile).Single(c => c.Id.ToString() == userId);
+                var visitUserProfile = db.Profiles.Include(e => e.UserAccount).Where(p => p.Id == ProfileId).SingleOrDefault();
+  
+                var visitCon = db.Contacts.Where(c => c.User.Id == ProfileId).ToList();
+                var visitCt = visitCon.Where(x => x.User.Id == ProfileId).SingleOrDefault(q => q.Friend.Id == currentUser.Id);
+
+                visitCt.Request = false;
+                visitCt.Accept = true;
+                visitCt.IAskedTheQuestion = false;
+
+                var userCon = db.Contacts.Where(a => a.User.Id == currentUser.Profile.Id).ToList();
+                var userCt = userCon.Where(t => t.User.Id == currentUser.Profile.Id).SingleOrDefault(w => w.Friend.Id == ProfileId);
+
+                userCt.Request = false;
+                userCt.Accept = true;
+                userCt.IAskedTheQuestion = false;
+
+                db.SaveChanges();
+
+                return View("ListOfContacts", userCon);
+            }
+        }
+
+        public ActionResult Reject(int ProfileId)
+        {
+            var userId = User.Identity.GetUserId();
+
+            using (var db = new DataContext())
+            {
+                //Tar ut den inloggade användaren
+                var currentUser = db.Users.Include(p => p.Profile).Single(c => c.Id.ToString() == userId);
+                //Tar ut den användare vi hälsar på
+                var visitUserProfile = db.Profiles.Include(e => e.UserAccount).Where(p => p.Id == ProfileId).SingleOrDefault();
+
+                //Tar ut kontakter hos den vi hälsar på
+                var visitCon = db.Contacts.Where(c => c.User.Id == ProfileId).ToList();
+                //Tar ut just den som är inloggad och kontakt med den som vi hälsar på
+                var visitCt = db.Contacts.Where(x => x.User.Id == ProfileId).SingleOrDefault(q => q.Friend.Id == currentUser.Id);
+
+                visitCt.Request = false;
+                visitCt.Accept = false;
+                visitCt.IAskedTheQuestion = false;
+                
+                //Tar ut kontakter för den inloggade
+                var userCon = db.Contacts.Where(a => a.User.Id == currentUser.Profile.Id).ToList();
+                //Tar ut den som vi hälsar på i den inloggades kontaktlista
+                var userCt = db.Contacts.Where(t => t.User.Id == currentUser.Profile.Id).SingleOrDefault(w => w.Friend.Id == ProfileId);
+
+                userCt.Request = false;
+                userCt.Accept = false;
+                userCt.IAskedTheQuestion = false;
+
+                db.SaveChanges();
+
+                return View("ListOfContacts", userCon);
+            }
         }
     }
 }
