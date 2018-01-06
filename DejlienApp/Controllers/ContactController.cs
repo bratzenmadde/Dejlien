@@ -44,7 +44,8 @@ namespace DejlienApp.Controllers
                     User = currentUser.Profile,
                     Request = true,
                     Accept = false,
-                    Friend = profile
+                    Friend = profile,
+                    IAskedTheQuestion = true
                 };
 
                 Contact contact2 = new Contact
@@ -52,7 +53,8 @@ namespace DejlienApp.Controllers
                     User = profile,
                     Request = true,
                     Accept = false,
-                    Friend = currentUser.Profile
+                    Friend = currentUser.Profile,
+                    IAskedTheQuestion = false
                 };
 
                 db.Contacts.Add(contact);
@@ -76,12 +78,14 @@ namespace DejlienApp.Controllers
 
                 visitCt.Request = false;
                 visitCt.Accept = true;
+                visitCt.IAskedTheQuestion = false;
 
                 var userCon = db.Contacts.Where(a => a.User.Id == currentUser.Profile.Id).ToList();
                 var userCt = userCon.Where(t => t.User.Id == currentUser.Profile.Id).SingleOrDefault(w => w.Friend.Id == ProfileId);
 
                 userCt.Request = false;
                 userCt.Accept = true;
+                userCt.IAskedTheQuestion = false;
 
                 db.SaveChanges();
 
@@ -107,6 +111,7 @@ namespace DejlienApp.Controllers
 
                 visitCt.Request = false;
                 visitCt.Accept = false;
+                visitCt.IAskedTheQuestion = false;
                 
                 //Tar ut kontakter för den inloggade
                 var userCon = db.Contacts.Where(a => a.User.Id == currentUser.Profile.Id).ToList();
@@ -115,6 +120,7 @@ namespace DejlienApp.Controllers
 
                 userCt.Request = false;
                 userCt.Accept = false;
+                userCt.IAskedTheQuestion = false;
 
                 db.SaveChanges();
 

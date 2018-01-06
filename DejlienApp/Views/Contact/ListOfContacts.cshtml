@@ -47,9 +47,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Friend.Gender)
                 </td>
+                @if (item.IAskedTheQuestion == false)
+                {
                 <td>
                     <input type="button" value="Accept" onclick="location.href='@Url.Action("Accept", "Contact", new { ProfileId = item.Friend.Id })'" />
                 </td>
+                }
                 <td>
                     <input type="button" value="Reject" onclick="location.href='@Url.Action("Reject", "Contact", new { ProfileId = item.Friend.Id })'" />
                 </td>
