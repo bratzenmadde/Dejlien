@@ -21,7 +21,7 @@
     <br />
     @if (Model.Profile.UserAccount.Email != User.Identity.Name)
     {
-        <input type="button" name="requestButton" value="Add friend" onclick="location.href='@Url.Action("FriendRequest", "Contact" , new { ProfileId = Model.Profile.Id })'" />
+        <input type="button" name="requestButton" value="Add friend" onclick="location.href='@Url.Action("FriendRequest", "Account", new { ProfileId = Model.Profile.Id} )'" />
     }
     <br />
 
