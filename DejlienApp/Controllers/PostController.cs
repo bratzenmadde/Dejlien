@@ -17,4 +17,11 @@ namespace DejlienApp.Controllers
         public ICollection<Post> Posts { get; set; }
         public Post Post { get; set; } = new Post();
     }
+
+    public class ContactViewModel
+    {
+        public int Id { get; set; }
+        public ICollection<Contact> Contacts { get; set; }
+        public Contact Contact { get; set; } = new Contact();
+    }
 }
