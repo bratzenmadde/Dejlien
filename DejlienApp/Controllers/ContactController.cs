@@ -12,14 +12,12 @@ namespace DejlienApp.Controllers
 {
     public class ContactController : Controller
     {
-        // GET: Contact for current user
         public ActionResult ListOfContacts()
         {
             var currentUserId = User.Identity.GetUserId();
 
             using (var db = new DataContext())
             {
-                // gets the current user profile
                 var currentUser = db.Users.Include(p => p.Profile).Include(c => c.Profile.Contacts).Single(c => c.Id.ToString() == currentUserId);
                 var contacts = db.Contacts.Include(f => f.Friend).Where(c => c.User.Id.ToString() == currentUserId);
                 var con = contacts.ToList();
@@ -29,9 +27,8 @@ namespace DejlienApp.Controllers
         }
 
         [Authorize]
-        public ActionResult FriendRequest(int ProfileId, string requestButton)
+        public ActionResult FriendRequest(int ProfileId)
         {
-            // Current user
             var userId = User.Identity.GetUserId();
 
             using (var db = new DataContext())
@@ -39,20 +36,8 @@ namespace DejlienApp.Controllers
                 var currentUser = db.Users.Single(c => c.Id.ToString() == userId);
                 var visitUserProfile = db.Profiles.Include(e => e.UserAccount).Where(p => p.Id == ProfileId).SingleOrDefault();
 
-
-                Profile profile = new Profile
-                {
-                    Id = visitUserProfile.Id,
-                    Name = visitUserProfile.Name,
-                    Age = visitUserProfile.Age,
-                    Location = visitUserProfile.Location,
-                    Gender = visitUserProfile.Gender,
-                    SearchingFor = visitUserProfile.SearchingFor,
-                    UserPhoto = visitUserProfile.UserPhoto,
-                    Description = visitUserProfile.Description,
-                    Visible = visitUserProfile.Visible,
-                    UserAccount = visitUserProfile.UserAccount
-                };
+                Profile profile = new Profile();
+                profile = visitUserProfile;
 
                 Contact contact = new Contact
                 {
@@ -62,21 +47,10 @@ namespace DejlienApp.Controllers
                     Friend = profile
                 };
 
-                //currentUser.Profile.Contacts.Add(contact);
-
                 db.Contacts.Add(contact);
                 db.SaveChanges();
 
-
-
-                //var pwm = new ProfileViewModel();
-                //pwm.Profile = visitedProfile;
-                //pwm.PostIndexViewModel = new PostIndexViewModel();
-                //pwm.PostIndexViewModel.Id = currentUserProfile.Id;
-                //pwm.PostIndexViewModel.Posts = visitedUserProfiel.Posts;
-
-                //return View("PersonalUserSite", pwm);
-                return RedirectToAction("VisitProfile");
+                return RedirectToAction("VisitProfile", "Account", new { profileid = ProfileId });
             }   
         }
     }
