@@ -192,11 +192,15 @@ namespace DejlienApp.Controllers
                 var currentUser = db.Users.Include(p => p.Profile.Posts).Single(c => c.Id.ToString() == userId);
                 var visitUser = db.Profiles.Include(e => e.UserAccount).Where(p => p.Id == ProfileId).SingleOrDefault();
                 visitUser.Posts = db.Posts.Where(p => p.Receiver.Id == ProfileId).ToList();
+                var con = db.Contacts.Where(c => c.User.Id == ProfileId).ToList();
 
                 var pwm = new ProfileViewModel();
                 pwm.Profile = visitUser;
                 pwm.PostIndexViewModel = new PostIndexViewModel();
                 pwm.PostIndexViewModel.Id = currentUser.Id;
+                pwm.ContactViewModel = new ContactViewModel();
+                pwm.ContactViewModel.Id = visitUser.Id;
+                pwm.ContactViewModel.Contacts = con;
 
                 return View("PersonalUserSite", pwm);
             }

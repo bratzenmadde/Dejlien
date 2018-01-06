@@ -46,7 +46,17 @@ namespace DejlienApp.Controllers
                     Accept = false,
                     Friend = profile
                 };
+
+                Contact contact2 = new Contact
+                {
+                    User = profile,
+                    Request = true,
+                    Accept = false,
+                    Friend = currentUser.Profile
+                };
+
                 db.Contacts.Add(contact);
+                db.Contacts.Add(contact2);
                 db.SaveChanges();
 
                 return RedirectToAction("VisitProfile", "Account", new { profileid = ProfileId });
