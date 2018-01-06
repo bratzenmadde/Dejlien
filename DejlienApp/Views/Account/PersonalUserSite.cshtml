@@ -21,7 +21,7 @@
     <br />
     @if (Model.Profile.UserAccount.Email != User.Identity.Name)
     {
-        if (Model.ContactViewModel != null)
+        if (Model.ContactViewModel != null && Model.ContactViewModel.Contact != null)
         {
             if (Model.ContactViewModel.Contact.Request == false && Model.ContactViewModel.Contact.Accept == false)
             {
