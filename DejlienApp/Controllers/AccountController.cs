@@ -19,8 +19,8 @@ namespace DejlienApp.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly ApplicationSignInManager applicationSignInManager;
-        private readonly AccountUserManager accountUserManager;
+        private ApplicationSignInManager applicationSignInManager;
+        private AccountUserManager accountUserManager;
         private readonly IAuthenticationManager authenticationManager;
 
         public AccountController(ApplicationSignInManager applicationSignInManager, AccountUserManager accountUserManager,
@@ -30,7 +30,28 @@ namespace DejlienApp.Controllers
             this.accountUserManager = accountUserManager;
             this.applicationSignInManager = applicationSignInManager;
         }
-
+        public AccountUserManager UserManager
+        {
+            get
+            {
+                return accountUserManager ?? Request.GetOwinContext().GetUserManager<AccountUserManager>();
+            }
+            private set
+            {
+                accountUserManager = value;
+            }
+        }
+        public ApplicationSignInManager SignInManager
+        {
+            get
+            {
+                return applicationSignInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            }
+            private set
+            {
+                applicationSignInManager = value;
+            }
+        }
 
         [AllowAnonymous]
         public ActionResult Register()
@@ -274,5 +295,33 @@ namespace DejlienApp.Controllers
 
         }
 
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var id = User.Identity.GetUserId();
+            int userId = Int32.Parse(id);
+            var result = await UserManager.ChangePasswordAsync(userId, model.OldPassword, model.NewPassword);
+            if (result.Succeeded)
+            {
+                var user = await UserManager.FindByIdAsync(userId);
+                if (user != null)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                }
+                return RedirectToAction("Index", "Home");
+            }
+            return View(model);
+        }
     }
 }
