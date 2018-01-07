@@ -20,18 +20,15 @@
             <li>
                 @Html.ActionLink(User.Identity.GetUserName(), "PersonalUserSite", "Account", routeValues: null, htmlAttributes: new { title = "Profile" })
             </li>
-            <li><a href="javascript:document.getElementById('logoutForm').submit()">@Resources.Lang.LogOff_LoginPartial</a></li>
-            <div class="nav navbar-nav navbar-right" style="margin-top:8px;">
-                @using (Html.BeginForm("Index", "Search", FormMethod.Post))
-                {
-                    <ul class="nav navbar-nav">
-                        <li>@Html.TextBox("search")</li>
-                        <li><input type="submit" name="searchButton" value="@Resources.Lang.Search_LoginPartial" formaction="account/Search" /></li>
-                    </ul>
-                }
-            </div>
+            <li>
+            <a href="javascript:document.getElementById('logoutForm').submit()">@Resources.Lang.LogOff_LoginPartial</a>
+            </li>
+
+        <li>@Html.TextBox("search")</li>
+            <li>
+            <li><input type="submit" name="searchButton" value="@Resources.Lang.Search_LoginPartial" formaction="search/Search" /></li>
         </ul>
-    }
+    } 
 }
 else
 {

@@ -227,6 +227,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PostApiController.cs" />
     <Compile Include="Controllers\PostController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Framework\Identity\ApplicationSignInManager.cs" />
     <Compile Include="Framework\Repositories\IEntity.cs" />
     <Compile Include="Framework\Repositories\Repository.cs" />
@@ -297,7 +298,7 @@
     <Content Include="Views\Account\PersonalUserSite.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Contact\ListOfContacts.cshtml" />
-    <Content Include="Views\Account\Search.cshtml" />
+    <Content Include="Views\Search\Search.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
