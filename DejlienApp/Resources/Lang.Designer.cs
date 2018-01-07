@@ -70,6 +70,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Account settings.
+        /// </summary>
+        public static string AccountSettings_Menu {
+            get {
+                return ResourceManager.GetString("AccountSettings_Menu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Alexander Island, Antarctic 
         ///
         ///.
@@ -113,6 +122,15 @@ namespace Resources {
         public static string Contact_Menu {
             get {
                 return ResourceManager.GetString("Contact_Menu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contacts.
+        /// </summary>
+        public static string Contacts_Menu {
+            get {
+                return ResourceManager.GetString("Contacts_Menu", resourceCulture);
             }
         }
         

@@ -187,4 +187,10 @@
   <data name="Title_Search" xml:space="preserve">
     <value>Sökresultat</value>
   </data>
+  <data name="AccountSettings_Menu" xml:space="preserve">
+    <value>Profil-inställningar</value>
+  </data>
+  <data name="Contacts_Menu" xml:space="preserve">
+    <value>Kontakter</value>
+  </data>
 </root>

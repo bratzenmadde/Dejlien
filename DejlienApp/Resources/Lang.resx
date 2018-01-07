@@ -188,4 +188,10 @@
   <data name="Title_Search" xml:space="preserve">
     <value>Search</value>
   </data>
+  <data name="AccountSettings_Menu" xml:space="preserve">
+    <value>Account settings</value>
+  </data>
+  <data name="Contacts_Menu" xml:space="preserve">
+    <value>Contacts</value>
+  </data>
 </root>
