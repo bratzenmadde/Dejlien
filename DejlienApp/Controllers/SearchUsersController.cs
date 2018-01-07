@@ -8,12 +8,15 @@ using System.Web.Mvc;
 
 namespace DejlienApp.Controllers
 {
-    public class SearchController : Controller
+    public class SearchUsersController : Controller
     {
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         [Authorize]
-        public ActionResult Search(string searchButton, string search)
+        public ActionResult SearchUsers(string search)
         {
             if (String.IsNullOrEmpty(search))
             {
@@ -23,17 +26,17 @@ namespace DejlienApp.Controllers
             {
                 using (var db = new DataContext())
                 {
-                    var SearchedProfiles = db.Profiles.Where(n => n.Name.Contains(search) && n.Visible == Visible.Yes);
-                    var SearchedP = SearchedProfiles.ToList();
+                    var SearchedProfiles = db.Profiles.Where(n => n.Name.Contains(search) && n.Visible == Visible.Yes).ToList();
+                    //var SearchedP = SearchedProfiles.ToList();
 
-                    if (SearchedP == null)
+                    if (SearchedProfiles == null)
                     {
                         return View();
                     }
 
                     else
                     {
-                        return View(SearchedP);
+                        return View(SearchedProfiles);
                     }
                 }
             }

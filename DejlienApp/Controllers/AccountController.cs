@@ -229,8 +229,6 @@ namespace DejlienApp.Controllers
             }
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
             authenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);

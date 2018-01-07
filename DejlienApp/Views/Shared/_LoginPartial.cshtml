@@ -1,34 +1,35 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-    {
-        @Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()
 
-        <ul class="nav navbar-nav navbar-left">
-            <li>
-                <a onclick="location.href='@Url.Action("ListOfContacts", "Contact")'" class="dropdown-toggle" data-toggle="dropdown">
-                    <i data-count="2" class="glyphicon glyphicon-bell notification-icon"></i>
-                </a>
-            </li>
+    <ul class="nav navbar-nav navbar-left">
+        <li>
+            <a onclick="location.href='@Url.Action("ListOfContacts", "Contact")'" class="dropdown-toggle" data-toggle="dropdown">
+                <i data-count="2" class="glyphicon glyphicon-bell notification-icon"></i>
+            </a>
+        </li>
 
-            <li>@Html.ActionLink(Resources.Lang.Contacts_Menu, "ListOfContacts", "Contact")</li>
-            <li>@Html.ActionLink(Resources.Lang.AccountSettings_Menu, "ModifyProfile", "Account")</li>
-        </ul>
+        <li>@Html.ActionLink(Resources.Lang.Contacts_Menu, "ListOfContacts", "Contact")</li>
+        <li>@Html.ActionLink(Resources.Lang.AccountSettings_Menu, "ModifyProfile", "Account")</li>
+    </ul>
 
         <ul class="nav navbar-nav navbar-right">
             <li>
                 @Html.ActionLink(User.Identity.GetUserName(), "PersonalUserSite", "Account", routeValues: null, htmlAttributes: new { title = "Profile" })
             </li>
-            <li>
-            <a href="javascript:document.getElementById('logoutForm').submit()">@Resources.Lang.LogOff_LoginPartial</a>
-            </li>
+            <li>@Html.ActionLink(Resources.Lang.LogOff_LoginPartial, "LogOff", "Account")</li>
 
-        <li>@Html.TextBox("search")</li>
+            @(Html.BeginForm("SearchUsers", "SearchUsers", FormMethod.Post))
+            {
             <li>
-            <li><input type="submit" name="searchButton" value="@Resources.Lang.Search_LoginPartial" formaction="search/Search" /></li>
+                @Html.TextBox("search")
+                <input type="submit" value="@Resources.Lang.Search_LoginPartial" />
+            </li>
+            }
         </ul>
-    } 
+        
+
 }
 else
 {
