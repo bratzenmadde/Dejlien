@@ -73,6 +73,10 @@ namespace DejlienApp.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
+                else
+                {
+                    ModelState.AddModelError("", result.Errors.SingleOrDefault());
+                }
 
             }
 
@@ -216,16 +220,24 @@ namespace DejlienApp.Controllers
                 var con = db.Contacts.Where(c => c.User.Id == ProfileId).ToList();
                 var ct = db.Contacts.Where(x => x.User.Id == ProfileId).SingleOrDefault(q => q.Friend.Id == currentUser.Id);
 
-                var pwm = new ProfileViewModel();
-                pwm.Profile = visitUser;
-                pwm.PostIndexViewModel = new PostIndexViewModel();
-                pwm.PostIndexViewModel.Id = currentUser.Id;
-                pwm.ContactViewModel = new ContactViewModel();
-                pwm.ContactViewModel.Id = visitUser.Id;
-                pwm.ContactViewModel.Contacts = con;
-                pwm.ContactViewModel.Contact = ct;
+                if(currentUser.Profile != null)
+                {
+                    var pwm = new ProfileViewModel();
+                    pwm.Profile = visitUser;
+                    pwm.PostIndexViewModel = new PostIndexViewModel();
+                    pwm.PostIndexViewModel.Id = currentUser.Id;
+                    pwm.ContactViewModel = new ContactViewModel();
+                    pwm.ContactViewModel.Id = visitUser.Id;
+                    pwm.ContactViewModel.Contacts = con;
+                    pwm.ContactViewModel.Contact = ct;
 
-                return View("PersonalUserSite", pwm);
+                    return View("PersonalUserSite", pwm);
+                }
+                else
+                {
+                    return View("ModifyProfile");
+                }
+                
             }
         }
 

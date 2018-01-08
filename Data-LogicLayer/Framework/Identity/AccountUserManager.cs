@@ -11,19 +11,13 @@ namespace DataLogicLayer.Models.Identity
         public AccountUserManager(IUserStore<UserAccount, int> store)
         : base(store)
         {
-        }
-        public static AccountUserManager Create(
-        IdentityFactoryOptions<AccountUserManager> options, IOwinContext context)
-        {
-            var manager = new AccountUserManager(
-                new CustomUserStore(context.Get<DataContext>()));
-            manager.UserValidator = new UserValidator<UserAccount, int>(manager)
+                UserValidator = new UserValidator<UserAccount, int>(this)
             {
                 AllowOnlyAlphanumericUserNames = false,
                 RequireUniqueEmail = true
             };
 
-            manager.PasswordValidator = new PasswordValidator
+            PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
                 RequireNonLetterOrDigit = true,
@@ -32,11 +26,11 @@ namespace DataLogicLayer.Models.Identity
                 RequireUppercase = true
             };
 
-            manager.UserLockoutEnabledByDefault = true;
-            manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
-            manager.MaxFailedAccessAttemptsBeforeLockout = 5;
+            UserLockoutEnabledByDefault = true;
+            DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
+            MaxFailedAccessAttemptsBeforeLockout = 5;
 
-            return manager;
+           
         }
 
     }

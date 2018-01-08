@@ -2,6 +2,10 @@
 @using DataLogicLayer.Models
 
 <h2>@Resources.Lang.Title_ModifyProfile</h2>
+@if (Model == null) {
+<h4 style="color:mediumvioletred;">Create your profile before the love-adventure begins!</h4>}
+
+
 
 @using (Html.BeginForm("ModifyProfile", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" })) 
 {
