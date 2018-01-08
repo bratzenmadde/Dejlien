@@ -18,6 +18,6 @@ namespace DejlienApp.Repositories
         public DbSet<Post> Posts { get; set; }
         public DbSet<Contact> Contacts { get; set; }
 
-        public System.Data.Entity.DbSet<DejlienApp.Controllers.PostIndexViewModel> PostIndexViewModels { get; set; }
+        public System.Data.Entity.DbSet<DejlienApp.Models.PostIndexViewModel> PostIndexViewModels { get; set; }
     }
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using DejlienApp.Repositories;
 using Microsoft.AspNet.Identity;
@@ -25,6 +22,7 @@ namespace DejlienApp.Controllers
             }
         }
 
+        //Send friendrequest
         [Authorize]
         public ActionResult FriendRequest(int ProfileId)
         {
@@ -64,6 +62,7 @@ namespace DejlienApp.Controllers
             }   
         }
         
+        //Accept friendrequest
         public ActionResult Accept(int ProfileId)
         {
             var userId = User.Identity.GetUserId();
@@ -91,6 +90,7 @@ namespace DejlienApp.Controllers
             }
         }
 
+        //Reject friendrequest
         public ActionResult Reject(int ProfileId)
         {
             var userId = User.Identity.GetUserId();

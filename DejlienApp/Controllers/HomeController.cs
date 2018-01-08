@@ -1,7 +1,4 @@
-﻿using DejlienApp.Models;
-using DejlienApp.Repositories;
-using System;
-using System.Collections.Generic;
+﻿using DejlienApp.Repositories;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
@@ -23,14 +20,12 @@ namespace DejlienApp.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
 
             return View();
         }
@@ -44,7 +39,8 @@ namespace DejlienApp.Controllers
         {
             return View();
         }
-
+        
+        //Change language
         public ActionResult ChangeLang(string lang)
         {
             if (lang != null)

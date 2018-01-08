@@ -44,13 +44,15 @@ namespace DejlienApp
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
         }
+
+        //Cookie for current language
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
             HttpCookie cookie = HttpContext.Current.Request.Cookies["Home"];
             if (cookie != null && cookie.Value != null)
             {
-                Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(cookie.Value);
-                Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(cookie.Value);
+                Thread.CurrentThread.CurrentCulture = new CultureInfo(cookie.Value);
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo(cookie.Value);
             }
             else
             {

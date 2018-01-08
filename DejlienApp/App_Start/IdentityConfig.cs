@@ -34,20 +34,5 @@ namespace DejlienApp.App_Start
                 }
             });
         }
-
-
-        //app.CreatePerOwinContext(() => new DataContext());
-        //app.CreatePerOwinContext<AccountUserManager>(AccountUserManager.Create);
-
-        //////Johan har inte med detta i föreläsning 3
-        ////app.CreatePerOwinContext<RoleManager<Role>>((options, context) =>
-        ////    new RoleManager<Role>(
-        ////        new RoleStore<Role>(context.Get<DataContext>())));
-
-        //app.UseCookieAuthentication(new CookieAuthenticationOptions
-        //{
-        //    AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-        //    LoginPath = new PathString("/Home/Login"),
-        //});
     }
 }

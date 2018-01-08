@@ -6,8 +6,7 @@ using System.Web;
 
 namespace DejlienApp.Models
 {   
-    // View Model
-    public class Register
+    public class RegisterViewModel
     {
         [Required]
         [EmailAddress]

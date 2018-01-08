@@ -15,7 +15,6 @@ namespace DejlienApp.Models
         {
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             return userIdentity;
-            //return UserManager.CreateIdentityAsync(userAccount, DefaultAuthenticationTypes.ApplicationCookie);
         }
     }
     public class CustomUserLogin : IdentityUserLogin<int> { }

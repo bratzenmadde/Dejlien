@@ -1,14 +1,8 @@
 ﻿using DejlienApp.Models;
 using DejlienApp.Repositories;
 using Microsoft.AspNet.Identity;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using System.Web.Mvc;
 
 namespace DejlienApp.Controllers
 {
@@ -20,7 +14,7 @@ namespace DejlienApp.Controllers
             public string Text { get; set; }
         }
 
-        [System.Web.Http.HttpPost]
+        [HttpPost]
         public void SavePost(PostModel model)
         {
             var userId = User.Identity.GetUserId();

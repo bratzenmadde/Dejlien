@@ -9,26 +9,24 @@
 <div class="row">
     @foreach (var item in Model)
     {
-        if (Model.Count() < 7)
-        {
-            <div class="col-md-4">
+        <div class="col-md-4">
 
-                <h2>@Html.DisplayFor(modelitem => item.Name)</h2>
-                <p>
-                    @Html.DisplayFor(modelitem => item.Description)
-                </p>
+            <h2>@Html.DisplayFor(modelitem => item.Name)</h2>
+            <p>
+                @Html.DisplayFor(modelitem => item.Description)
+            </p>
 
-                @if (Request.IsAuthenticated)
+            @if (Request.IsAuthenticated)
                 {
-                    <input type="button" value="Check me out!" onclick="location.href='@Url.Action("Visitprofile", "Account" , new { ProfileId = item.Id })'" />
-                }
-                else
-                {
-                    <input type="button" value="@Resources.Lang.CMButton_Home" onclick="location.href='@Url.Action("Login", "Account")'" />
-                }
+                <input type="button" value="Check me out!" onclick="location.href='@Url.Action("Visitprofile", "Account" , new { ProfileId = item.Id })'" />
+            }
+            else
+            {
+                <input type="button" value="@Resources.Lang.CMButton_Home" onclick="location.href='@Url.Action("Login", "Account")'" />
+            }
 
-            </div>
-        }
+        </div>
+
     }
 
 </div>

@@ -4,7 +4,7 @@
 @{
     DataContext db = new DataContext();
 
-
+    //Friendrequest-count
     var Id = User.Identity.GetUserId();
 
     var request = db.Contacts.Where(x => x.User.Id.ToString() == Id && x.IAskedTheQuestion == false && x.Request == true);

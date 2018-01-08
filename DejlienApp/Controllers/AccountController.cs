@@ -9,11 +9,9 @@ using DejlienApp.Framework.Identity;
 using Microsoft.Owin.Security;
 using Microsoft.AspNet.Identity.Owin;
 using System.Linq;
-using System.Net;
 using System.IO;
 using System.Web;
 using System.Data.Entity;
-using System.Collections.Generic;
 
 namespace DejlienApp.Controllers
 {
@@ -62,7 +60,7 @@ namespace DejlienApp.Controllers
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(Register model)
+        public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -157,7 +155,7 @@ namespace DejlienApp.Controllers
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginModel model, string returnUrl)
+        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
             var result = await applicationSignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: true);
             switch (result)
@@ -175,7 +173,7 @@ namespace DejlienApp.Controllers
             }
         }
 
-
+        //View the current user profile
         public ActionResult PersonalUserSite()
         {
             var userId = User.Identity.GetUserId();
@@ -203,6 +201,7 @@ namespace DejlienApp.Controllers
             }
         }
 
+        //Shows profile for another user
         [Authorize]
         public ActionResult VisitProfile(int ProfileId)
         {
@@ -235,6 +234,7 @@ namespace DejlienApp.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        //Sets userphoto for user
         [Authorize]
         public FileContentResult UserPhotos(int ProfileId)
         {
