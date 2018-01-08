@@ -1,4 +1,4 @@
-﻿using DejlienApp.Repositories;
+﻿using DataLogicLayer.Repositories;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
@@ -11,6 +11,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using DataLogicLayer;
 
 namespace DejlienApp
 {

@@ -1,4 +1,6 @@
 ﻿
+using DataLogicLayer.Models;
+
 namespace DejlienApp.Models
 {
     public class ProfileViewModel

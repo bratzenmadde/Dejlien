@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
-using DejlienApp.Repositories;
+using DataLogicLayer.Repositories;
 using Microsoft.AspNet.Identity;
-using DejlienApp.Models;
+using DataLogicLayer.Models;
 using System.Data.Entity;
 
 namespace DejlienApp.Controllers

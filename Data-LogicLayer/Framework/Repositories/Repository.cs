@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity;
-using DejlienApp.Repositories;
+using DataLogicLayer.Repositories;
 
-namespace DejlienApp.Framework
+namespace DataLogicLayer.Framework
 {
     public abstract class Repository<T, TKey> where T : class, IEntity<TKey>
     {

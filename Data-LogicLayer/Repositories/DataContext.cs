@@ -1,8 +1,8 @@
 ﻿using System.Data.Entity;
-using DejlienApp.Models;
+using DataLogicLayer.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace DejlienApp.Repositories
+namespace DataLogicLayer.Repositories
 {
 
     public class DataContext : IdentityDbContext<UserAccount, CustomRole, int, CustomUserLogin, CustomUserRole, CustomUserClaim>
@@ -18,6 +18,6 @@ namespace DejlienApp.Repositories
         public DbSet<Post> Posts { get; set; }
         public DbSet<Contact> Contacts { get; set; }
 
-        public System.Data.Entity.DbSet<DejlienApp.Models.PostIndexViewModel> PostIndexViewModels { get; set; }
+        public System.Data.Entity.DbSet<DataLogicLayer.Models.PostIndexViewModel> PostIndexViewModels { get; set; }
     }
 }

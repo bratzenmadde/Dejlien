@@ -1,7 +1,7 @@
-﻿using DejlienApp.Framework.Identity;
-using DejlienApp.Models;
-using DejlienApp.Models.Identity;
-using DejlienApp.Repositories;
+﻿using DataLogicLayer.Framework.Identity;
+using DataLogicLayer.Models;
+using DataLogicLayer.Models.Identity;
+using DataLogicLayer.Repositories;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -13,7 +13,7 @@ using System;
 using System.Threading.Tasks;
 using System.Security.Claims;
 
-namespace DejlienApp.App_Start
+namespace DataLogicLayer.App_Start
 {
     public class IdentityConfig
     {

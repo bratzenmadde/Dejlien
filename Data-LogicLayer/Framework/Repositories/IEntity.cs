@@ -1,4 +1,4 @@
-﻿namespace DejlienApp.Framework
+﻿namespace DataLogicLayer.Framework
 {
     public interface IEntity : IEntity<int> { }
     public interface IEntity<T>

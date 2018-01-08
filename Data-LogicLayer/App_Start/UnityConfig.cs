@@ -1,7 +1,7 @@
-using DejlienApp.Framework.Identity;
-using DejlienApp.Models;
-using DejlienApp.Models.Identity;
-using DejlienApp.Repositories;
+using DataLogicLayer.Framework.Identity;
+using DataLogicLayer.Models;
+using DataLogicLayer.Models.Identity;
+using DataLogicLayer.Repositories;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
@@ -11,7 +11,7 @@ using Unity;
 using Unity.AspNet.Mvc;
 using Unity.Injection;
 
-namespace DejlienApp
+namespace DataLogicLayer
 {
     /// <summary>
     /// Specifies the Unity configuration for the main container.

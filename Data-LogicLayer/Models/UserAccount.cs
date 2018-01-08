@@ -1,11 +1,11 @@
-﻿using DejlienApp.Framework;
-using DejlienApp.Repositories;
+﻿using DataLogicLayer.Framework;
+using DataLogicLayer.Repositories;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace DejlienApp.Models
+namespace DataLogicLayer.Models
 {
     public class UserAccount:IdentityUser<int, CustomUserLogin, CustomUserRole, CustomUserClaim>, IEntity<int>
     {

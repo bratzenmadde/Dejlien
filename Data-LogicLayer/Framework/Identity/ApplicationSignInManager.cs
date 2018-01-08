@@ -1,9 +1,9 @@
-﻿using DejlienApp.Models;
-using DejlienApp.Models.Identity;
+﻿using DataLogicLayer.Models;
+using DataLogicLayer.Models.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 
-namespace DejlienApp.Framework.Identity
+namespace DataLogicLayer.Framework.Identity
 {
     public class ApplicationSignInManager : SignInManager<UserAccount, int>
     {

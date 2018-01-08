@@ -1,5 +1,5 @@
-﻿using DejlienApp.Models;
-using DejlienApp.Models.Identity;
+﻿using DataLogicLayer.Models;
+using DataLogicLayer.Models.Identity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Security;
 
-namespace DejlienApp.Repositories
+namespace DataLogicLayer.Repositories
 {
     public class DataContextInitializer : DropCreateDatabaseIfModelChanges<DataContext>
     {

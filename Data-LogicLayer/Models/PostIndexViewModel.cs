@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 
-namespace DejlienApp.Models
+namespace DataLogicLayer.Models
 {
     public class PostIndexViewModel
     {

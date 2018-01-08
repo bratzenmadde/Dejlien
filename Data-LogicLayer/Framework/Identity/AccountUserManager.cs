@@ -1,10 +1,10 @@
-﻿using DejlienApp.Repositories;
+﻿using DataLogicLayer.Repositories;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using System;
 
-namespace DejlienApp.Models.Identity
+namespace DataLogicLayer.Models.Identity
 {
     public class AccountUserManager : UserManager<UserAccount, int>
     {

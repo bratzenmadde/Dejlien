@@ -1,4 +1,4 @@
-﻿using DejlienApp.Repositories;
+﻿using DataLogicLayer.Repositories;
 using System.Globalization;
 using System.Linq;
 using System.Threading;

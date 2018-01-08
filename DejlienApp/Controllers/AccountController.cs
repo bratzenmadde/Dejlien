@@ -1,11 +1,12 @@
 ﻿using System.Web.Mvc;
 using DejlienApp.Models;
-using DejlienApp.Repositories;
+using DataLogicLayer.Models;
+using DataLogicLayer.Repositories;
 using System.Threading.Tasks;
-using DejlienApp.Models.Identity;
+using DataLogicLayer.Models.Identity;
 using Microsoft.AspNet.Identity;
 using System;
-using DejlienApp.Framework.Identity;
+using DataLogicLayer.Framework.Identity;
 using Microsoft.Owin.Security;
 using Microsoft.AspNet.Identity.Owin;
 using System.Linq;

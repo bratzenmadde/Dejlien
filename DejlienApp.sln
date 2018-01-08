@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2009
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DejlienApp", "DejlienApp\DejlienApp.csproj", "{C5F2FF2E-2A52-48B3-B119-F5BB1B7C6555}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data-LogicLayer", "Data-LogicLayer\Data-LogicLayer.csproj", "{21814AC5-4C79-4AAE-B28E-3269C3B2E207}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLogicLayer", "Data-LogicLayer\DataLogicLayer.csproj", "{21814AC5-4C79-4AAE-B28E-3269C3B2E207}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,5 +1,5 @@
-﻿using DejlienApp.Models;
-using DejlienApp.Repositories;
+﻿using DataLogicLayer.Models;
+using DataLogicLayer.Repositories;
 using System;
 using System.Linq;
 using System.Web.Mvc;

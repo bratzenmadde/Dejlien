@@ -81,7 +81,8 @@
                 </th>
             </tr>
 
-            @foreach (var item in Model.Profile.Posts)
+
+            @foreach (var item in Model.Profile.Posts.Reverse())
             {
                 <tr>
                     <td>
@@ -105,14 +106,19 @@
     <script type="text/javascript">
         $("#form1").submit(function (event) {
             var txtLength = $('#Post_Text').val().length;
-            if (txtLength > 0) {
+            var authorProfile = @Model.PostIndexViewModel.Post.Author != null;
+            if (txtLength > 0 && authorProfile) {
                 event.preventDefault();
                 var text = $.ajax({ url: '/api/PostApi/SavePost/', data: { text: $('#Post_Text').val(), reciever: @Model.Profile.Id }, type: "post" })
                 alert("Message successfully sent!");
                 $("#form1")[0].reset();
             }
-            else {
+            else if (txtLength == 0 || txtLength == null) {
                 alert("Message cannot be empty.");
+            }
+            else if (@Model.PostIndexViewModel.Post.Author == null) {
+                alert("Please create your profile before spreading love!");
+                @Url.Action("ModifyProfile", "Account");
             }
             });
         

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using DataLogicLayer.Models;
+using System.Collections.Generic;
 
 namespace DejlienApp.Models
 {

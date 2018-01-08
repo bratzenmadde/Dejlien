@@ -1,8 +1,8 @@
-﻿using DejlienApp.Framework;
+﻿using DataLogicLayer.Framework;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace DejlienApp.Models
+namespace DataLogicLayer.Models
 {
 
     public class Profile : IEntity

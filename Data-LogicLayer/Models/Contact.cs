@@ -1,6 +1,6 @@
-﻿using DejlienApp.Framework;
+﻿using DataLogicLayer.Framework;
 
-namespace DejlienApp.Models
+namespace DataLogicLayer.Models
 {
     public class Contact: IEntity
     {
