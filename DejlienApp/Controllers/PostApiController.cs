@@ -1,6 +1,7 @@
 ﻿using DataLogicLayer.Models;
 using DataLogicLayer.Repositories;
 using Microsoft.AspNet.Identity;
+using System;
 using System.Linq;
 using System.Web.Http;
 
@@ -32,8 +33,9 @@ namespace DejlienApp.Controllers
                 db.Posts.Add(post);
                 db.SaveChanges();
 
-                return;
             }
+
+
         }
     }
 }

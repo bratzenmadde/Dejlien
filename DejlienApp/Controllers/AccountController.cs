@@ -220,7 +220,7 @@ namespace DejlienApp.Controllers
                 var con = db.Contacts.Where(c => c.User.Id == ProfileId).ToList();
                 var ct = db.Contacts.Where(x => x.User.Id == ProfileId).SingleOrDefault(q => q.Friend.Id == currentUser.Id);
 
-                if(currentUser.Profile != null)
+                if (currentUser.Profile != null)
                 {
                     var pwm = new ProfileViewModel();
                     pwm.Profile = visitUser;
