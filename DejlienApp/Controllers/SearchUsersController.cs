@@ -12,7 +12,11 @@ namespace DejlienApp.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            using (var db = new DataContext())
+            {
+                var users = db.Profiles.ToList();
+                return View("SearchUsers", users);
+            }
         }
 
         [Authorize]

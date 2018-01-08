@@ -1,35 +1,38 @@
 ﻿@using Microsoft.AspNet.Identity
+@using DejlienApp.Repositories
+
+@{
+    DataContext db = new DataContext();
+
+
+    var Id = User.Identity.GetUserId();
+
+    var request = db.Contacts.Where(x => x.User.Id.ToString() == Id && x.IAskedTheQuestion == false && x.Request == true);
+
+    var numRequests = request.Count().ToString();
+
+    if (Int32.Parse(numRequests) < 1)
+    {
+        numRequests = "";
+    }
+
+
+}
+
 @if (Request.IsAuthenticated)
 {
     @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-left">
-        <li>
-            <a onclick="location.href='@Url.Action("ListOfContacts", "Contact")'" class="dropdown-toggle" data-toggle="dropdown">
-                <i data-count="2" class="glyphicon glyphicon-bell notification-icon"></i>
-            </a>
-        </li>
-
-        <li>@Html.ActionLink(Resources.Lang.Contacts_Menu, "ListOfContacts", "Contact")</li>
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink(Resources.Lang.Contacts_Menu + " " + numRequests, "ListOfContacts", "Contact")</li>
         <li>@Html.ActionLink(Resources.Lang.AccountSettings_Menu, "ModifyProfile", "Account")</li>
+        <li>
+            @Html.ActionLink(User.Identity.GetUserName(), "PersonalUserSite", "Account", routeValues: null, htmlAttributes: new { title = "Profile" })
+        </li>
+        <li>@Html.ActionLink(Resources.Lang.LogOff_LoginPartial, "LogOff", "Account")</li>
+        <li>@Html.ActionLink(Resources.Lang.Search_LoginPartial, "Index", "SearchUsers")</li>
+
     </ul>
-
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                @Html.ActionLink(User.Identity.GetUserName(), "PersonalUserSite", "Account", routeValues: null, htmlAttributes: new { title = "Profile" })
-            </li>
-            <li>@Html.ActionLink(Resources.Lang.LogOff_LoginPartial, "LogOff", "Account")</li>
-
-            @(Html.BeginForm("SearchUsers", "SearchUsers", FormMethod.Post))
-            {
-            <li>
-                @Html.TextBox("search")
-                <input type="submit" value="@Resources.Lang.Search_LoginPartial" />
-            </li>
-            }
-        </ul>
-        
-
 }
 else
 {

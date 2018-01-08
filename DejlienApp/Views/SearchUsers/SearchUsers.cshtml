@@ -1,7 +1,15 @@
 ﻿@model IEnumerable<DejlienApp.Models.Profile>
 
-<h2>@Resources.Lang.Title_Search</h2>
+<li>
+    <h2>@Resources.Lang.Title_Search</h2>
+    @using (Html.BeginForm("SearchUsers", "SearchUsers", FormMethod.Get))
+    {
+        @Html.TextBox("search")
+        <input type="submit" value="@Resources.Lang.Search_LoginPartial" />
+    }   
+</li>
 
+<br />
 
 <table class="table">
     <tr>
