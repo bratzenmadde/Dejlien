@@ -210,34 +210,41 @@ namespace DejlienApp.Controllers
         [Authorize]
         public ActionResult VisitProfile(int ProfileId)
         {
-            var userId = User.Identity.GetUserId();
-
-            using (var db = new DataContext())
+            try
             {
-                var currentUser = db.Users.Include(p => p.Profile.Posts).Single(c => c.Id.ToString() == userId);
-                var visitUser = db.Profiles.Include(e => e.UserAccount).Where(p => p.Id == ProfileId).SingleOrDefault();
-                visitUser.Posts = db.Posts.Where(p => p.Receiver.Id == ProfileId).ToList();
-                var con = db.Contacts.Where(c => c.User.Id == ProfileId).ToList();
-                var ct = db.Contacts.Where(x => x.User.Id == ProfileId).SingleOrDefault(q => q.Friend.Id == currentUser.Id);
+                var userId = User.Identity.GetUserId();
 
-                if (currentUser.Profile != null)
+                using (var db = new DataContext())
                 {
-                    var pwm = new ProfileViewModel();
-                    pwm.Profile = visitUser;
-                    pwm.PostIndexViewModel = new PostIndexViewModel();
-                    pwm.PostIndexViewModel.Id = currentUser.Id;
-                    pwm.ContactViewModel = new ContactViewModel();
-                    pwm.ContactViewModel.Id = visitUser.Id;
-                    pwm.ContactViewModel.Contacts = con;
-                    pwm.ContactViewModel.Contact = ct;
+                    var currentUser = db.Users.Include(p => p.Profile.Posts).Single(c => c.Id.ToString() == userId);
+                    var visitUser = db.Profiles.Include(e => e.UserAccount).Where(p => p.Id == ProfileId).SingleOrDefault();
+                    visitUser.Posts = db.Posts.Where(p => p.Receiver.Id == ProfileId).ToList();
+                    var con = db.Contacts.Where(c => c.User.Id == ProfileId).ToList();
+                    var ct = db.Contacts.Where(x => x.User.Id == ProfileId).SingleOrDefault(q => q.Friend.Id == currentUser.Id);
 
-                    return View("PersonalUserSite", pwm);
+                    if (currentUser.Profile != null)
+                    {
+                        var pwm = new ProfileViewModel();
+                        pwm.Profile = visitUser;
+                        pwm.PostIndexViewModel = new PostIndexViewModel();
+                        pwm.PostIndexViewModel.Id = currentUser.Id;
+                        pwm.ContactViewModel = new ContactViewModel();
+                        pwm.ContactViewModel.Id = visitUser.Id;
+                        pwm.ContactViewModel.Contacts = con;
+                        pwm.ContactViewModel.Contact = ct;
+
+                        return View("PersonalUserSite", pwm);
+                    }
+                    else
+                    {
+                        return View("ModifyProfile");
+                    }
+
                 }
-                else
-                {
-                    return View("ModifyProfile");
-                }
-                
+            }
+            catch (Exception ex)
+            {
+                return View("Error", "Shared", new HandleErrorInfo(ex, "Home", "Index"));
             }
         }
 

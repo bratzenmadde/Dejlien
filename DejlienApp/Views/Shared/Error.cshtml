@@ -9,7 +9,7 @@
     <hgroup>
         <h1 class="text-danger">Error.@Model.Exception.Message</h1>
         <h2 class="text-danger">An error occurred while processing your request.</h2>
-        @Html.ActionLink("Go back to home page", "Index", "Home");
+        @Html.ActionLink("Go back to home page", Model.ActionName, Model.ControllerName);
     </hgroup>
 </body>
 </html>
