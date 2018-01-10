@@ -75,7 +75,7 @@ namespace DejlienApp.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", result.Errors.SingleOrDefault());
+                    ModelState.AddModelError("", result.Errors.FirstOrDefault());
                 }
 
             }
